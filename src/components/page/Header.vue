@@ -1,14 +1,13 @@
-<script setup  lang="ts">
-function changePage(page: string) {
-  console.log(page)
-}
-
+<script setup lang="ts">
+import {HomeUrl} from "../../routes/Routes.ts";
 </script>
 
 <template>
   <div class="Header">
-    <button class="HeaderButton" @click="changePage('/home')">Home</button>
-    <button class="HeaderButton">Home</button>
+
+    <RouterLink :to=HomeUrl>
+      <button class="HeaderButton">Home</button>
+    </RouterLink>
   </div>
 </template>
 

@@ -1,17 +1,7 @@
-
-<script setup lang="ts">
-  import Home from "./pages/Home.vue";
-</script>
+<script setup lang="ts"/>
 
 <template>
-  <div class="App">
-    <Home/>
-  </div>
+    <RouterView />
 </template>
 
-<style scoped>
-.App {
-  display: flex;
-}
-
-</style>
+<style scoped/>
