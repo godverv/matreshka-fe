@@ -9,10 +9,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.10.7",
+    "@grpc/proto-loader": "^0.7.13",
+    "@types/js-yaml": "^4.0.9",
+    "axios": "^1.6.8",
+    "browserify": "^17.0.0",
+    "goog": "^0.2.1",
+    "google-protobuf": "^3.21.2",
+    "grpc-web": "^1.5.0",
+    "js-yaml": "^4.1.0",
+    "primevue": "^3.52.0",
     "vue": "^3.4.21",
-    "vue-router": "4"
+    "vue-router": "4",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@types/node": "^20.12.11",
     "@vitejs/plugin-vue": "^5.0.4",
     "vite": "^5.2.0"
   }

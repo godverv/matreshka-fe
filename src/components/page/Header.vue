@@ -4,7 +4,6 @@ import {HomeUrl} from "../../routes/Routes.ts";
 
 <template>
   <div class="Header">
-
     <RouterLink :to=HomeUrl>
       <button class="HeaderButton">Home</button>
     </RouterLink>
@@ -14,11 +13,11 @@ import {HomeUrl} from "../../routes/Routes.ts";
 <style scoped>
 .Header {
   width: 100%;
+  box-sizing: border-box;
+
   height: 3em;
 
   max-height: 48px;
-
-  border: red solid;
 
   display: flex;
 
@@ -29,8 +28,10 @@ import {HomeUrl} from "../../routes/Routes.ts";
 }
 
 .HeaderButton {
-  border: red dashed;
   cursor: pointer;
+
+  width: 100%;
+  height: 100%;
 }
 
 </style>

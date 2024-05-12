@@ -1,7 +1,16 @@
-<script setup lang="ts"/>
+<script setup lang="ts">
+</script>
 
-<template>
+<template >
+  <div class="root">
     <RouterView />
+  </div>
 </template>
 
-<style scoped/>
+<style scoped>
+
+.root {
+  padding: 2em
+}
+
+</style>
