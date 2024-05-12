@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {PropType} from "vue";
 import {ResourcePostgres} from "../../../api/grpc/matreshka-be_api.pb.ts";
+import Inputer from "../../base/Inputer.vue";
 
 defineProps({
   val: {
@@ -12,11 +13,26 @@ defineProps({
 
 <template>
   <div class="Info">
-    <div>{{val.dbName}}</div>
-    <div>{{val.host}}</div>
-    <div>{{val.port}}</div>
-    <div>{{val.userName}}</div>
-    <div>{{val.pwd}}</div>
+    <Inputer
+        input-tittle="Database name"
+        v-model="val.dbName"
+    />
+    <Inputer
+        input-tittle="Host"
+        v-model="val.host"
+    />
+    <Inputer
+        input-tittle="Port"
+        v-model="val.port"
+    />
+    <Inputer
+        input-tittle="Username"
+        v-model="val.userName"
+    />
+    <Inputer
+        input-tittle="Password"
+        v-model="val.pwd"
+    />
   </div>
 </template>
 
@@ -24,5 +40,7 @@ defineProps({
 .Info {
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
 }
+
 </style>

@@ -31,5 +31,6 @@ const appConfig = defineModel<ConfigAppConfig>()
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  padding: 0.5em;
 }
 </style>

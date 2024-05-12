@@ -64,6 +64,7 @@ export type ResourceTelegram = {
 }
 
 export type ResourceConnection = {
+  connectionString?: string
 }
 
 

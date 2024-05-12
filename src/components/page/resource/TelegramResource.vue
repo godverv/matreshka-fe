@@ -2,6 +2,7 @@
 
 import {PropType} from "vue";
 import {ResourceTelegram} from "../../../api/grpc/matreshka-be_api.pb.ts";
+import Inputer from "../../base/Inputer.vue";
 
 defineProps({
   val: {
@@ -13,7 +14,10 @@ defineProps({
 
 <template>
   <div class="Info">
-    <div>{{val.apiKey}}</div>
+    <Inputer
+        input-tittle="Api Key"
+        v-model="val.apiKey"
+    />
   </div>
 </template>
 

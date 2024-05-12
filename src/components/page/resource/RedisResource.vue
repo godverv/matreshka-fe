@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {PropType} from "vue";
 import {ResourceRedis} from "../../../api/grpc/matreshka-be_api.pb.ts";
+import Inputer from "../../base/Inputer.vue";
 
 defineProps({
   val: {
@@ -12,11 +13,26 @@ defineProps({
 
 <template>
   <div class="Info">
-    <div>{{ val.host }}</div>
-    <div>{{ val.port }}</div>
-    <div>{{ val.user }}</div>
-    <div>{{ val.pwd }}</div>
-    <div>{{ val.db }}</div>
+    <Inputer
+        input-tittle="Host"
+        v-model="val.host"
+    />
+    <Inputer
+        input-tittle="Post"
+        v-model="val.port"
+    />
+    <Inputer
+        input-tittle="User"
+        v-model="val.user"
+    />
+    <Inputer
+        input-tittle="Password"
+        v-model="val.pwd"
+    />
+    <Inputer
+        input-tittle="Db number"
+        v-model="val.db"
+    />
   </div>
 </template>
 

@@ -2,8 +2,8 @@
 import {GetConfig} from "../../api/api.ts";
 import {ref} from "vue";
 import {Config} from "../../api/grpc/matreshka-be_api.pb";
-import OneOfResourceConfig from "./resource/OneOfResource.vue";
 import AppInfo from "./app_info/AppInfo.vue";
+import Resource from "./resource/Resource.vue";
 
 const props = defineProps({
   serviceName: {
@@ -16,7 +16,6 @@ const config = ref<Config | undefined>({})
 
 GetConfig(props.serviceName)
     .then((r) => {
-      console.log(r)
       config.value = r
     })
 
@@ -30,21 +29,15 @@ GetConfig(props.serviceName)
     </div>
 
     <div class="InfoBlock">
-      <div
-          v-for="res in config.resources"
+      <div v-if="!config.resources"> No resources</div>
+      <Resource
+          v-else
+          v-for="(res, i) in config.resources"
           :key="res.name"
-          class="Resources"
+          v-model="config.resources[i]"
       >
-        <div>Conn: {{ res.conn }}</div>
-        <div>Resource type: {{ res.resourceType }}</div>
 
-        <div>Config:
-          <OneOfResourceConfig
-              v-if=res.resourceConfig
-              :config="res.resourceConfig"/>
-        </div>
-
-      </div>
+      </Resource>
     </div>
   </div>
 </template>
@@ -61,13 +54,10 @@ GetConfig(props.serviceName)
 .InfoBlock {
   display: flex;
   flex-direction: column;
-  border: red solid;
+  border: #78042f solid;
+  border-radius: 0.75vw;
   gap: 1em;
-  padding: 0.5em;
-}
-
-.Resources {
-  border: blue solid;
+  padding: 0.5em 0 0.5em 0 ;
 }
 
 </style>

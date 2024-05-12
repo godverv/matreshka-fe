@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {PropType} from "vue";
-import {ResourceRedis, ResourceSqlite} from "../../../api/grpc/matreshka-be_api.pb.ts";
+import {ResourceSqlite} from "../../../api/grpc/matreshka-be_api.pb.ts";
+import Inputer from "../../base/Inputer.vue";
 
 defineProps({
   val: {
@@ -12,7 +13,10 @@ defineProps({
 
 <template>
   <div class="Info">
-    <div>{{val.path}}</div>
+    <Inputer
+        input-tittle="File path"
+        v-model="val.path"
+    />
   </div>
 </template>
 

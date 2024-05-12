@@ -9,6 +9,10 @@ const props = defineProps({
   tittlePosition: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
     default: 'top'
+  },
+  readOnly: {
+    type: Boolean,
+    default: false,
   }
 })
 
@@ -27,13 +31,22 @@ switch (props.tittlePosition) {
   default:
     tittlePositionCss.value = 'column';
 }
-const value = defineModel()
+const value = defineModel<String>()
+
+function doCopy() {
+  if (value.value) {
+    navigator.clipboard.writeText(value.value.toString())
+  }
+}
 </script>
 
 <template>
   <div class="Inputer">
     <div v-if="inputTittle" class="Tittle">{{inputTittle}}</div>
-    <input :value="value">
+    <div class="TextAndButton">
+      <input v-model="value" :disabled="readOnly">
+      <button @click="doCopy">Copy</button>
+    </div>
   </div>
 </template>
 
@@ -46,21 +59,32 @@ const value = defineModel()
   width: 100%;
 }
 
+
 .Tittle {
   display: flex;
   width: fit-content;
+
+  flex: 1;
 
   text-decoration: underline;
 
   align-items: center;
 }
 
+.TextAndButton {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25em;
+}
+
 input {
   border-radius: 0.5vw;
   padding: 0.25em 0.5em 0.25em 0.5em;
+  display: inline-block;
 
-  border: #12c4ca solid;
-
+  border: cadetblue solid;
   width: fit-content;
+  flex: 4;
 }
+
 </style>
