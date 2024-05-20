@@ -3,6 +3,7 @@
 import {PropType} from "vue";
 import {ResourceTelegram} from "../../../api/grpc/matreshka-be_api.pb.ts";
 import Inputer from "../../base/Inputer.vue";
+import CopyButton from "../../base/CopyButton.vue";
 
 defineProps({
   val: {
@@ -14,10 +15,12 @@ defineProps({
 
 <template>
   <div class="Info">
-    <Inputer
-        input-tittle="Api Key"
-        v-model="val.apiKey"
-    />
+    <a>Api Key:</a>
+    <div class="InputAndCopy">
+      <Inputer v-model="val.apiKey"/>
+      <CopyButton v-model="val.apiKey"/>
+    </div>
+
   </div>
 </template>
 
@@ -25,5 +28,9 @@ defineProps({
 .Info {
   display: flex;
   flex-direction: column;
+}
+.InputAndCopy {
+  display: flex;
+  flex-direction: row;
 }
 </style>

@@ -16,15 +16,14 @@ const config = defineModel<Resource | undefined>()
 
     <div class="ResourceType">Resource type: {{ fromProtoResourceType(config.resourceType)}}</div>
 
-    <div v-if="!config.conn" class="NoConStr">
-      Connection string cannot be define for this resource
+    <div v-if="config.conn" class="NoConStr">
+      <CopyButton
+          input-tittle="Connection string:"
+          v-model="config.conn.connectionString"
+          :read-only="true"
+      />
     </div>
-    <CopyButton
-        v-else
-        input-tittle="Connection string:"
-        v-model="config.conn.connectionString"
-        :read-only="true"
-    />
+
 
     <div>
       <OneOfResourceConfig

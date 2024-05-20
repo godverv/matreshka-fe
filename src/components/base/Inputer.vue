@@ -1,60 +1,16 @@
 <script setup lang="ts">
-import {PropType, ref} from "vue";
-
-const props = defineProps({
-  inputTittle: {
-    type: String as PropType<String | undefined>,
-    required: false
-  },
-  tittlePosition: {
-    type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
-    default: 'top'
-  }
+const value = defineModel({
+  type: String,
+  required: true,
 })
 
-const tittlePositionCss = ref('column')
-
-switch (props.tittlePosition) {
-  case 'bottom':
-    tittlePositionCss.value = 'column-reverse';
-    break;
-  case 'left':
-    tittlePositionCss.value = 'row';
-    break;
-  case 'right':
-    tittlePositionCss.value = 'row-reverse';
-    break;
-  default:
-    tittlePositionCss.value = 'column';
-}
-const value = defineModel()
 </script>
 
 <template>
-  <div class="Inputer">
-    <div v-if="inputTittle" class="Tittle">{{inputTittle}}</div>
-    <input :value="value">
-  </div>
+    <input v-model="value">
 </template>
 
 <style scoped>
-.Inputer {
-  display: flex;
-  flex-direction: v-bind('tittlePositionCss');
-  gap: 0.25em;
-
-  width: 100%;
-}
-
-.Tittle {
-  display: flex;
-  width: fit-content;
-
-  text-decoration: underline;
-
-  align-items: center;
-}
-
 input {
   border-radius: 0.5vw;
   padding: 0.25em 0.5em 0.25em 0.5em;
