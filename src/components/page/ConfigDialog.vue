@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {GetConfig} from "../../api/api.ts";
+import {GetConfig} from "@/api/api.ts";
 import {ref} from "vue";
-import {Config} from "../../api/grpc/matreshka-be_api.pb";
+import {Config} from "@/api/grpc/matreshka-be_api.pb.ts";
 import AppInfo from "./app_info/AppInfo.vue";
 import Resource from "./resource/Resource.vue";
 
@@ -12,7 +12,7 @@ const props = defineProps({
   },
 })
 
-const config = ref<Config | undefined>({})
+const config = ref<Config | undefined>({} as Config)
 
 GetConfig(props.serviceName)
     .then((r) => {
@@ -23,6 +23,7 @@ GetConfig(props.serviceName)
 
 <template>
   <div v-if="!config">Отсутствует информация о сервисе</div>
+
   <div v-else class="ConfigDialog">
     <div class="InfoBlock">
       <AppInfo v-model="config.appConfig"/>
@@ -57,7 +58,7 @@ GetConfig(props.serviceName)
   border: #78042f solid;
   border-radius: 0.75vw;
   gap: 1em;
-  padding: 0.5em 0 0.5em 0 ;
+  padding: 0.5em 0 0.5em 0;
 }
 
 </style>
