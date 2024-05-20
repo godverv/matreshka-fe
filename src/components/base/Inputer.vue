@@ -1,22 +1,30 @@
 <script setup lang="ts">
-const value = defineModel({
-  type: String,
+const value = defineModel<String | number>({
   required: true,
 })
 
 </script>
 
 <template>
-    <input v-model="value">
+  <input
+      class="Inputer"
+      :size="value.toString().length ?? 3"
+      v-model.lazy="value">
 </template>
 
 <style scoped>
-input {
-  border-radius: 0.5vw;
+
+.Inputer {
+  border-radius: 2px;
   padding: 0.25em 0.5em 0.25em 0.5em;
 
-  border: #12c4ca solid;
-
+  border: none;
+  border-bottom: #12c4ca solid;
   width: fit-content;
 }
+
+.Inputer:focus {
+  outline: none;
+}
+
 </style>

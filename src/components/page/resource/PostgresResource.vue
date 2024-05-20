@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {PropType} from "vue";
-import {ResourcePostgres} from "../../../api/grpc/matreshka-be_api.pb.ts";
-import Inputer from "../../base/Inputer.vue";
+import {ResourcePostgres} from "@/api/grpc/matreshka-be_api.pb.ts";
+import Inputer from "@/components/base/Inputer.vue";
 
 defineProps({
   val: {
@@ -12,35 +12,35 @@ defineProps({
 </script>
 
 <template>
-  <div class="Info">
-    <Inputer
-        input-tittle="Database name"
-        v-model="val.dbName"
-    />
-    <Inputer
-        input-tittle="Host"
-        v-model="val.host"
-    />
-    <Inputer
-        input-tittle="Port"
-        v-model="val.port"
-    />
-    <Inputer
-        input-tittle="Username"
-        v-model="val.userName"
-    />
-    <Inputer
-        input-tittle="Password"
-        v-model="val.pwd"
-    />
+  <div class="InfoTable">
+    <div class="InfoTableColumn">
+      <div>Database name</div>
+      <Inputer v-model="val.dbName"/>
+    </div>
+
+    <div class="InfoTableColumn">
+      <div>Host</div>
+      <Inputer v-model="val.host"/>
+    </div>
+
+    <div class="InfoTableColumn">
+      <div>Port</div>
+      <Inputer v-model="val.port"/>
+    </div>
+
+    <div class="InfoTableColumn">
+      <div>Username</div>
+      <Inputer v-model="val.userName"/>
+    </div>
+
+    <div class="InfoTableColumn">
+      <div>Password</div>
+      <Inputer v-model="val.pwd"/>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.Info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-}
+@import "@/assets/styles/resource_info.css";
 
 </style>

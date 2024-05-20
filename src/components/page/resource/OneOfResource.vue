@@ -23,7 +23,7 @@ defineProps(
   <div class="ResourceInfo">
     <UnknownResource
         v-if="config.unknown"
-        :val="config.unknown"/>
+        :environmentVariables="config.unknown"/>
 
     <PostgresResource
         v-else-if="config.postgres"

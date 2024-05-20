@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
 import OneOfResourceConfig from "./OneOfResource.vue";
-import {Resource} from "../../../api/grpc/matreshka-be_api.pb.ts";
-import CopyButton from "../../base/CopyButton.vue";
-import {fromProtoResourceType} from "../../../models/resource_types.ts";
+import {Resource} from "@/api/grpc/matreshka-be_api.pb.ts";
+import CopyButton from "@/components/base/CopyButton.vue";
+import {fromProtoResourceType} from "@/models/resource_types.ts";
 
 const config = defineModel<Resource | undefined>()
 
@@ -23,7 +23,6 @@ const config = defineModel<Resource | undefined>()
           :read-only="true"
       />
     </div>
-
 
     <div>
       <OneOfResourceConfig
