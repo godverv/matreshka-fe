@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {PropType} from "vue";
-import {ResourceRedis} from "../../../api/grpc/matreshka-be_api.pb.ts";
-import Inputer from "../../base/Inputer.vue";
+import {ResourceRedis} from "@/api/grpc/matreshka-be_api.pb.ts";
+import Inputer from "@/components/base/Inputer.vue";
 
 defineProps({
   val: {

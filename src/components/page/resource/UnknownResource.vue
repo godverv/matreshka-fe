@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
 import {PropType} from "vue";
-import {ResourceUnknown} from "../../../api/grpc/matreshka-be_api.pb.ts";
-import Inputer from "../../base/Inputer.vue";
+import {ResourceUnknown} from "@/api/grpc/matreshka-be_api.pb.ts";
+import Inputer from "@/components/base/Inputer.vue";
 
 const props = defineProps({
   environmentVariables: {

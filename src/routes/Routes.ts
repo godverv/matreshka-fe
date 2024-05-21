@@ -1,5 +1,5 @@
-import Home from "../pages/Home.vue";
-import NotFound from "../pages/NotFound.vue";
+import Home from "@/pages/Home.vue";
+import NotFound from "@/pages/NotFound.vue";
 import Config from "@/pages/Config.vue";
 
 export const HomeUrl = "/"

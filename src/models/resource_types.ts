@@ -1,6 +1,6 @@
-import {ResourceType} from "../api/grpc/matreshka-be_api.pb.ts";
+import {ResourceType} from "@/api/grpc/matreshka-be_api.pb.ts";
 
-const unknownResourceName = '?';
+const unknownResourceName = 'Unknown';
 const PostgresResourceName = 'Postgres';
 const RedisResourceName = 'Redis';
 const SqliteResourceName = 'Sqlite';

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
 import {PropType} from "vue";
-import {ResourceTelegram} from "../../../api/grpc/matreshka-be_api.pb.ts";
-import Inputer from "../../base/Inputer.vue";
-import CopyButton from "../../base/CopyButton.vue";
+import {ResourceTelegram} from "@/api/grpc/matreshka-be_api.pb.ts";
+import Inputer from "@/components/base/Inputer.vue";
+import CopyButton from "@/components/base/CopyButton.vue";
 
 defineProps({
   val: {
