@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import ConfigDisplay from "@/widget/ConfigDisplay.vue";
 
-const props = defineProps({
-  name: String,
+defineProps({
+  name: {
+    type: String,
+    required: true,
+  },
 })
 </script>
 
