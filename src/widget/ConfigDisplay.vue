@@ -3,7 +3,7 @@ import {GetConfig} from "@/api/api.ts";
 import {ref} from "vue";
 import {Config} from "@/api/grpc/matreshka-be_api.pb.ts";
 import AppInfo from "@/components/page/app_info/AppInfo.vue";
-import Resource from "@/components/page/resource/ResourceDescription.vue";
+
 import ResourcesInfo from "@/components/page/resource/ResourcesInfo.vue";
 
 const props = defineProps({

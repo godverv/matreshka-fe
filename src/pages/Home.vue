@@ -6,7 +6,7 @@ import Dialog from "primevue/dialog";
 import {ListServices} from "@/api/api.ts";
 import {ConfigAppConfig} from "@/api/grpc/matreshka-be_api.pb.ts";
 import Header from "@/components/page/Header.vue";
-import ConfigDialog from "@/widget/ConfigDialog.vue";
+import ConfigDialog from "@/widget/ConfigDisplay.vue";
 
 const visible = ref(false);
 
@@ -56,9 +56,7 @@ ListServices(listReq)
           }
         }"
     >
-      <ConfigDialog
-          :service-name="currentlyOpenService"
-      />
+      <ConfigDialog :service-name="currentlyOpenService"/>
     </Dialog>
   </div>
 </template>
