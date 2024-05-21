@@ -14,23 +14,14 @@ defineProps({
 </script>
 
 <template>
-  <div class="Info">
-    <a>Api Key:</a>
-    <div class="InputAndCopy">
-      <Inputer v-model="val.apiKey"/>
-      <CopyButton v-model="val.apiKey"/>
-    </div>
-
+  <div class="NodeField">
+    <div>Api Key:</div>
+    <Inputer v-model="val.apiKey"/>
+    <CopyButton v-model="val.apiKey"/>
   </div>
 </template>
 
 <style scoped>
-.Info {
-  display: flex;
-  flex-direction: column;
-}
-.InputAndCopy {
-  display: flex;
-  flex-direction: row;
-}
+@import "@/assets/styles/config_display.css";
+
 </style>

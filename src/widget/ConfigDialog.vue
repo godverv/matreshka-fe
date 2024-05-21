@@ -2,8 +2,9 @@
 import {GetConfig} from "@/api/api.ts";
 import {ref} from "vue";
 import {Config} from "@/api/grpc/matreshka-be_api.pb.ts";
-import AppInfo from "./app_info/AppInfo.vue";
-import Resource from "./resource/Resource.vue";
+import AppInfo from "@/components/page/app_info/AppInfo.vue";
+import Resource from "@/components/page/resource/ResourceDescription.vue";
+import ResourcesInfo from "@/components/page/resource/ResourcesInfo.vue";
 
 const props = defineProps({
   serviceName: {
@@ -25,25 +26,19 @@ GetConfig(props.serviceName)
   <div v-if="!config">Отсутствует информация о сервисе</div>
 
   <div v-else class="ConfigDialog">
-    <div class="InfoBlock">
+    <div class="InfoBlock Node">
       <AppInfo v-model="config.appConfig"/>
     </div>
 
-    <div class="InfoBlock">
-      <div v-if="!config.resources"> No resources</div>
-      <Resource
-          v-else
-          v-for="(res, i) in config.resources"
-          :key="res.name"
-          v-model="config.resources[i]"
-      >
-
-      </Resource>
+    <div class="InfoBlock Node">
+      <ResourcesInfo v-model="config.resources"/>
     </div>
   </div>
 </template>
 
 <style scoped>
+@import "@/assets/styles/config_display.css";
+
 .ConfigDialog {
   min-width: 40vw;
   min-height: 80vh;

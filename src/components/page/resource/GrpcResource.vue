@@ -12,22 +12,17 @@ defineProps({
 </script>
 
 <template>
-  <div class="Info">
-    <Inputer
-      input-tittle="Service url"
-      v-model="val.connectionString"
-    />
-    <Inputer
-        input-tittle="Module"
-        v-model="val.module"
-    />
+  <div class="NodeField">
+    <div>Service url:</div>
+    <Inputer v-model="val.connectionString"/>
+  </div>
+
+  <div class="NodeField">
+    <div>Module:</div>
+    <Inputer v-model="val.module"/>
   </div>
 </template>
 
 <style scoped>
-.Info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em
-}
+@import "@/assets/styles/config_display.css";
 </style>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const value = defineModel<String | number>({
+const value = defineModel<String | number | undefined>({
   required: true,
 })
 
@@ -8,7 +8,7 @@ const value = defineModel<String | number>({
 <template>
   <input
       class="Inputer"
-      :size="value.toString().length ?? 3"
+      :size="value?.toString().length ?? 3"
       v-model.lazy="value">
 </template>
 
@@ -16,7 +16,7 @@ const value = defineModel<String | number>({
 
 .Inputer {
   border-radius: 2px;
-  padding: 0.25em 0.5em 0.25em 0.5em;
+  padding: 0.125em 0.25em 0.125em 0.25em;
 
   border: none;
   border-bottom: #12c4ca solid;

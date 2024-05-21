@@ -1,0 +1,42 @@
+.InfoTable {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.InfoTableRow {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25em;
+}
+
+.InfoTableColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.Node {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+}
+
+.NodeHeader {
+    max-width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.NodeField {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.Node > .Node {
+    padding: 0 1em 0 1em;
+}
+.Node > .NodeField {
+    padding: 0 0.5em 0 0.5em;
+}

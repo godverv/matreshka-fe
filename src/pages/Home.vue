@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import {ref} from "vue";
 
-import ConfigDialog from "../components/page/ConfigDialog.vue";
-import {ListServices} from "../api/api.ts";
 import Dialog from "primevue/dialog";
-import {ConfigAppConfig} from "../api/grpc/matreshka-be_api.pb.ts";
-import Header from "../components/page/Header.vue";
+
+import {ListServices} from "@/api/api.ts";
+import {ConfigAppConfig} from "@/api/grpc/matreshka-be_api.pb.ts";
+import Header from "@/components/page/Header.vue";
+import ConfigDialog from "@/widget/ConfigDialog.vue";
 
 const visible = ref(false);
 
@@ -40,7 +41,7 @@ ListServices(listReq)
           class="listItem"
           @click="openDialog(service.name ?? '')"
       >
-          {{ service.name }}
+        {{ service.name }}
       </div>
     </div>
 

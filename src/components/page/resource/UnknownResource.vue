@@ -20,7 +20,7 @@ for (const key in props.environmentVariables.environment) {
 
 <template>
   <div
-      class="InfoTable"
+      class="Node"
       v-for="(_, idx) in environmentFlat" :key="environmentFlat[idx][0]">
 
     <div class="InfoTableRow">
@@ -37,7 +37,7 @@ for (const key in props.environmentVariables.environment) {
 </template>
 
 <style scoped>
-@import "@/assets/styles/resource_info.css";
+@import "@/assets/styles/config_display.css";
 
 .Separator {
   display: flex;

@@ -12,33 +12,32 @@ defineProps({
 </script>
 
 <template>
-  <div class="Info">
-    <Inputer
-        input-tittle="Host"
-        v-model="val.host"
-    />
-    <Inputer
-        input-tittle="Post"
-        v-model="val.port"
-    />
-    <Inputer
-        input-tittle="User"
-        v-model="val.user"
-    />
-    <Inputer
-        input-tittle="Password"
-        v-model="val.pwd"
-    />
-    <Inputer
-        input-tittle="Db number"
-        v-model="val.db"
-    />
+  <div class="NodeField">
+    <div>Host:</div>
+    <Inputer v-model="val.host"/>
+  </div>
+
+  <div class="NodeField">
+    <div>Post:</div>
+    <Inputer v-model="val.port"/>
+  </div>
+
+  <div class="NodeField">
+    <div>User:</div>
+    <Inputer v-model="val.user"/>
+  </div>
+
+  <div class="NodeField">
+    <div>Password:</div>
+    <Inputer v-model="val.pwd"/>
+  </div>
+
+  <div class="NodeField">
+    <div>Db number:</div>
+    <Inputer v-model="val.db"/>
   </div>
 </template>
 
 <style scoped>
-.Info {
-  display: flex;
-  flex-direction: column;
-}
+@import "@/assets/styles/config_display.css";
 </style>

@@ -20,7 +20,7 @@ defineProps(
 </script>
 
 <template>
-  <div class="ResourceInfo">
+  <div class="Node">
     <UnknownResource
         v-if="config.unknown"
         :environmentVariables="config.unknown"/>

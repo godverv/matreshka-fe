@@ -1,12 +1,11 @@
 import {ResourceType} from "../api/grpc/matreshka-be_api.pb.ts";
 
-const unknownResourceName = 'Unknown resource';
+const unknownResourceName = '?';
 const PostgresResourceName = 'Postgres';
 const RedisResourceName = 'Redis';
 const SqliteResourceName = 'Sqlite';
 const GrpcServerResourceName = 'Grpc server';
-const RestAPIResourceName = 'Rest API';
-
+const TelegramResourceName = 'Telegram Bot';
 
 const
     resourceTypes =
@@ -16,7 +15,7 @@ resourceTypes.set(ResourceType.PostgresResourceType, PostgresResourceName);
 resourceTypes.set(ResourceType.RedisResourceType, RedisResourceName);
 resourceTypes.set(ResourceType.SqliteResourceType, SqliteResourceName);
 resourceTypes.set(ResourceType.GrpcResourceType, GrpcServerResourceName);
-resourceTypes.set(ResourceType.TelegramResourceType, RestAPIResourceName);
+resourceTypes.set(ResourceType.TelegramResourceType, TelegramResourceName);
 
 
 export function fromProtoResourceType(rt: ResourceType | undefined): String {

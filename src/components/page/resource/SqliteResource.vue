@@ -12,17 +12,12 @@ defineProps({
 </script>
 
 <template>
-  <div class="Info">
-    <Inputer
-        input-tittle="File path"
-        v-model="val.path"
-    />
+  <div class="NodeField">
+    <div>File path:</div>
+    <Inputer v-model="val.path"/>
   </div>
 </template>
 
 <style scoped>
-.Info {
-  display: flex;
-  flex-direction: column;
-}
+@import "@/assets/styles/config_display.css";
 </style>
