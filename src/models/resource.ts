@@ -4,9 +4,11 @@ type namedResource = {
     resource_name: string
 }
 
-export type unknownResource = namedResource & {
-    content: { [key: string]: string }
+export type keyMap = {
+    [key: string]: any
 }
+
+export type unknownResource = namedResource & keyMap;
 
 export type resourcePostgres = namedResource & {
     host: string

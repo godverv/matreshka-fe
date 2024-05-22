@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {PropType} from "vue";
 
 import {resourcePostgres, resourceRedis, unknownResource} from "@/models/resource.ts"
 
@@ -34,7 +33,7 @@ const model = defineModel<oneOfResource>(
 
     <UnknownResource
         v-else
-        :environmentVariables="model as unknownResource"/>
+        :val="model as unknownResource"/>
 
 
     <!--    <SqliteResource-->

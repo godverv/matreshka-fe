@@ -1,39 +1,74 @@
 <script setup lang="ts">
 
-import {PropType} from "vue";
 import Inputer from "@/components/base/Inputer.vue";
-import {unknownResource} from "@/models/resource.ts";
+import {PropType} from "vue";
+import {keyMap} from "@/models/resource.ts";
 
 const props = defineProps({
-  environmentVariables: {
-    type: Object as PropType<unknownResource>,
-    required: true,
+  val: {
+    type: Object as PropType<keyMap>,
   }
 })
 
-const environmentFlat: string[][] = []
+const flatValues: (string | number)[][] = []
+const innerNodes: keyMap[] = []
 
-for (const key in props.environmentVariables?.content) {
-  environmentFlat.push([key, props.environmentVariables?.content[key]])
+for (const key in props.val) {
+  const val = props.val[key];
+
+  const valType = typeof val;
+  switch (valType) {
+    case "object":
+      const ur = {
+        fieldName: key
+      } as keyMap
+
+      for (const innerKey in val) {
+        ur[innerKey] = val[innerKey]
+      }
+
+      innerNodes.push(ur)
+      break;
+    case "string":
+      flatValues.push([key, val])
+      break;
+    case "number":
+      flatValues.push([key, val])
+  }
+
+  console.log(123, innerNodes)
 }
+
 </script>
 
 <template>
   <div
       class="Node"
-      v-for="(_, idx) in environmentFlat" :key="environmentFlat[idx][0]">
+      v-for="(_, idx) in flatValues" :key="flatValues[idx][0]">
 
     <div class="InfoTableRow">
       <div class="InfoTableColumn">
-        <Inputer v-model="environmentFlat[idx][0]"/>
+        <Inputer
+            :disabled="true"
+            v-model="flatValues[idx][0]"/>
       </div>
 
       <div class="Separator">:</div>
       <div class="InfoTableColumn">
-        <Inputer v-model="environmentFlat[idx][1]"/>
+        <Inputer v-model="flatValues[idx][1]"/>
       </div>
     </div>
   </div>
+  <div
+      class="Node"
+      v-for="(_, i) in innerNodes" :key="innerNodes[i].resource_name"
+  >
+    <div>{{ innerNodes[i].fieldName }}:</div>
+
+    <UnknownResource
+        :val="innerNodes[i]"/>
+  </div>
+
 </template>
 
 <style scoped>

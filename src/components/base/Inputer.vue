@@ -1,6 +1,14 @@
 <script setup lang="ts">
+
 const value = defineModel<String | number | undefined>({
   required: true,
+})
+
+defineProps({
+  disabled: {
+    type:  Boolean,
+    default: false,
+  }
 })
 
 </script>
@@ -8,7 +16,8 @@ const value = defineModel<String | number | undefined>({
 <template>
   <input
       class="Inputer"
-      :size="value?.toString().length ?? 3"
+      :size="(value?.toString().length ?? 3) + 1"
+      :disabled="disabled"
       v-model.lazy="value">
 </template>
 
@@ -25,6 +34,10 @@ const value = defineModel<String | number | undefined>({
 
 .Inputer:focus {
   outline: none;
+}
+
+.Inputer:disabled {
+  border-bottom: #4a5353 solid;
 }
 
 </style>

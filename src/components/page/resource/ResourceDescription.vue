@@ -5,7 +5,7 @@ import {fromProtoResourceName} from "@/models/resource_types.ts";
 import {oneOfResource} from "@/models/resource.ts";
 
 const resource = defineModel<oneOfResource>({required: true})
-console.log(resource.value)
+
 </script>
 
 <template>
