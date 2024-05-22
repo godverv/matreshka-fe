@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {PropType} from "vue";
-import {ResourceRedis} from "@/api/grpc/matreshka-be_api.pb.ts";
 import Inputer from "@/components/base/Inputer.vue";
+import {resourceRedis} from "@/models/resource.ts";
 
 defineProps({
   val: {
-    type: Object as PropType<ResourceRedis>,
+    type: Object as PropType<resourceRedis>,
     required: true,
   }
 })

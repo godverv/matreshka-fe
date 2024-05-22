@@ -1,20 +1,20 @@
 <script setup lang="ts">
 
 import {PropType} from "vue";
-import {ResourceUnknown} from "@/api/grpc/matreshka-be_api.pb.ts";
 import Inputer from "@/components/base/Inputer.vue";
+import {unknownResource} from "@/models/resource.ts";
 
 const props = defineProps({
   environmentVariables: {
-    type: Object as PropType<ResourceUnknown>,
+    type: Object as PropType<unknownResource>,
     required: true,
   }
 })
 
 const environmentFlat: string[][] = []
 
-for (const key in props.environmentVariables.environment) {
-  environmentFlat.push([key, props.environmentVariables.environment[key]])
+for (const key in props.environmentVariables?.content) {
+  environmentFlat.push([key, props.environmentVariables?.content[key]])
 }
 </script>
 

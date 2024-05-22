@@ -26,7 +26,7 @@ const appConfig = defineModel<ConfigAppConfig>()
 
       <div class="NodeField">
         <div>Startup duration:</div>
-        <Inputer v-model="appConfig.startupDurationSec"/>
+        <Inputer v-model="appConfig.startup_duration"/>
         <div>seconds</div>
       </div>
     </div>

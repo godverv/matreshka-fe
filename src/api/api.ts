@@ -1,12 +1,13 @@
 import {
     MatreshkaBeAPI,
-    Config,
     ListConfigsRequest,
-    ConfigAppConfig
+    GetConfigRawRequest
 } from "./grpc/matreshka-be_api.pb";
 
-const backendApi = import.meta.env.VITE_MATRESHKA_BACKEND_URL
+import *as yaml from "js-yaml";
+import {Config, ConfigAppConfig} from "@/models/config.ts";
 
+const backendApi = import.meta.env.VITE_MATRESHKA_BACKEND_URL
 
 const prefix = {pathPrefix: backendApi}
 
@@ -17,11 +18,19 @@ export async function ListServices(req: ListConfigsRequest): Promise<ConfigAppCo
         })
 }
 
-export async function GetConfig(serviceName: string): Promise<Config | undefined> {
-    const req = {serviceName: serviceName}
+export async function GetConfigRaw(serviceName: string): Promise<Config> {
+    const req = {
+        serviceName: serviceName,
+    } as GetConfigRawRequest;
 
-    return MatreshkaBeAPI.GetConfig(req, prefix)
-        .then((r) => {
-            return r.config
-        })
+    return MatreshkaBeAPI.GetConfigRaw(req, prefix)
+        .then((res) => {
+            if (!res.config) {
+                return {} as Config;
+            }
+
+            const configRaw = atob(res.config.toString());
+
+            return yaml.load(configRaw) as Config;
+        }).catch()
 }

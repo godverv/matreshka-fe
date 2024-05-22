@@ -1,49 +1,53 @@
 <script setup lang="ts">
 import {PropType} from "vue";
-import {ResourceConfig} from "@/api/grpc/matreshka-be_api.pb.ts";
+
+import {resourcePostgres, resourceRedis, unknownResource} from "@/models/resource.ts"
+
 import UnknownResource from "@/components/page/resource/UnknownResource.vue";
 import PostgresResource from "@/components/page/resource/PostgresResource.vue";
 import RedisResource from "@/components/page/resource/RedisResource.vue";
-import SqliteResource from "@/components/page/resource/SqliteResource.vue";
-import GrpcResource from "@/components/page/resource/GrpcResource.vue";
-import TelegramResource from "@/components/page/resource/TelegramResource.vue";
+// import SqliteResource from "@/components/page/resource/SqliteResource.vue";
+// import GrpcResource from "@/components/page/resource/GrpcResource.vue";
+// import TelegramResource from "@/components/page/resource/TelegramResource.vue";
 
-defineProps(
+import {oneOfResource} from "@/models/resource.ts";
+import {PostgresResourceTypePrefix, RedisResourceTypePrefix} from "@/models/resource_types.ts";
+
+const model = defineModel<oneOfResource>(
     {
-      config: {
-        type: Object as PropType<ResourceConfig>,
-        required: true,
-      }
+      required: true,
     }
 )
+
 
 </script>
 
 <template>
   <div class="Node">
-    <UnknownResource
-        v-if="config.unknown"
-        :environmentVariables="config.unknown"/>
-
     <PostgresResource
-        v-else-if="config.postgres"
-        :val="config.postgres"/>
+        v-if="model.resource_name.startsWith(PostgresResourceTypePrefix)"
+        v-model="model as resourcePostgres"/>
 
     <RedisResource
-        v-else-if="config.redis"
-        :val="config.redis"/>
+        v-else-if="model.resource_name.startsWith(RedisResourceTypePrefix)"
+        :val="model as resourceRedis"/>
 
-    <SqliteResource
-        v-else-if="config.sqlite"
-        :val="config.sqlite"/>
+    <UnknownResource
+        v-else
+        :environmentVariables="model as unknownResource"/>
 
-    <GrpcResource
-        v-else-if="config.grpc"
-        :val="config.grpc"/>
 
-    <TelegramResource
-        v-else-if="config.telegram"
-        :val="config.telegram"/>
+    <!--    <SqliteResource-->
+    <!--        v-else-if="config.sqlite"-->
+    <!--        :val="config.sqlite"/>-->
+
+    <!--    <GrpcResource-->
+    <!--        v-else-if="config.grpc"-->
+    <!--        :val="config.grpc"/>-->
+
+    <!--    <TelegramResource-->
+    <!--        v-else-if="config.telegram"-->
+    <!--        :val="config.telegram"/>-->
   </div>
 </template>
 

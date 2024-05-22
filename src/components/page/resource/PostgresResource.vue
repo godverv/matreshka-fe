@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import {PropType} from "vue";
-import {ResourcePostgres} from "@/api/grpc/matreshka-be_api.pb.ts";
 import Inputer from "@/components/base/Inputer.vue";
+import {resourcePostgres} from "@/models/resource.ts";
 
-defineProps({
-  val: {
-    type: Object as PropType<ResourcePostgres>,
+const model = defineModel<resourcePostgres>({
     required: true,
-  }
 })
 </script>
 
@@ -15,27 +11,27 @@ defineProps({
   <div>
     <div class="NodeField">
       <div>Database name:</div>
-      <Inputer v-model="val.dbName"/>
+      <Inputer v-model="model.name"/>
     </div>
 
     <div class="NodeField">
       <div>Host:</div>
-      <Inputer v-model="val.host"/>
+      <Inputer v-model="model.host"/>
     </div>
 
     <div class="NodeField">
       <div>Port:</div>
-      <Inputer v-model="val.port"/>
+      <Inputer v-model="model.port"/>
     </div>
 
     <div class="NodeField">
       <div>Username:</div>
-      <Inputer v-model="val.userName"/>
+      <Inputer v-model="model.user"/>
     </div>
 
     <div class="NodeField">
       <div>Password:</div>
-      <Inputer v-model="val.pwd"/>
+      <Inputer v-model="model.pwd"/>
     </div>
   </div>
 </template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {GetConfig} from "@/api/api.ts";
+import { GetConfigRaw} from "@/api/api.ts";
 import {ref} from "vue";
-import {Config} from "@/api/grpc/matreshka-be_api.pb.ts";
 import AppInfo from "@/components/page/app_info/AppInfo.vue";
 
 import ResourcesInfo from "@/components/page/resource/ResourcesInfo.vue";
 import ServersInfo from "@/components/page/server/ServersInfo.vue";
+import {Config} from "@/models/config.ts";
 
 const props = defineProps({
   serviceName: {
@@ -14,11 +14,11 @@ const props = defineProps({
   },
 })
 
-const config = ref<Config | undefined>({} as Config)
+const config = ref<Config>({} as Config);
 
-GetConfig(props.serviceName)
-    .then((r) => {
-      config.value = r
+GetConfigRaw(props.serviceName)
+    .then((c) => {
+      config.value = c
     })
 
 </script>
@@ -28,11 +28,11 @@ GetConfig(props.serviceName)
 
   <div v-else class="ConfigDialog">
     <div class="InfoBlock Node">
-      <AppInfo v-model="config.appConfig"/>
+      <AppInfo v-model="config.app_info"/>
     </div>
 
     <div class="InfoBlock Node">
-      <ResourcesInfo v-model="config.resources"/>
+      <ResourcesInfo v-model="config.data_sources"/>
     </div>
 
     <div class="InfoBlock Node">

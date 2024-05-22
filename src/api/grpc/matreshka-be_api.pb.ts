@@ -107,18 +107,7 @@ export type Server = {
   type?: ServerType
 }
 
-export type ConfigAppConfig = {
-  name?: string
-  version?: string
-  startupDurationSec?: number
-}
 
-export type Config = {
-  appConfig?: ConfigAppConfig
-  resources?: Resource[]
-  servers?: Server[]
-  environment?: {[key: string]: string}
-}
 
 export type ApiVersionRequest = {
 }

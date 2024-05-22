@@ -1,30 +1,24 @@
 <script setup lang="ts">
 
 import OneOfResourceConfig from "./OneOfResource.vue";
-import {Resource} from "@/api/grpc/matreshka-be_api.pb.ts";
-import CopyButton from "@/components/base/CopyButton.vue";
-import {fromProtoResourceType} from "@/models/resource_types.ts";
+import {fromProtoResourceName} from "@/models/resource_types.ts";
+import {oneOfResource} from "@/models/resource.ts";
 
-const config = defineModel<Resource | undefined>()
-
+const resource = defineModel<oneOfResource>({required: true})
+console.log(resource.value)
 </script>
 
 <template>
-  <div v-if="!config"> No information on resource</div>
+  <div v-if="!resource"> No information on resource</div>
 
   <div v-else class="Node ResourceBlock">
-    <div class="NodeHeader">Resource type: {{ fromProtoResourceType(config.resourceType) }}
+    <div class="NodeHeader">Resource type: {{ fromProtoResourceName(resource.resource_name) }}
 
-      <div v-if="config.conn">
-        <CopyButton
-            v-model="config.conn.connectionString"
-        />
-      </div>
+    <!--     TODO ADD CONNECTION STRING -->
     </div>
 
     <OneOfResourceConfig
-        v-if=config.resourceConfig
-        :config="config.resourceConfig"/>
+        v-model="resource"/>
   </div>
 </template>
 
