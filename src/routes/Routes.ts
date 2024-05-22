@@ -4,7 +4,7 @@ import Config from "@/pages/Config.vue";
 
 export const HomeUrl = "/"
 export const NotFoundURl = "/:pathMatch(.*)*"
-export const ConfigPage = "/config/:name"
+export const ConfigPage = "/:name"
 
 export const routes = [
     {path: NotFoundURl, component: NotFound},

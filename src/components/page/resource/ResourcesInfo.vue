@@ -7,11 +7,16 @@ const resources = defineModel<Resource[]>()
 </script>
 
 <template>
-  <div v-if="!resources"> No resources defined</div>
 
-  <div v-else class="Node">
-    <div class="NodeHeader">Resources:</div>
+
+  <div class="Node">
+    <div class="NodeHeader">
+      <div v-if="!resources"> No resources defined</div>
+      <div v-else>Resources:</div>
+    </div>
+
     <div
+        v-if="resources"
         class="NodeField"
         v-for="(res, i) in resources"
         :key="res.name">

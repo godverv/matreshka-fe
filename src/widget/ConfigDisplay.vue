@@ -5,6 +5,7 @@ import {Config} from "@/api/grpc/matreshka-be_api.pb.ts";
 import AppInfo from "@/components/page/app_info/AppInfo.vue";
 
 import ResourcesInfo from "@/components/page/resource/ResourcesInfo.vue";
+import ServersInfo from "@/components/page/server/ServersInfo.vue";
 
 const props = defineProps({
   serviceName: {
@@ -32,6 +33,10 @@ GetConfig(props.serviceName)
 
     <div class="InfoBlock Node">
       <ResourcesInfo v-model="config.resources"/>
+    </div>
+
+    <div class="InfoBlock Node">
+      <ServersInfo v-model="config.servers"/>
     </div>
   </div>
 </template>
