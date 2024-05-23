@@ -4,9 +4,10 @@ import {ref} from "vue";
 import Dialog from "primevue/dialog";
 
 import {ListServices} from "@/api/api.ts";
-import {ConfigAppConfig} from "@/api/grpc/matreshka-be_api.pb.ts";
-import Header from "@/components/page/Header.vue";
+
+import Header from "@/widget/Header.vue";
 import ConfigDialog from "@/widget/ConfigDisplay.vue";
+import {appInfo} from "@/models/appConfig.ts";
 
 const visible = ref(false);
 
@@ -17,7 +18,7 @@ function openDialog(serviceName: string) {
   visible.value = true
 }
 
-const servicesList = ref<ConfigAppConfig[]>([])
+const servicesList = ref<appInfo[]>([])
 const listReq = {
   listRequest: {
     limit: 10,

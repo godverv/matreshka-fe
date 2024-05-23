@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import {Server} from "@/api/grpc/matreshka-be_api.pb.ts";
-import ServerInfo from "@/components/page/server/ServerInfo.vue";
 
-const servers = defineModel<Server[]>()
+import ServerInfo from "@/components/config/server/ServerInfo.vue";
+import {oneOfServer} from "@/models/servers.ts";
+
+const servers = defineModel<oneOfServer[]>()
 
 </script>
 
@@ -15,12 +16,10 @@ const servers = defineModel<Server[]>()
 
     <div
         v-if="servers"
-        v-for="(s, i) in servers"
-        :key="s.makoshName"
         class="Node"
+        v-for="(s, i) in servers" :key="s.name"
     >
       <ServerInfo v-model="servers[i]"/>
-
     </div>
   </div>
 

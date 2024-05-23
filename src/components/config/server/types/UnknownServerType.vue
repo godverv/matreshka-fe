@@ -12,11 +12,13 @@ for (const key in info.value?.environment) {
 
 <template>
   <div class="Node">
-    <div v-if="!info">nothing</div>
+    <div v-if="!info">no information</div>
+
     <div v-else
          class="NodeField"
          v-for="(f) in infoFlat">
-      <div>{{ f[0] }}</div><div>{{ f[1] }}</div>
+      <div>{{ f[0] }}</div>
+      <div>{{ f[1] }}</div>
     </div>
   </div>
 </template>

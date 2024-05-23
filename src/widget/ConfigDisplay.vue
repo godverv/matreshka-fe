@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { GetConfigRaw} from "@/api/api.ts";
 import {ref} from "vue";
-import AppInfo from "@/components/page/app_info/AppInfo.vue";
 
-import ResourcesInfo from "@/components/page/resource/ResourcesInfo.vue";
-import ServersInfo from "@/components/page/server/ServersInfo.vue";
-import {Config} from "@/models/config.ts";
+import AppInfo from "@/components/config/app_info/AppInfo.vue";
+import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
+import ServersInfo from "@/components/config/server/ServersInfo.vue";
+
+import { appConfig } from "@/models/appConfig.ts";
+
+import { GetConfigRaw} from "@/api/api.ts";
 
 const props = defineProps({
   serviceName: {
@@ -14,30 +16,29 @@ const props = defineProps({
   },
 })
 
-const config = ref<Config>({} as Config);
+const cfg = ref<appConfig>({} as appConfig);
 
 GetConfigRaw(props.serviceName)
     .then((c) => {
-      config.value = c
-      console.log(c)
+      cfg.value = c
     })
 
 </script>
 
 <template>
-  <div v-if="!config">Отсутствует информация о сервисе</div>
+  <div v-if="!cfg">Отсутствует информация о сервисе</div>
 
   <div v-else class="ConfigDialog">
     <div class="InfoBlock Node">
-      <AppInfo v-model="config.app_info"/>
+      <AppInfo v-model="cfg.app_info"/>
     </div>
 
     <div class="InfoBlock Node">
-      <ResourcesInfo v-model="config.data_sources"/>
+      <ResourcesInfo v-model="cfg.data_sources"/>
     </div>
 
     <div class="InfoBlock Node">
-      <ServersInfo v-model="config.server"/>
+      <ServersInfo v-model="cfg.server"/>
     </div>
   </div>
 </template>

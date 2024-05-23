@@ -1,11 +1,14 @@
-export type oneOfResource = (unknownResource | resourcePostgres | resourceRedis);
+import {keyMap} from "@/models/common.ts";
+
+export type oneOfResource = (unknownResource |
+    resourcePostgres |
+    resourceRedis |
+    resourceSqlite |
+    resourceTelegram |
+    resourceGrpc);
 
 type namedResource = {
     resource_name: string
-}
-
-export type keyMap = {
-    [key: string]: any
 }
 
 export type unknownResource = namedResource & keyMap;

@@ -1,14 +1,16 @@
 <script setup lang="ts">
+import {PropType} from "vue";
+
+import {keyMap} from "@/models/common.ts";
 
 import Inputer from "@/components/base/Inputer.vue";
-import {PropType} from "vue";
-import {keyMap} from "@/models/resource.ts";
 
 const props = defineProps({
   val: {
     type: Object as PropType<keyMap>,
   }
 })
+
 
 const flatValues: (string | number)[][] = []
 const innerNodes: keyMap[] = []
@@ -37,7 +39,7 @@ for (const key in props.val) {
   }
 
 }
-
+console.log(flatValues)
 </script>
 
 <template>
@@ -66,18 +68,15 @@ for (const key in props.val) {
         :disabled="true"
         v-model="innerNodes[i].fieldName"></Inputer>
 
-    <UnknownResource
+    <KeyMapComponent
         :val="innerNodes[i]"/>
   </div>
-
 </template>
 
 <style scoped>
 @import "@/assets/styles/config_display.css";
-
 .Separator {
   display: flex;
   align-items: center;
 }
-
 </style>

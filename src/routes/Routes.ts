@@ -1,6 +1,6 @@
-import Home from "@/pages/Home.vue";
-import NotFound from "@/pages/NotFound.vue";
-import Config from "@/pages/Config.vue";
+import Home from "@/pages/HomePage.vue";
+import NotFound from "@/pages/NotFoundPage.vue";
+import Config from "@/pages/ConfigPage.vue";
 
 export const HomeUrl = "/"
 export const NotFoundURl = "/:pathMatch(.*)*"

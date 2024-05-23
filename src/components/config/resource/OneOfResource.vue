@@ -6,15 +6,13 @@ import {
   resourceRedis,
   resourceSqlite,
   resourceTelegram,
-  unknownResource
 } from "@/models/resource.ts"
 
-import UnknownResource from "@/components/page/resource/UnknownResource.vue";
-import PostgresResource from "@/components/page/resource/types/PostgresResource.vue";
-import RedisResource from "@/components/page/resource/types/RedisResource.vue";
-import SqliteResource from "@/components/page/resource/types/SqliteResource.vue";
-import TelegramResource from "@/components/page/resource/types/TelegramResource.vue";
-import GrpcResource from "@/components/page/resource/types/GrpcResource.vue";
+import PostgresResource from "@/components/config/resource/types/PostgresResource.vue";
+import RedisResource from "@/components/config/resource/types/RedisResource.vue";
+import SqliteResource from "@/components/config/resource/types/SqliteResource.vue";
+import TelegramResource from "@/components/config/resource/types/TelegramResource.vue";
+import GrpcResource from "@/components/config/resource/types/GrpcResource.vue";
 
 import {oneOfResource} from "@/models/resource.ts";
 import {
@@ -23,6 +21,8 @@ import {
   RedisResourceTypePrefix,
   SqliteResourceTypePrefix, TelegramResourceTypePrefix
 } from "@/models/resource_types.ts";
+import {keyMap} from "@/models/common.ts";
+import KeyMapComponent from "@/components/base/KeyMapComponent.vue";
 
 const model = defineModel<oneOfResource>(
     {
@@ -55,9 +55,9 @@ const model = defineModel<oneOfResource>(
         v-else-if="model.resource_name.startsWith(GrpcResourceTypePrefix)"
         :val="model as resourceGrpc"/>
 
-    <UnknownResource
+    <KeyMapComponent
         v-else
-        :val="model as unknownResource"/>
+        :val="model as keyMap"/>
 
   </div>
 </template>

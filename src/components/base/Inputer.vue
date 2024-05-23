@@ -16,7 +16,7 @@ defineProps({
 <template>
   <input
       class="Inputer"
-      :size="(value?.toString().length ?? 3)"
+      :size="(value?.toString().length ?? 3) + (disabled ? 1 : 0)"
       :disabled="disabled"
       v-model.lazy="value">
 </template>
