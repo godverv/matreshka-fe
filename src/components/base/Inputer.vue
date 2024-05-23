@@ -16,7 +16,7 @@ defineProps({
 <template>
   <input
       class="Inputer"
-      :size="(value?.toString().length ?? 3) + 1"
+      :size="(value?.toString().length ?? 3)"
       :disabled="disabled"
       v-model.lazy="value">
 </template>
@@ -25,7 +25,7 @@ defineProps({
 
 .Inputer {
   border-radius: 2px;
-  padding: 0.125em 0.25em 0.125em 0.25em;
+  padding: 0.125em 1em 0.125em 1em;
 
   border: none;
   border-bottom: #12c4ca solid;

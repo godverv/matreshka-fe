@@ -19,6 +19,7 @@ const config = ref<Config>({} as Config);
 GetConfigRaw(props.serviceName)
     .then((c) => {
       config.value = c
+      console.log(c)
     })
 
 </script>
@@ -36,7 +37,7 @@ GetConfigRaw(props.serviceName)
     </div>
 
     <div class="InfoBlock Node">
-      <ServersInfo v-model="config.servers"/>
+      <ServersInfo v-model="config.server"/>
     </div>
   </div>
 </template>

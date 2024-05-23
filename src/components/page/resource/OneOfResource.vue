@@ -1,16 +1,28 @@
 <script setup lang="ts">
 
-import {resourcePostgres, resourceRedis, unknownResource} from "@/models/resource.ts"
+import {
+  resourceGrpc,
+  resourcePostgres,
+  resourceRedis,
+  resourceSqlite,
+  resourceTelegram,
+  unknownResource
+} from "@/models/resource.ts"
 
 import UnknownResource from "@/components/page/resource/UnknownResource.vue";
-import PostgresResource from "@/components/page/resource/PostgresResource.vue";
-import RedisResource from "@/components/page/resource/RedisResource.vue";
-// import SqliteResource from "@/components/page/resource/SqliteResource.vue";
-// import GrpcResource from "@/components/page/resource/GrpcResource.vue";
-// import TelegramResource from "@/components/page/resource/TelegramResource.vue";
+import PostgresResource from "@/components/page/resource/types/PostgresResource.vue";
+import RedisResource from "@/components/page/resource/types/RedisResource.vue";
+import SqliteResource from "@/components/page/resource/types/SqliteResource.vue";
+import TelegramResource from "@/components/page/resource/types/TelegramResource.vue";
+import GrpcResource from "@/components/page/resource/types/GrpcResource.vue";
 
 import {oneOfResource} from "@/models/resource.ts";
-import {PostgresResourceTypePrefix, RedisResourceTypePrefix} from "@/models/resource_types.ts";
+import {
+  GrpcResourceTypePrefix,
+  PostgresResourceTypePrefix,
+  RedisResourceTypePrefix,
+  SqliteResourceTypePrefix, TelegramResourceTypePrefix
+} from "@/models/resource_types.ts";
 
 const model = defineModel<oneOfResource>(
     {
@@ -31,22 +43,22 @@ const model = defineModel<oneOfResource>(
         v-else-if="model.resource_name.startsWith(RedisResourceTypePrefix)"
         :val="model as resourceRedis"/>
 
+    <SqliteResource
+        v-else-if="model.resource_name.startsWith(SqliteResourceTypePrefix)"
+        :val="model as resourceSqlite"/>
+
+    <TelegramResource
+        v-else-if="model.resource_name.startsWith(TelegramResourceTypePrefix)"
+        :val="model as resourceTelegram"/>
+
+    <GrpcResource
+        v-else-if="model.resource_name.startsWith(GrpcResourceTypePrefix)"
+        :val="model as resourceGrpc"/>
+
     <UnknownResource
         v-else
         :val="model as unknownResource"/>
 
-
-    <!--    <SqliteResource-->
-    <!--        v-else-if="config.sqlite"-->
-    <!--        :val="config.sqlite"/>-->
-
-    <!--    <GrpcResource-->
-    <!--        v-else-if="config.grpc"-->
-    <!--        :val="config.grpc"/>-->
-
-    <!--    <TelegramResource-->
-    <!--        v-else-if="config.telegram"-->
-    <!--        :val="config.telegram"/>-->
   </div>
 </template>
 

@@ -26,7 +26,6 @@ const resource = defineModel<oneOfResource>({required: true})
 @import "@/assets/styles/config_display.css";
 
 .ResourceBlock {
-  border-top: blue solid;
   width: 100%;
   padding: 0.25em;
 }

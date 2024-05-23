@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import {Server} from "@/api/grpc/matreshka-be_api.pb.ts";
 import ServerOneOf from "@/components/page/server/ServerOneOf.vue";
+import {Server} from "@/models/servers.ts";
 
 const server = defineModel<Server | undefined>()
 

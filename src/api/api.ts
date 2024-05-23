@@ -32,5 +32,5 @@ export async function GetConfigRaw(serviceName: string): Promise<Config> {
             const configRaw = atob(res.config.toString());
 
             return yaml.load(configRaw) as Config;
-        }).catch()
+        })
 }

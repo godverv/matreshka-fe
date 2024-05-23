@@ -8,7 +8,6 @@ const model = defineModel<resourcePostgres>({
 </script>
 
 <template>
-  <div>
     <div class="NodeField">
       <div>Database name:</div>
       <Inputer v-model="model.name"/>
@@ -33,7 +32,6 @@ const model = defineModel<resourcePostgres>({
       <div>Password:</div>
       <Inputer v-model="model.pwd"/>
     </div>
-  </div>
 </template>
 
 <style scoped>

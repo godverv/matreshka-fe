@@ -16,7 +16,7 @@ const resources = defineModel<oneOfResource[]>()
 
     <div
         v-if="resources"
-        class="NodeField"
+        class="Node"
         v-for="(res, i) in resources"
         :key="res.resource_name">
 

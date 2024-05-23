@@ -107,8 +107,6 @@ export type Server = {
   type?: ServerType
 }
 
-
-
 export type ApiVersionRequest = {
 }
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-
 import {PropType} from "vue";
-import {ResourceTelegram} from "@/api/grpc/matreshka-be_api.pb.ts";
+
 import Inputer from "@/components/base/Inputer.vue";
-import CopyButton from "@/components/base/CopyButton.vue";
+
+import {resourceGrpc} from "@/models/resource.ts";
 
 defineProps({
   val: {
-    type: Object as PropType<ResourceTelegram>,
+    type: Object as PropType<resourceGrpc>,
     required: true,
   }
 })
@@ -15,13 +15,16 @@ defineProps({
 
 <template>
   <div class="NodeField">
-    <div>Api Key:</div>
-    <Inputer v-model="val.apiKey"/>
-    <CopyButton v-model="val.apiKey"/>
+    <div>Service url:</div>
+    <Inputer v-model="val.connection_string"/>
+  </div>
+
+  <div class="NodeField">
+    <div>Module:</div>
+    <Inputer v-model="val.module"/>
   </div>
 </template>
 
 <style scoped>
 @import "@/assets/styles/config_display.css";
-
 </style>

@@ -26,3 +26,16 @@ export type resourceRedis = namedResource & {
     pwd: string
     db: number
 }
+
+export type resourceSqlite = namedResource & {
+    path: string
+}
+
+export type resourceTelegram = namedResource & {
+    api_key: string
+}
+
+export type resourceGrpc = namedResource & {
+    connection_string: string
+    module: string
+}
