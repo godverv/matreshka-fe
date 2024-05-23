@@ -36,7 +36,6 @@ for (const key in props.val) {
       flatValues.push([key, val])
   }
 
-  console.log(123, innerNodes)
 }
 
 </script>
@@ -63,7 +62,9 @@ for (const key in props.val) {
       class="Node"
       v-for="(_, i) in innerNodes" :key="innerNodes[i].resource_name"
   >
-    <div>{{ innerNodes[i].fieldName }}:</div>
+    <Inputer
+        :disabled="true"
+        v-model="innerNodes[i].fieldName"></Inputer>
 
     <UnknownResource
         :val="innerNodes[i]"/>
