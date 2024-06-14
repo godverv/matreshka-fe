@@ -24,7 +24,7 @@ resourceTypes.set(TelegramResourceTypePrefix, TelegramResourceName);
 
 
 export function fromProtoResourceName(resourceName: string): String {
-    resourceName = resourceName.split("_")[0]
+    resourceName = resourceName.split("-")[0]
 
     const res = resourceTypes.get(resourceName)
     if (res) {

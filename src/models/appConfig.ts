@@ -1,5 +1,6 @@
 import {oneOfResource} from "@/models/resource.ts";
 import {oneOfServer} from "@/models/servers.ts";
+import {configValue} from "@/models/common.ts";
 
 export type appConfig = {
     app_info: appInfo
@@ -9,12 +10,8 @@ export type appConfig = {
 }
 
 export type appInfo = {
-    name: configValue
-    version: configValue
-    startup_duration: configValue
+    name: configValue<string>
+    version: configValue<string>
+    startup_duration: configValue<string>
 }
 
-export type configValue = {
-    name: string
-    value: string
-}

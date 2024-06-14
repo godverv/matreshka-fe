@@ -1,4 +1,4 @@
-import {keyMap} from "@/models/common.ts";
+import {configValue, keyMap} from "@/models/common.ts";
 
 export type oneOfResource = (unknownResource |
     resourcePostgres |
@@ -14,12 +14,12 @@ type namedResource = {
 export type unknownResource = namedResource & keyMap;
 
 export type resourcePostgres = namedResource & {
-    host: string
-    name: string
-    port: number
-    user: string
-    pwd: string
-    ssl_mode: string
+    host: configValue<string>
+    name: configValue<string>
+    port: configValue<number>
+    user: configValue<string>
+    pwd: configValue<string>
+    ssl_mode: configValue<string>
 }
 
 export type resourceRedis = namedResource & {

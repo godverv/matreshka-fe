@@ -46,6 +46,8 @@ export async function GetConfigRaw(serviceName: string): Promise<appConfig> {
             }
             const cfg: appConfig = {} as appConfig;
             cfg.app_info = {} as appInfo;
+            cfg.data_sources = []
+            cfg.server = []
 
             res.root.innerNodes?.map((n) => {
                 mapNodeToConfig(cfg, n)

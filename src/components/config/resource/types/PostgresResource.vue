@@ -10,27 +10,27 @@ const model = defineModel<resourcePostgres>({
 <template>
     <div class="NodeField">
       <div>Database name:</div>
-      <Inputer v-model="model.name"/>
+      <Inputer v-model="model.name.value"/>
     </div>
 
     <div class="NodeField">
       <div>Host:</div>
-      <Inputer v-model="model.host"/>
+      <Inputer v-model="model.host.value"/>
     </div>
 
     <div class="NodeField">
       <div>Port:</div>
-      <Inputer v-model="model.port"/>
+      <Inputer v-model="model.port.value"/>
     </div>
 
     <div class="NodeField">
       <div>Username:</div>
-      <Inputer v-model="model.user"/>
+      <Inputer v-model="model.user.value"/>
     </div>
 
     <div class="NodeField">
       <div>Password:</div>
-      <Inputer v-model="model.pwd"/>
+      <Inputer v-model="model.pwd.value"/>
     </div>
 </template>
 
