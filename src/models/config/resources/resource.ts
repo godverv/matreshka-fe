@@ -1,4 +1,4 @@
-import {configValue, keyMap} from "@/models/common.ts";
+import {configValue, keyMap} from "@/models/config/common.ts";
 
 export type oneOfResource = (unknownResource |
     resourcePostgres |
@@ -9,6 +9,7 @@ export type oneOfResource = (unknownResource |
 
 type namedResource = {
     resource_name: string
+    resource_type: string
 }
 
 export type unknownResource = namedResource & keyMap;
@@ -23,11 +24,11 @@ export type resourcePostgres = namedResource & {
 }
 
 export type resourceRedis = namedResource & {
-    host: string
-    port: number
-    user: string
-    pwd: string
-    db: number
+    host: configValue<string>
+    port: configValue<number>
+    user: configValue<string>
+    pwd: configValue<string>
+    db: configValue<number>
 }
 
 export type resourceSqlite = namedResource & {
@@ -35,10 +36,10 @@ export type resourceSqlite = namedResource & {
 }
 
 export type resourceTelegram = namedResource & {
-    api_key: string
+    api_key: configValue<string>
 }
 
 export type resourceGrpc = namedResource & {
-    connection_string: string
-    module: string
+    connection_string: configValue<string>
+    module: configValue<string>
 }

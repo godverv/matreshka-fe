@@ -14,30 +14,31 @@ defineProps({
 <template>
   <div class="NodeField">
     <div>Host:</div>
-    <Inputer v-model="val.host"/>
+    <Inputer v-model="val.host.value"/>
   </div>
 
   <div class="NodeField">
     <div>Post:</div>
-    <Inputer v-model="val.port"/>
+    <Inputer v-model="val.port.value"/>
   </div>
 
   <div class="NodeField">
     <div>User:</div>
-    <Inputer v-model="val.user"/>
+    <Inputer v-model="val.user.value"/>
   </div>
 
   <div class="NodeField">
     <div>Password:</div>
-    <Inputer v-model="val.pwd"/>
+    <Inputer v-model="val.pwd.value"/>
   </div>
 
   <div class="NodeField">
     <div>Db number:</div>
-    <Inputer v-model="val.db"/>
+    <Inputer v-model="val.db.value"/>
   </div>
 </template>
 
 <style scoped>
 @import "@/assets/styles/config_display.css";
+
 </style>

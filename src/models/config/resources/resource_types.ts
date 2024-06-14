@@ -23,10 +23,10 @@ resourceTypes.set(GrpcResourceTypePrefix, GrpcServerResourceName);
 resourceTypes.set(TelegramResourceTypePrefix, TelegramResourceName);
 
 
-export function fromProtoResourceName(resourceName: string): String {
-    resourceName = resourceName.split("-")[0]
+export function getResourceName(resourceFullName: string): String {
+    resourceFullName = resourceFullName.split("-")[0]
 
-    const res = resourceTypes.get(resourceName)
+    const res = resourceTypes.get(resourceFullName)
     if (res) {
         return res
     }

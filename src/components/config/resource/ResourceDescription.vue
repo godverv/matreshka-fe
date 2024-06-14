@@ -1,8 +1,7 @@
 <script setup lang="ts">
 
 import OneOfResourceConfig from "./OneOfResource.vue";
-import {fromProtoResourceName} from "@/models/resource_types.ts";
-import {oneOfResource} from "@/models/resource.ts";
+import {oneOfResource} from "@/models/config/resources/resource.ts";
 
 const resource = defineModel<oneOfResource>({required: true})
 
@@ -12,7 +11,7 @@ const resource = defineModel<oneOfResource>({required: true})
   <div v-if="!resource"> No information on resource</div>
 
   <div v-else class="Node ResourceBlock">
-    <div class="NodeHeader">Resource type: {{ fromProtoResourceName(resource.resource_name) }}
+    <div class="NodeHeader">Resource type: {{ resource.resource_type }}
 
     <!--     TODO ADD CONNECTION STRING -->
     </div>

@@ -14,7 +14,7 @@ defineProps({
 <template>
   <div class="NodeField">
     <div>File path:</div>
-    <Inputer v-model="val.path"/>
+    <Inputer v-model="val.path.value"/>
   </div>
 </template>
 

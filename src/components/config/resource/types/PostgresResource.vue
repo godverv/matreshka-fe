@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Inputer from "@/components/base/Inputer.vue";
-import {resourcePostgres} from "@/models/resource.ts";
+import {resourcePostgres} from "@/models/config/resources/resource.ts";
 
 const model = defineModel<resourcePostgres>({
     required: true,

@@ -16,12 +16,12 @@ defineProps({
 <template>
   <div class="NodeField">
     <div>Service url:</div>
-    <Inputer v-model="val.connection_string"/>
+    <Inputer v-model="val.connection_string.value"/>
   </div>
 
   <div class="NodeField">
     <div>Module:</div>
-    <Inputer v-model="val.module"/>
+    <Inputer v-model="val.module.value"/>
   </div>
 </template>
 

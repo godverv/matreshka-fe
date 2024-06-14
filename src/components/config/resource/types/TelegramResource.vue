@@ -18,8 +18,8 @@ defineProps({
 <template>
   <div class="NodeField">
     <div>Api Key:</div>
-    <Inputer v-model="val.api_key"/>
-    <CopyButton v-model="val.api_key"/>
+    <Inputer v-model="val.api_key.value"/>
+    <CopyButton v-model="val.api_key.value"/>
   </div>
 </template>
 
