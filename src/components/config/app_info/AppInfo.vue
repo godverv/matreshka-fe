@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import {ConfigAppConfig} from "@/api/grpc/matreshka-be_api.pb.ts";
 import Inputer from "@/components/base/Inputer.vue";
+import {appInfo} from "@/models/appConfig.ts";
 
-const appConfig = defineModel<ConfigAppConfig>()
-
+const info = defineModel<appInfo>()
 </script>
 
 <template>
-  <div v-if="!appConfig">No app info</div>
+  <div v-if="!info">No app info</div>
+
   <div v-else class="Node">
     <div class="NodeHeader">
       AppInfo:
@@ -16,17 +16,17 @@ const appConfig = defineModel<ConfigAppConfig>()
     <div class="Node">
       <div class="NodeField">
         <div>Service name:</div>
-        <Inputer v-model="appConfig.name"/>
+        <Inputer v-model="info.name.value"/>
       </div>
 
       <div class="NodeField">
         <div>Version:</div>
-        <Inputer v-model="appConfig.version"/>
+        <Inputer v-model="info.version.value"/>
       </div>
 
       <div class="NodeField">
         <div>Startup duration:</div>
-        <Inputer v-model="appConfig.startup_duration"/>
+        <Inputer v-model="info.startup_duration.value"/>
         <div>seconds</div>
       </div>
     </div>

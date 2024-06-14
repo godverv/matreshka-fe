@@ -13,6 +13,7 @@ import RedisResource from "@/components/config/resource/types/RedisResource.vue"
 import SqliteResource from "@/components/config/resource/types/SqliteResource.vue";
 import TelegramResource from "@/components/config/resource/types/TelegramResource.vue";
 import GrpcResource from "@/components/config/resource/types/GrpcResource.vue";
+import KeyMapComponent from "@/components/base/KeyMapComponent.vue";
 
 import {oneOfResource} from "@/models/resource.ts";
 import {
@@ -21,15 +22,14 @@ import {
   RedisResourceTypePrefix,
   SqliteResourceTypePrefix, TelegramResourceTypePrefix
 } from "@/models/resource_types.ts";
+
 import {keyMap} from "@/models/common.ts";
-import KeyMapComponent from "@/components/base/KeyMapComponent.vue";
 
 const model = defineModel<oneOfResource>(
     {
       required: true,
     }
 )
-
 
 </script>
 

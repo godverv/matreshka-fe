@@ -39,7 +39,6 @@ for (const key in props.val) {
   }
 
 }
-console.log(flatValues)
 </script>
 
 <template>

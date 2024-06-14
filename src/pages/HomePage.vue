@@ -38,11 +38,11 @@ ListServices(listReq)
     <div class="list">
       <div
           v-for="service in servicesList"
-          :key="service.name"
+          :key="service.name.value"
           class="listItem"
-          @click="openDialog(service.name ?? '')"
+          @click="openDialog(service.name.value ?? '')"
       >
-        {{ service.name }}
+        {{ service.name.value }}
       </div>
     </div>
 

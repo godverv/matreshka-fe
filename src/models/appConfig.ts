@@ -9,7 +9,12 @@ export type appConfig = {
 }
 
 export type appInfo = {
+    name: configValue
+    version: configValue
+    startup_duration: configValue
+}
+
+export type configValue = {
     name: string
-    version: string
-    startup_duration: number
+    value: string
 }
