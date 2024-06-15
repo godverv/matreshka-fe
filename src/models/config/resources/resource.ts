@@ -32,7 +32,7 @@ export type resourceRedis = namedResource & {
 }
 
 export type resourceSqlite = namedResource & {
-    path: string
+    path: configValue<string>
 }
 
 export type resourceTelegram = namedResource & {

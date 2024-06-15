@@ -2,6 +2,7 @@ import {SqliteResourceTypePrefix} from "@/models/config/resources/resource_types
 import {appConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 import {resourceSqlite} from "@/models/config/resources/resource.ts";
+import {extractStringValue} from "@/models/config/common.ts";
 
 export function mapSqlite(cfg: appConfig, root: Node) {
     const sqlite: resourceSqlite = {} as resourceSqlite
@@ -21,8 +22,8 @@ export function mapSqlite(cfg: appConfig, root: Node) {
 
             const fieldName = n.name.slice(root.name.length + 1)
             switch (fieldName) {
-                default:
-                    console.log(fieldName)
+                case 'PATH':
+                    sqlite.path = extractStringValue(n)
             }
         }
     )

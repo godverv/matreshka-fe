@@ -1,10 +1,15 @@
-import {keyMap} from "@/models/common.ts";
+import {keyMap} from "@/models/config/common.ts";
 
 export type oneOfServer = (unknownServer)
 
 export type unknownServer = namedServer & keyMap
 
 export type namedServer = {
-    name: string
+    server_name: string
+    server_type: string
     port: number
 }
+
+export type grpcServer = namedServer
+
+export type restServer = namedServer

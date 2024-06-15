@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {PropType} from "vue";
-import {ResourceSqlite} from "@/api/grpc/matreshka-be_api.pb.ts";
 import Inputer from "@/components/base/Inputer.vue";
+import {resourceSqlite} from "@/models/config/resources/resource.ts";
 
 defineProps({
   val: {
-    type: Object as PropType<ResourceSqlite>,
+    type: Object as PropType<resourceSqlite>,
     required: true,
   }
 })
