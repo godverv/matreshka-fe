@@ -2,17 +2,17 @@ import {appConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 import {serverGrpc} from "@/models/config/servers/servers.ts";
 import {extractNumberValue} from "@/models/config/common.ts";
-import {GrpcServerTypePrefix} from "@/models/config/servers/server_types.ts";
+import {RestServerTypePrefix} from "@/models/config/servers/server_types.ts";
 
-export function mapGrpcServer(cfg: appConfig, root: Node) {
+export function mapRestServer(cfg: appConfig, root: Node) {
     if (!root.name) {
         return
     }
 
     const grpcSrv: serverGrpc = {} as serverGrpc
 
-    grpcSrv.server_name = root.name.slice(root.name.indexOf('GRPC')).toLowerCase()
-    grpcSrv.server_type = GrpcServerTypePrefix
+    grpcSrv.server_name = root.name.slice(root.name.indexOf('REST')).toLowerCase()
+    grpcSrv.server_type = RestServerTypePrefix
 
     root.innerNodes?.map(
         (n) => {

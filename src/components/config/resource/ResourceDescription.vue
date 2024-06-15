@@ -10,7 +10,7 @@ const resource = defineModel<oneOfResource>({required: true})
 <template>
   <div v-if="!resource"> No information on resource</div>
 
-  <div v-else class="Node ResourceBlock">
+  <div v-else class="Node">
     <div class="NodeHeader">Resource type: {{ resource.resource_type }}
 
     <!--     TODO ADD CONNECTION STRING -->
@@ -24,8 +24,4 @@ const resource = defineModel<oneOfResource>({required: true})
 <style scoped>
 @import "@/assets/styles/config_display.css";
 
-.ResourceBlock {
-  width: 100%;
-  padding: 0.25em;
-}
 </style>

@@ -13,8 +13,9 @@ import {mapRedis} from "@/models/config/resources/redis.ts";
 import {mapSqlite} from "@/models/config/resources/sqlite.ts";
 import {mapTelegram} from "@/models/config/resources/telegram.ts";
 import {mapGrpc} from "@/models/config/resources/grpc.ts";
+import {extractType} from "@/models/config/common.ts";
 
-export const resourceMapping = new Map<string, (cfg: appConfig, node: Node) => void>()
+const resourceMapping = new Map<string, (cfg: appConfig, node: Node) => void>()
 resourceMapping.set(PostgresResourceTypePrefix, mapPostgres)
 resourceMapping.set(RedisResourceTypePrefix, mapRedis)
 resourceMapping.set(SqliteResourceTypePrefix, mapSqlite)
@@ -23,22 +24,10 @@ resourceMapping.set(GrpcResourceTypePrefix, mapGrpc)
 
 export function mapResource(cfg: appConfig, root: Node) {
     root.innerNodes?.map((n)=> {
-        if (!n.name || !root.name) {
+        const resType = extractType(n, root)
+
+        if (!resType) {
             return;
-        }
-
-        let name = n.name.slice(root.name.length+1)
-
-        const resourceNameEndIdx = name.indexOf("_")
-        if (resourceNameEndIdx >0) {
-            name = name.slice(resourceNameEndIdx)
-        }
-        name = name.toLowerCase()
-
-        let resType = name
-        const resourceTypeNameEndIdx = resType.indexOf("-")
-        if (resourceTypeNameEndIdx > 0 ) {
-            resType = name.slice(0, resourceTypeNameEndIdx)
         }
 
         const mapper = resourceMapping.get(resType)

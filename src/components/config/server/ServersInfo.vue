@@ -19,6 +19,10 @@ const servers = defineModel<oneOfServer[]>()
         class="Node"
         v-for="(s, i) in servers" :key="s.name"
     >
+      <div class="NodeHeader">Server type: {{ s.server_type }}
+
+        <!--     TODO ADD CONNECTION STRING -->
+      </div>
       <ServerInfo v-model="servers[i]"/>
     </div>
   </div>

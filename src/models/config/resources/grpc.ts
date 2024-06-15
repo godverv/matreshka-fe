@@ -5,13 +5,13 @@ import {resourceGrpc} from "@/models/config/resources/resource.ts";
 import {extractStringValue} from "@/models/config/common.ts";
 
 export function mapGrpc(cfg: appConfig, root: Node) {
-    const grpcClient: resourceGrpc = {} as resourceGrpc
-
     if (!root.name) {
         return
     }
 
-    grpcClient.resource_name = root.name.slice(root.name.indexOf('POSTGRES')).toLowerCase()
+    const grpcClient: resourceGrpc = {} as resourceGrpc
+
+    grpcClient.resource_name = root.name.slice(root.name.indexOf('GRPC')).toLowerCase()
     grpcClient.resource_type = GrpcResourceTypePrefix
 
     root.innerNodes?.map(

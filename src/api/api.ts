@@ -5,8 +5,9 @@ import {
 } from "./grpc/matreshka-be_api.pb";
 
 
-import {appConfig, appInfo} from "@/models/appConfig.ts";
 import {mapNodeToConfig} from "@/api/model.ts";
+import {appInfo} from "@/models/config/info/appInfo.ts";
+import {appConfig} from "@/models/config/appConfig.ts";
 
 const backendApi = import.meta.env.VITE_MATRESHKA_BACKEND_URL
 

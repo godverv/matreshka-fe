@@ -2,8 +2,8 @@
 import {PropType} from "vue";
 
 import Inputer from "@/components/base/Inputer.vue";
+import {resourceGrpc} from "@/models/config/resources/resource.ts";
 
-import {resourceGrpc} from "@/models/resource.ts";
 
 defineProps({
   val: {

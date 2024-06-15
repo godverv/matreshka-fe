@@ -21,3 +21,25 @@ export function extractNumberValue(n: Node) : configValue<number> {
         value: Number(n.value) ?? 0
     }
 }
+
+export function extractType(node: Node, root: Node): string | undefined {
+    if (!node.name || !root.name) {
+        return;
+    }
+
+    let name = node.name.slice(root.name.length+1)
+
+    const resourceNameEndIdx = name.indexOf("_")
+    if (resourceNameEndIdx >0) {
+        name = name.slice(resourceNameEndIdx)
+    }
+    name = name.toLowerCase()
+
+    let resType = name
+    const resourceTypeNameEndIdx = resType.indexOf("-")
+    if (resourceTypeNameEndIdx > 0 ) {
+        resType = name.slice(0, resourceTypeNameEndIdx)
+    }
+
+    return resType
+}
