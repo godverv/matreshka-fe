@@ -4,10 +4,10 @@ import {ref} from "vue";
 import Dialog from "primevue/dialog";
 
 import {ListServices} from "@/api/api.ts";
+import {appInfo} from "@/models/config/info/appInfo.ts";
 
-import Header from "@/widget/Header.vue";
 import ConfigDialog from "@/widget/ConfigDisplay.vue";
-import {appInfo} from "@/models/appConfig.ts";
+import Header from "@/widget/Header.vue";
 
 const visible = ref(false);
 

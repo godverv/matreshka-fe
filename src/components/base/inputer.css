@@ -1,0 +1,16 @@
+.Inputer {
+    border-radius: 2px;
+    padding: 0.125em 1em 0.125em 1em;
+
+    border: none;
+    border-bottom: #12c4ca solid;
+    width: fit-content;
+}
+
+.Inputer:focus {
+    outline: none;
+}
+
+.Inputer:disabled {
+    border-bottom: #4a5353 solid;
+}

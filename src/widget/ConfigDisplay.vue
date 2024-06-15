@@ -5,9 +5,10 @@ import AppInfo from "@/components/config/app_info/AppInfo.vue";
 import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
 import ServersInfo from "@/components/config/server/ServersInfo.vue";
 
-import { appConfig } from "@/models/appConfig.ts";
 
 import { GetConfigRaw} from "@/api/api.ts";
+import {appConfig} from "@/models/config/appConfig.ts";
+import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
 
 const props = defineProps({
   serviceName: {
@@ -22,7 +23,11 @@ GetConfigRaw(props.serviceName)
     .then((c) => {
       cfg.value = c
     })
+const configChangesStore = useOpenedConfigChangesStore()
 
+function save() {
+  console.log(configChangesStore.envVariables)
+}
 </script>
 
 <template>
@@ -40,6 +45,9 @@ GetConfigRaw(props.serviceName)
     <div class="InfoBlock Node">
       <ServersInfo v-model="cfg.server"/>
     </div>
+    <button @click="save">
+      Save
+    </button>
   </div>
 </template>
 

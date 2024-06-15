@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import {PropType} from "vue";
-import Inputer from "@/components/base/Inputer.vue";
-import {resourceRedis} from "@/models/resource.ts";
+
+import {resourceRedis} from "@/models/config/resources/resource.ts";
+
+import InputerUpdater from "@/components/base/ConfigField.vue";
 
 defineProps({
   val: {
@@ -9,32 +11,41 @@ defineProps({
     required: true,
   }
 })
+
+const emit = defineEmits(['set-change'])
+
+function setChange(name: string, value: string | number) {
+  emit('set-change', name, value)
+}
 </script>
 
 <template>
   <div class="NodeField">
     <div>Host:</div>
-    <Inputer v-model="val.host.value"/>
+    <InputerUpdater
+        v-model="val.host"
+        @set-change="setChange"
+    />
   </div>
 
   <div class="NodeField">
     <div>Post:</div>
-    <Inputer v-model="val.port.value"/>
+    <InputerUpdater v-model="val.port"/>
   </div>
 
   <div class="NodeField">
     <div>User:</div>
-    <Inputer v-model="val.user.value"/>
+    <InputerUpdater v-model="val.user"/>
   </div>
 
   <div class="NodeField">
     <div>Password:</div>
-    <Inputer v-model="val.pwd.value"/>
+    <InputerUpdater v-model="val.pwd"/>
   </div>
 
   <div class="NodeField">
     <div>Db number:</div>
-    <Inputer v-model="val.db.value"/>
+    <InputerUpdater v-model="val.db"/>
   </div>
 </template>
 

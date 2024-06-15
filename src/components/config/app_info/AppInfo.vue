@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Inputer from "@/components/base/Inputer.vue";
-import {appInfo} from "@/models/appConfig.ts";
+import {appInfo} from "@/models/config/info/appInfo.ts";
+import InputerUpdater from "@/components/base/ConfigField.vue";
 
 const info = defineModel<appInfo>()
 </script>
@@ -16,17 +16,17 @@ const info = defineModel<appInfo>()
     <div class="Node">
       <div class="NodeField">
         <div>Service name:</div>
-        <Inputer v-model="info.name.value"/>
+        <InputerUpdater v-model="info.name"/>
       </div>
 
       <div class="NodeField">
         <div>Version:</div>
-        <Inputer v-model="info.version.value"/>
+        <InputerUpdater v-model="info.version"/>
       </div>
 
       <div class="NodeField">
         <div>Startup duration:</div>
-        <Inputer v-model="info.startup_duration.value"/>
+        <InputerUpdater v-model="info.startup_duration"/>
         <div>seconds</div>
       </div>
     </div>

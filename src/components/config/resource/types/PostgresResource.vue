@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import Inputer from "@/components/base/Inputer.vue";
 import {resourcePostgres} from "@/models/config/resources/resource.ts";
+
+import InputerUpdater from "@/components/base/ConfigField.vue";
 
 const model = defineModel<resourcePostgres>({
     required: true,
@@ -10,27 +11,27 @@ const model = defineModel<resourcePostgres>({
 <template>
     <div class="NodeField">
       <div>Database name:</div>
-      <Inputer v-model="model.name.value"/>
+      <InputerUpdater v-model="model.name"/>
     </div>
 
     <div class="NodeField">
       <div>Host:</div>
-      <Inputer v-model="model.host.value"/>
+      <InputerUpdater v-model="model.host"/>
     </div>
 
     <div class="NodeField">
       <div>Port:</div>
-      <Inputer v-model="model.port.value"/>
+      <InputerUpdater v-model="model.port"/>
     </div>
 
     <div class="NodeField">
       <div>Username:</div>
-      <Inputer v-model="model.user.value"/>
+      <InputerUpdater v-model="model.user"/>
     </div>
 
     <div class="NodeField">
       <div>Password:</div>
-      <Inputer v-model="model.pwd.value"/>
+      <InputerUpdater v-model="model.pwd"/>
     </div>
 </template>
 

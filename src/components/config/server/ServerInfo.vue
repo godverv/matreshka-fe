@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import ServerOneOf from "@/components/config/server/ServerOneOf.vue";
-import {oneOfServer} from "@/models/servers.ts";
+import {oneOfServer} from "@/models/config/servers/servers.ts";
 
 const cfg = defineModel<oneOfServer | undefined>()
 

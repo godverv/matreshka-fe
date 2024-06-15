@@ -5,7 +5,7 @@ import {PropType} from "vue";
 import Inputer from "@/components/base/Inputer.vue";
 import CopyButton from "@/components/base/CopyButton.vue";
 
-import {resourceTelegram} from "@/models/resource.ts";
+import {resourceTelegram} from "@/models/config/resources/resource.ts";
 
 defineProps({
   val: {

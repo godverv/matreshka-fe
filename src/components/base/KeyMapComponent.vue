@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {PropType} from "vue";
 
-import {keyMap} from "@/models/common.ts";
 
 import Inputer from "@/components/base/Inputer.vue";
+import {keyMap} from "@/models/config/common.ts";
 
 const props = defineProps({
   val: {

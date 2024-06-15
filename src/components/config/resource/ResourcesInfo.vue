@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import ResourceDescription from "@/components/config/resource/ResourceDescription.vue";
-import {oneOfResource} from "@/models/resource.ts";
+import {oneOfResource} from "@/models/config/resources/resource.ts";
 
 const resources = defineModel<oneOfResource[]>()
 
