@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {PropType} from "vue";
 import {resourceSqlite} from "@/models/config/resources/resource.ts";
-import InputerUpdater from "@/components/base/ConfigField.vue";
+import ConfigField from "@/components/base/ConfigField.vue";
 
 defineProps({
   val: {
@@ -14,7 +14,7 @@ defineProps({
 <template>
   <div class="NodeField">
     <div>File path:</div>
-    <InputerUpdater v-model="val.path"/>
+    <ConfigField v-model="val.path"/>
   </div>
 </template>
 

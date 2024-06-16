@@ -2,7 +2,7 @@
 
 import {PropType} from "vue";
 
-import Inputer from "@/components/base/Inputer.vue";
+import ConfigField from "@/components/base/ConfigField.vue";
 import {serverGrpc} from "@/models/config/servers/servers.ts";
 
 const val = defineModel({
@@ -14,7 +14,7 @@ const val = defineModel({
 <template>
   <div class="NodeField">
     <div>Port:</div>
-    <Inputer v-model="val.port.value"/>
+    <ConfigField v-model="val.port"/>
   </div>
 </template>
 

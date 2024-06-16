@@ -32,7 +32,11 @@ export const useOpenedConfigChangesStore = defineStore('openedConfig', {
             this.changesMap.delete(name)
         },
         rollbackAll() {
-            this.changesMap.forEach((v) => {v.rollback()})
+            this.changesMap.forEach((v) => {
+                v.rollback()
+                this.changesMap.delete(v.fieldName)
+            })
+
         }
     },
 })

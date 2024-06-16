@@ -1,22 +1,25 @@
 import {
     MatreshkaBeAPI,
     ListConfigsRequest,
-    GetConfigNodeRequest
+    GetConfigNodeRequest,
+    Node,
 } from "./grpc/matreshka-be_api.pb";
 
 
 import {mapNodeToConfig} from "@/api/model.ts";
 import {appInfo} from "@/models/config/info/appInfo.ts";
 import {appConfig} from "@/models/config/appConfig.ts";
+import {PatchConfigRequest} from "./grpc/matreshka-be_api.pb";
+import {changes} from "@/state/opened_config.ts";
 
 const backendApi = import.meta.env.VITE_MATRESHKA_BACKEND_URL
 
 const prefix = {pathPrefix: backendApi}
 
 export async function ListServices(req: ListConfigsRequest): Promise<appInfo[]> {
-    return MatreshkaBeAPI.ListConfigs(req, prefix)
+    return MatreshkaBeAPI
+        .ListConfigs(req, prefix)
         .then((r) => {
-
             return r.services
                     ?.map((v) => {
                         return {
@@ -34,8 +37,7 @@ export async function ListServices(req: ListConfigsRequest): Promise<appInfo[]> 
         })
 }
 
-
-export async function GetConfigRaw(serviceName: string): Promise<appConfig> {
+export async function GetConfigNodes(serviceName: string): Promise<appConfig> {
     const req = {
         serviceName: serviceName,
     } as GetConfigNodeRequest;
@@ -56,4 +58,19 @@ export async function GetConfigRaw(serviceName: string): Promise<appConfig> {
 
             return cfg;
         })
+}
+
+export async function PatchConfig(serviceName: string, changeList: changes[]) {
+    const req: PatchConfigRequest = {
+        serviceName: serviceName,
+        changes: changeList.map((n) => {
+            return {
+                name: n.fieldName,
+                value: n.fieldValue,
+            } as Node
+        }),
+    } as PatchConfigRequest;
+
+    return MatreshkaBeAPI.PatchConfig(req, prefix)
+        .then(()=>GetConfigNodes(serviceName))
 }

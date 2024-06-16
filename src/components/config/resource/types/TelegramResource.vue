@@ -2,7 +2,7 @@
 
 import {PropType} from "vue";
 
-import Inputer from "@/components/base/Inputer.vue";
+import ConfigField from "@/components/base/ConfigField.vue";
 import CopyButton from "@/components/base/CopyButton.vue";
 
 import {resourceTelegram} from "@/models/config/resources/resource.ts";
@@ -18,8 +18,7 @@ defineProps({
 <template>
   <div class="NodeField">
     <div>Api Key:</div>
-    <Inputer v-model="val.api_key.value"/>
-    <CopyButton v-model="val.api_key.value"/>
+    <ConfigField v-model="val.api_key"/>
   </div>
 </template>
 

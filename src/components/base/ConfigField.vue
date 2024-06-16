@@ -8,6 +8,7 @@ const originalValue = defineModel<configValue<string | number>>({
   required: true,
 })
 
+
 defineProps({
   disabled: {
     type: Boolean,
@@ -17,18 +18,26 @@ defineProps({
 
 const newValRef = ref(originalValue.value.value as string | number)
 
-const color = ref('#12c4ca')
+const defaultColor = '#12c4ca'
+const changedColor = '#FF0000'
+const color = ref(defaultColor)
 
 const configChangesStore = useOpenedConfigChangesStore()
 
 function changeValue() {
   if (newValRef.value === originalValue.value.value) {
-    color.value = '#12c4ca'
+    color.value = defaultColor
     configChangesStore.deleteValue(originalValue.value.name)
   } else {
-    color.value = '#FF0000'
-    configChangesStore.setValue(originalValue.value.name, newValRef.value.toString(), ()=>{
-      newValRef.value = originalValue.value.value } )
+    color.value = changedColor
+    configChangesStore.setValue(
+        originalValue.value.name,
+        newValRef.value.toString(),
+        () => {
+          newValRef.value = originalValue.value.value
+          color.value = defaultColor
+        }
+    )
   }
 }
 

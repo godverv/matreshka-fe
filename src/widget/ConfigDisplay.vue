@@ -6,7 +6,7 @@ import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
 import ServersInfo from "@/components/config/server/ServersInfo.vue";
 
 
-import { GetConfigRaw} from "@/api/api.ts";
+import {GetConfigNodes, PatchConfig} from "@/api/api.ts";
 import {appConfig} from "@/models/config/appConfig.ts";
 import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
 
@@ -17,36 +17,48 @@ const props = defineProps({
   },
 })
 
-const cfg = ref<appConfig>({} as appConfig);
-
-GetConfigRaw(props.serviceName)
-    .then((c) => {
-      cfg.value = c
-    })
 const configChangesStore = useOpenedConfigChangesStore()
 
+const configData = ref<appConfig>({} as appConfig);
+
+function setNodes(c: appConfig) {
+  configData.value = c
+}
+
+function rollbackAll() {
+  configChangesStore.rollbackAll()
+}
+
+GetConfigNodes(props.serviceName)
+    .then(setNodes)
+
 function save() {
-  console.log(configChangesStore.envVariables)
+  PatchConfig(props.serviceName, configChangesStore.envVariables)
+      .then(setNodes)
+      .then(rollbackAll)
 }
 </script>
 
 <template>
-  <div v-if="!cfg">Отсутствует информация о сервисе</div>
+  <div v-if="!configData">Отсутствует информация о сервисе</div>
 
   <div v-else class="ConfigDialog">
     <div class="InfoBlock Node">
-      <AppInfo v-model="cfg.app_info"/>
+      <AppInfo v-model="configData.app_info"/>
     </div>
 
     <div class="InfoBlock Node">
-      <ResourcesInfo v-model="cfg.data_sources"/>
+      <ResourcesInfo v-model="configData.data_sources"/>
     </div>
 
     <div class="InfoBlock Node">
-      <ServersInfo v-model="cfg.server"/>
+      <ServersInfo v-model="configData.server"/>
     </div>
     <button @click="save">
       Save
+    </button>
+    <button @click="rollbackAll">
+      Rollback
     </button>
   </div>
 </template>

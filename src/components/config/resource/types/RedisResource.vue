@@ -3,7 +3,7 @@ import {PropType} from "vue";
 
 import {resourceRedis} from "@/models/config/resources/resource.ts";
 
-import InputerUpdater from "@/components/base/ConfigField.vue";
+import ConfigField from "@/components/base/ConfigField.vue";
 
 defineProps({
   val: {
@@ -22,7 +22,7 @@ function setChange(name: string, value: string | number) {
 <template>
   <div class="NodeField">
     <div>Host:</div>
-    <InputerUpdater
+    <ConfigField
         v-model="val.host"
         @set-change="setChange"
     />
@@ -30,22 +30,22 @@ function setChange(name: string, value: string | number) {
 
   <div class="NodeField">
     <div>Post:</div>
-    <InputerUpdater v-model="val.port"/>
+    <ConfigField v-model="val.port"/>
   </div>
 
   <div class="NodeField">
     <div>User:</div>
-    <InputerUpdater v-model="val.user"/>
+    <ConfigField v-model="val.user"/>
   </div>
 
   <div class="NodeField">
     <div>Password:</div>
-    <InputerUpdater v-model="val.pwd"/>
+    <ConfigField v-model="val.pwd"/>
   </div>
 
   <div class="NodeField">
     <div>Db number:</div>
-    <InputerUpdater v-model="val.db"/>
+    <ConfigField v-model="val.db"/>
   </div>
 </template>
 
