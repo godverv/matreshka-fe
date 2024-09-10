@@ -7,7 +7,7 @@ import {ListServices} from "@/api/api.ts";
 import {appInfo} from "@/models/config/info/appInfo.ts";
 
 import ConfigDialog from "@/widget/ConfigDisplay.vue";
-import Header from "@/widget/Header.vue";
+import {ErrPageUri, router} from "@/routes/Routes.ts";
 
 const visible = ref(false);
 
@@ -30,20 +30,30 @@ ListServices(listReq)
     .then((resp) => {
       servicesList.value = resp
     })
+    .catch((err) => {
+      if (err.status !== 404) {
+        router.push({path: ErrPageUri})
+      }
+    })
 </script>
 
 <template>
-  <Header/>
   <div class="Home">
     <div class="list">
-      <div
-          v-for="service in servicesList"
-          :key="service.name.value"
-          class="listItem"
-          @click="openDialog(service.name.value ?? '')"
-      >
-        {{ service.name.value }}
+      <div v-if="servicesList.length != 0 ">
+        <div
+            v-for="service in servicesList"
+            :key="service.name.value"
+            class="listItem"
+            @click="openDialog(service.name.value ?? '')"
+        >
+          {{ service.name.value }}
+        </div>
       </div>
+      <div v-else>
+        No configs on this node
+      </div>
+
     </div>
 
     <Dialog
@@ -76,8 +86,7 @@ ListServices(listReq)
 }
 
 .listItem {
-  min-width: 40%;
-  max-width: 80%;
+  width: 100%;
 
   height: 3em;
   max-height: 48px;

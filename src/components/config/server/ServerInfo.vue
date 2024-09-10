@@ -1,22 +1,26 @@
 <script setup lang="ts">
 
-import ServerOneOf from "@/components/config/server/ServerOneOf.vue";
-import {oneOfServer} from "@/models/config/servers/servers.ts";
+import {Server} from "@/models/config/servers/servers.ts";
+import GrpcHandlerInfo from "@/components/config/server/GrpcHandlerInfo.vue";
+import FileServerHandlerInfo from "@/components/config/server/FileServerHandlerInfo.vue";
 
-const cfg = defineModel<oneOfServer | undefined>()
-
+const cfg = defineModel<Server>({required: true})
 </script>
 
 <template>
   <div v-if="!cfg">No information on server</div>
 
-  <div
-      v-else
-      class="Node"
-  >
-    <div class="NodeHeader">{{cfg.name}} </div>
-    <ServerOneOf
-        v-model="cfg"/>
+  <div v-else class="Node">
+    <div v-for="(_, idx) in cfg.grpc"
+         class="Node">
+      <GrpcHandlerInfo v-model="cfg.grpc[idx]"/>
+    </div>
+
+    <div
+        v-for="(_, idx) in cfg.fs"
+        class="Node">
+      <FileServerHandlerInfo v-model="cfg.fs[idx]"/>
+    </div>
   </div>
 </template>
 

@@ -22,15 +22,11 @@ export function extractNumberValue(n: Node) : configValue<number> {
     }
 }
 
-export function extractType(node: Node, root: Node): string | undefined {
-    if (!node.name || !root.name) {
-        return;
-    }
-
+export function extractResourceType(node: Node, root: Node): string | undefined {
     let name = node.name.slice(root.name.length+1)
 
     const resourceNameEndIdx = name.indexOf("_")
-    if (resourceNameEndIdx >0) {
+    if (resourceNameEndIdx > 0) {
         name = name.slice(resourceNameEndIdx)
     }
     name = name.toLowerCase()

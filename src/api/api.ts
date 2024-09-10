@@ -47,6 +47,7 @@ export async function GetConfigNodes(serviceName: string): Promise<appConfig> {
             if (!res.root) {
                 return {} as appConfig;
             }
+
             const cfg: appConfig = {} as appConfig;
             cfg.app_info = {} as appInfo;
             cfg.data_sources = []

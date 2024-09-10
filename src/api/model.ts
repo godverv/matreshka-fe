@@ -10,14 +10,16 @@ const fromApiMapping = new Map<string, (cfg: appConfig, node: Node) => void>()
 fromApiMapping.set('APP-INFO', mapAppInfo)
 fromApiMapping.set('DATA-SOURCES', mapResource)
 fromApiMapping.set('SERVERS', mapServer)
+
 export function mapNodeToConfig(cfg: appConfig, node: Node) {
     if (!node.name) {
         return
     }
-    const map = fromApiMapping.get(node.name)
+    const doMap = fromApiMapping.get(node.name)
 
-    if (!map) {
+    if (!doMap) {
         return
     }
-    map(cfg, node)
+
+    doMap(cfg, node)
 }

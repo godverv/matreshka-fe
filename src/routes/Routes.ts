@@ -1,14 +1,23 @@
 import Home from "@/pages/HomePage.vue";
 import NotFound from "@/pages/NotFoundPage.vue";
 import Config from "@/pages/ConfigPage.vue";
+import ErrorPage from "@/pages/ErrorPage.vue";
 
-export const HomeUrl = "/"
-export const NotFoundURl = "/:pathMatch(.*)*"
-export const ConfigPage = "/:name"
+import {createRouter, createWebHistory} from "vue-router";
+
+export const HomeUri = "/"
+export const NotFoundUri = "/:pathMatch(.*)*"
+export const ConfigPageUri = "/:name"
+export const ErrPageUri = "/error"
 
 export const routes = [
-    {path: NotFoundURl, component: NotFound},
-    {path: HomeUrl, component: Home},
-    {path: ConfigPage, component: Config, props: true },
+    {path: NotFoundUri, component: NotFound},
+    {path: HomeUri, component: Home},
+    {path: ConfigPageUri, component: Config, props: true },
+    {path: ErrPageUri, component: ErrorPage, props: true },
 ]
 
+export const router = createRouter({
+    history: createWebHistory(),
+    routes,
+})

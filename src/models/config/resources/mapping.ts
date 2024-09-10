@@ -13,7 +13,7 @@ import {mapRedis} from "@/models/config/resources/redis.ts";
 import {mapSqlite} from "@/models/config/resources/sqlite.ts";
 import {mapTelegram} from "@/models/config/resources/telegram.ts";
 import {mapGrpc} from "@/models/config/resources/grpc.ts";
-import {extractType} from "@/models/config/common.ts";
+import {extractResourceType} from "@/models/config/common.ts";
 
 const resourceMapping = new Map<string, (cfg: appConfig, node: Node) => void>()
 resourceMapping.set(PostgresResourceTypePrefix, mapPostgres)
@@ -24,7 +24,7 @@ resourceMapping.set(GrpcResourceTypePrefix, mapGrpc)
 
 export function mapResource(cfg: appConfig, root: Node) {
     root.innerNodes?.map((n)=> {
-        const resType = extractType(n, root)
+        const resType = extractResourceType(n, root)
 
         if (!resType) {
             return;

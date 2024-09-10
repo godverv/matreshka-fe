@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
 import ServerInfo from "@/components/config/server/ServerInfo.vue";
-import {oneOfServer} from "@/models/config/servers/servers.ts";
+import {Server} from "@/models/config/servers/servers.ts";
 
-const servers = defineModel<oneOfServer[]>()
+const servers = defineModel<Server[]>()
 
 </script>
 
@@ -17,9 +17,9 @@ const servers = defineModel<oneOfServer[]>()
     <div
         v-if="servers"
         class="Node"
-        v-for="(s, i) in servers" :key="s.name"
+        v-for="(s, i) in servers" :key="s.port"
     >
-      <div class="NodeHeader">Server type: {{ s.server_type }}
+      <div class="NodeHeader"> {{ s.port }}:
 
         <!--     TODO ADD CONNECTION STRING -->
       </div>
