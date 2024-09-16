@@ -1,4 +1,5 @@
 import {configValue, keyMap} from "@/models/config/common.ts";
+import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
 export type oneOfResource = (unknownResource |
     resourcePostgres |
@@ -9,7 +10,7 @@ export type oneOfResource = (unknownResource |
 
 type namedResource = {
     resource_name: string
-    resource_type: string
+    resource_type: ResourceType
 }
 
 export type unknownResource = namedResource & keyMap;

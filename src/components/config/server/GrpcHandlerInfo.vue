@@ -9,13 +9,17 @@ const grpcInfo = defineModel<grpcHandler>({required: true})
 
 <template>
   <div class="NodeField">
-    <div>Module:</div>
-    <ConfigField v-model="grpcInfo.module"/>
+    <ConfigField
+        v-model="grpcInfo.module"
+        field-name="Module"
+    />
   </div>
 
   <div class="NodeField">
-    <div>Gateway:</div>
-    <ConfigField v-model="grpcInfo.gateway"/>
+    <ConfigField
+        v-model="grpcInfo.gateway"
+        field-name="Gateway"
+    />
   </div>
 </template>
 

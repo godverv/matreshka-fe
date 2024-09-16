@@ -26,15 +26,16 @@
     display: flex;
     flex-direction: row;
     gap: 1em;
+    padding: 0.25em;
     border-bottom: gray solid;
     border-left: gray solid;
 }
 
 .NodeField {
     display: flex;
-    flex-direction: row;
-    gap: 0.25em;
+    flex-direction: column;
     width: 100%;
+    gap: 0;
 
     border-left: gray solid;
 }

@@ -15,19 +15,25 @@ const info = defineModel<appInfo>()
 
     <div class="Node">
       <div class="NodeField">
-        <div>Service name:</div>
-        <ConfigField v-model="info.name"/>
+        <ConfigField
+            v-model="info.name"
+            field-name="Service name:"
+        />
       </div>
 
       <div class="NodeField">
-        <div>Version:</div>
-        <ConfigField v-model="info.version"/>
+        <ConfigField
+            v-model="info.version"
+            field-name="Version"
+        />
       </div>
 
       <div class="NodeField">
-        <div>Startup duration:</div>
-        <ConfigField v-model="info.startup_duration"/>
-        <div>seconds</div>
+        <ConfigField
+            v-model="info.startup_duration"
+            field-name="Startup duration"
+            units="sec"
+        />
       </div>
     </div>
   </div>

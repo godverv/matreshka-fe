@@ -5,12 +5,23 @@ import App from "./App.vue";
 import { createPinia } from 'pinia'
 
 import PrimeVue from 'primevue/config';
-import 'primevue/resources/themes/aura-light-green/theme.css'
-import {router} from "@/routes/Routes.ts";
+import Aura from '@primevue/themes/aura';
 
+import {router} from "@/routes/Routes.ts";
+import ToastService from 'primevue/toastservice';
 
 createApp(App)
     .use(router)
     .use(createPinia())
-    .use(PrimeVue)
+    .use(PrimeVue, {
+        theme: {
+            preset: Aura,
+            options: {
+                prefix: 'p',
+                darkModeSelector: 'system',
+                cssLayer: false
+            }
+        }
+    })
+    .use(ToastService)
     .mount('#app')

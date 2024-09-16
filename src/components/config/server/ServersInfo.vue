@@ -19,7 +19,7 @@ const servers = defineModel<Server[]>()
         class="Node"
         v-for="(s, i) in servers" :key="s.port"
     >
-      <div class="NodeHeader"> {{ s.port }}:
+      <div class="NodeHeader"> :{{ s.port }}
 
         <!--     TODO ADD CONNECTION STRING -->
       </div>

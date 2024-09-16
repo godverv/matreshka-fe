@@ -2,20 +2,20 @@
 import {ref} from "vue";
 
 import Dialog from "primevue/dialog";
+import {useToast} from "primevue/usetoast";
 
 import {ListServices} from "@/api/api.ts";
 import {appInfo} from "@/models/config/info/appInfo.ts";
-
 import ConfigDialog from "@/widget/ConfigDisplay.vue";
-import {ErrPageUri, router} from "@/routes/Routes.ts";
 
-const visible = ref(false);
+const isDialogOpen = ref(false);
+const toastApi = useToast();
 
 const currentlyOpenService = ref('');
 
 function openDialog(serviceName: string) {
   currentlyOpenService.value = serviceName
-  visible.value = true
+  isDialogOpen.value = true
 }
 
 const servicesList = ref<appInfo[]>([])
@@ -31,9 +31,13 @@ ListServices(listReq)
       servicesList.value = resp
     })
     .catch((err) => {
-      if (err.status !== 404) {
-        router.push({path: ErrPageUri})
-      }
+      toastApi.add({
+        severity: 'error',
+        summary: `Unable to load list of service: ${err.message}.`,
+        closable: false,
+        life: 5000,
+      })
+      return
     })
 </script>
 
@@ -57,7 +61,7 @@ ListServices(listReq)
     </div>
 
     <Dialog
-        v-model:visible="visible"
+        v-model:visible="isDialogOpen"
         modal
         :header="currentlyOpenService"
         :pt="{

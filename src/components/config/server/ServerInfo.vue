@@ -26,4 +26,5 @@ const cfg = defineModel<Server>({required: true})
 
 <style scoped>
 @import "@/assets/styles/config_display.css";
+
 </style>

@@ -10,28 +10,38 @@ const model = defineModel<resourcePostgres>({
 
 <template>
     <div class="NodeField">
-      <div>Database name:</div>
-      <ConfigField v-model="model.name"/>
+      <ConfigField
+          v-model="model.name"
+          field-name="Database name"
+      />
     </div>
 
     <div class="NodeField">
-      <div>Host:</div>
-      <ConfigField v-model="model.host"/>
+      <ConfigField
+          v-model="model.host"
+          field-name="Host"
+      />
     </div>
 
     <div class="NodeField">
-      <div>Port:</div>
-      <ConfigField v-model="model.port"/>
+      <ConfigField
+          v-model="model.port"
+          field-name="Port"
+      />
     </div>
 
     <div class="NodeField">
-      <div>Username:</div>
-      <ConfigField v-model="model.user"/>
+      <ConfigField
+          v-model="model.user"
+          field-name="Username"
+      />
     </div>
 
     <div class="NodeField">
-      <div>Password:</div>
-      <ConfigField v-model="model.pwd"/>
+      <ConfigField
+          v-model="model.pwd"
+          field-name="Password"
+      />
     </div>
 </template>
 

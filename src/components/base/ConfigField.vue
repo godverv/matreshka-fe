@@ -4,6 +4,11 @@ import {ref} from "vue";
 import {configValue} from "@/models/config/common.ts";
 import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
 
+import InputText from 'primevue/inputtext';
+import InputGroup from 'primevue/inputgroup';
+import FloatLabel from 'primevue/floatlabel'
+import InputGroupAddon from 'primevue/inputgroupaddon'
+
 const originalValue = defineModel<configValue<string | number>>({
   required: true,
 })
@@ -14,6 +19,13 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  fieldName: {
+    type: String,
+    required: true,
+  },
+  units: {
+    type: String
+  }
 })
 
 const newValRef = ref(originalValue.value.value as string | number)
@@ -44,17 +56,19 @@ function changeValue() {
 </script>
 
 <template>
-  <input
-      class="Inputer"
-      :style="{borderBottom: color+' solid'}"
-      :size="(originalValue?.toString().length ?? 3) + (disabled ? 1 : 0)"
-      :disabled="disabled"
-      @input="changeValue"
-      v-model="newValRef"
-  >
+    <label>{{ fieldName }}</label>
+    <InputGroup>
+      <FloatLabel>
+        <InputText
+            v-model="newValRef"
+            @input="changeValue"
+        />
+      </FloatLabel>
+      <InputGroupAddon v-if="units">{{ units }}</InputGroupAddon>
+    </InputGroup>
 </template>
 
 <style scoped>
-@import "@/components/base/inputer.css";
+@import "@/assets/styles/config_display.css";
 
 </style>
