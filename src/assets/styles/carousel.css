@@ -1,0 +1,25 @@
+.Carousel {
+    height: 100%;
+
+    display: table;
+    list-style-type: none;
+    table-layout: fixed;
+
+    overflow-y: scroll;
+}
+
+.CarouselItem {
+    padding: 8px;
+    display: table-cell;
+}
+
+.CarouselItem + .CarouselItem {
+    border-left: 2px solid black;
+}
+
+.CarouselItem:first-child {
+  border-top-left-radius: 16px;
+}
+.CarouselItem:last-child {
+    border-top-right-radius: 16px;
+}

@@ -47,13 +47,12 @@ function save() {
       <AppInfo v-model="configData.app_info"/>
     </div>
 
-    <div class="InfoBlock Node">
-      <ResourcesInfo v-model="configData.data_sources"/>
-    </div>
+    <ResourcesInfo v-model="configData.data_sources"/>
 
-    <div class="InfoBlock Node">
-      <ServersInfo v-model="configData.server"/>
-    </div>
+<!--    <div class="InfoBlock Node">-->
+<!--      <ServersInfo v-model="configData.server"/>-->
+<!--    </div>-->
+
     <button @click="save">
       Save
     </button>
@@ -74,13 +73,5 @@ function save() {
   gap: 1em;
 }
 
-.InfoBlock {
-  display: flex;
-  flex-direction: column;
-  border: #78042f solid;
-  border-radius: 0.75vw;
-  gap: 1em;
-  padding: 0.5em 0 0.5em 0;
-}
 
 </style>

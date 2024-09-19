@@ -46,3 +46,13 @@
 .Node > .NodeField {
     padding: 0 0.5em 0 0.5em;
 }
+
+.InfoBlock {
+    display: flex;
+    flex-direction: column;
+    border: #78042f solid;
+    border-radius: 16px;
+
+    padding: 1em;
+}
+

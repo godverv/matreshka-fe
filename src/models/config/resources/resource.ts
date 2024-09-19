@@ -44,3 +44,18 @@ export type resourceGrpc = namedResource & {
     connection_string: configValue<string>
     module: configValue<string>
 }
+
+
+export function NormalizeName(res: namedResource): string {
+    if (res.resource_name === res.resource_type ) {
+        return res.resource_name
+    }
+
+
+    let out = res.resource_name.slice(res.resource_type.length)
+    if (out[0] === '-') {
+        out = out.slice(1)
+    }
+
+    return out
+}
