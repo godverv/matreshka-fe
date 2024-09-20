@@ -23,10 +23,16 @@ defineProps({
 <template>
   <div class="Button">
     <div class="ButtonItem">
-      <img :src="iconPath" alt="؟"/>
+      <div>
+        <img :src="iconPath" alt="؟"/>
+      </div>
     </div>
     <div class="ButtonItem">
-      <label v-if="label"> {{ label }}</label>
+      <div>
+        <label v-if="label">
+          {{ label }}
+        </label>
+      </div>
     </div>
   </div>
 </template>
@@ -46,25 +52,27 @@ defineProps({
   padding: 1em;
 }
 
+.ButtonItem {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 img {
-  width: v-bind(size);
+  width: 100%;
   height: v-bind(size);
   flex: 1;
 }
 
 label {
+  width: 100%;
+
   flex: 1;
 
   display: flex;
   justify-content: center;
   overflow: scroll;
   text-overflow: ellipsis;
-}
-
-.ButtonItem {
-
-  display: flex;
-  justify-content: center;
 }
 
 .ButtonItem + .ButtonItem {

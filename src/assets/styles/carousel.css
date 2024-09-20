@@ -1,16 +1,14 @@
 .Carousel {
-    height: 100%;
-
-    display: table;
-    list-style-type: none;
-    table-layout: fixed;
-
-    overflow-y: scroll;
+    display: flex;
+    min-width: max-content;
+    justify-content: center;
 }
 
 .CarouselItem {
-    padding: 8px;
-    display: table-cell;
+    max-width: 8em;
+    min-width: 8em;
+
+    flex: 1;
 }
 
 .CarouselItem + .CarouselItem {
