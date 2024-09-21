@@ -43,6 +43,13 @@ function save() {
   <div v-if="!configData">Отсутствует информация о сервисе</div>
 
   <div v-else class="ConfigDialog">
+    <button @click="save">
+      Save
+    </button>
+    <button @click="rollbackAll">
+      Rollback
+    </button>
+
     <div class="InfoBlock Node">
       <AppInfo v-model="configData.app_info"/>
     </div>
@@ -50,16 +57,9 @@ function save() {
     <ResourcesInfo
         v-model="configData.data_sources"/>
 
-<!--    <div class="InfoBlock Node">-->
-<!--      <ServersInfo v-model="configData.server"/>-->
-<!--    </div>-->
-
-    <button @click="save">
-      Save
-    </button>
-    <button @click="rollbackAll">
-      Rollback
-    </button>
+    <!--    <div class="InfoBlock Node">-->
+    <!--      <ServersInfo v-model="configData.server"/>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -67,10 +67,12 @@ function save() {
 @import "@/assets/styles/config_display.css";
 
 .ConfigDialog {
-  min-width: 40vw;
-  min-height: 80vh;
+  width: 100%;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 1em;
 }
 

@@ -70,6 +70,10 @@ ListServices(listReq)
               style: 'backdrop-filter: blur(2px)'
           }
         }"
+        :style="{
+          width: '80%',
+          height: '95%',
+          }"
     >
       <ConfigWidget :service-name="currentlyOpenService"/>
     </Dialog>

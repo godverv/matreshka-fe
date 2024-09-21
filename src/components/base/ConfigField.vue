@@ -51,7 +51,6 @@ function changeValue() {
     )
   }
 }
-
 </script>
 
 <template>
@@ -69,5 +68,11 @@ function changeValue() {
 
 <style scoped>
 @import "@/assets/styles/config_display.css";
+
+label {
+  display: inline-block;
+  overflow: hidden;
+
+}
 
 </style>

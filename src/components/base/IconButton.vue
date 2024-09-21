@@ -21,7 +21,13 @@ defineProps({
 </script>
 
 <template>
-  <div class="Button">
+  <div
+      class="Button"
+      :style="{
+          paddingTop: isSelected ? '2em': '1em',
+          gap: isSelected ? '0.5em': '1em'
+      }"
+  >
     <div class="ButtonItem">
       <div>
         <img :src="iconPath" alt="؟"/>
@@ -65,14 +71,9 @@ img {
 }
 
 label {
-  width: 100%;
-
   flex: 1;
 
-  display: flex;
-  justify-content: center;
-  overflow: scroll;
-  text-overflow: ellipsis;
+  display: inline-block;
 }
 
 .ButtonItem + .ButtonItem {

@@ -3,7 +3,6 @@
 import {NormalizeName, oneOfResource} from "@/models/config/resources/resource.ts";
 import {GetImageForResource} from "@/models/config/resources/images.ts";
 import IconButton from "@/components/base/IconButton.vue";
-// import OneOfResource from "@/components/config/resource/OneOfResource.vue"
 
 import {ref} from "vue";
 import {ResourceType} from "@/models/config/resources/resource_types.ts";
@@ -19,10 +18,10 @@ function setSelected(i: number) {
 
 <template>
   <div class="InfoBlock" v-if="resources">
-    <div class="CarouselWrapper">
-      <div class="Carousel">
+    <div class="BoomBoxButtonsWrapper">
+      <div class="BoomBox">
         <div
-            class="CarouselItem"
+            class="BoomBoxItem"
             v-for="(res, i) in resources"
             :key="res.resource_name"
             :style="{
@@ -50,16 +49,16 @@ function setSelected(i: number) {
 @import "@/assets/styles/config_display.css";
 @import "@/assets/styles/carousel.css";
 
-.CarouselWrapper {
+.BoomBoxButtonsWrapper {
   overflow-x: scroll;
   overflow-y: hidden;
 }
 
-.CarouselItem {
+.BoomBoxItem {
   background: var(--basic-gradient);
 }
 
-.CarouselItem:focus {
+.BoomBoxItem:focus {
   background: var(--selected-gradient);
 }
 </style>

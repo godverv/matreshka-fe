@@ -32,5 +32,17 @@ body {
 
 
 :root{
-font-size: 20px;
+  font-size: 20px;
+}
+
+@media (max-width: 400px) {
+  :root{
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 200px) {
+  :root {
+    font-size: 8px;
+  }
 }

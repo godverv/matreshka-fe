@@ -23,12 +23,15 @@
 
 .NodeHeader {
     max-width: fit-content;
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
+
+    display: inline-block;
+
     padding: 0.25em;
+
     border-bottom: gray solid;
     border-left: gray solid;
+
+    overflow: hidden;
 }
 
 .NodeField {
