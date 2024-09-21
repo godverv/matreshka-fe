@@ -1,7 +1,7 @@
 import {configValue, keyMap} from "@/models/config/common.ts";
 import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
-export type oneOfResource = (unknownResource |
+export type oneOfResource =  (unknownResource |
     resourcePostgres |
     resourceRedis |
     resourceSqlite |
@@ -44,7 +44,6 @@ export type resourceGrpc = namedResource & {
     connection_string: configValue<string>
     module: configValue<string>
 }
-
 
 export function NormalizeName(res: namedResource): string {
     if (res.resource_name === res.type ) {
