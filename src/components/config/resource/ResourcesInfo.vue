@@ -47,7 +47,7 @@ function setSelected(i: number) {
 
 <style scoped>
 @import "@/assets/styles/config_display.css";
-@import "@/assets/styles/carousel.css";
+@import "@/assets/styles/boombox.css";
 
 .BoomBoxButtonsWrapper {
   overflow-x: scroll;
