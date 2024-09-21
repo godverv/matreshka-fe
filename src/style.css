@@ -25,7 +25,9 @@ body {
 
 
 :root {
-  --border-color: #05bc05
+  --border-color: #05bc05;
+  --selected-gradient: linear-gradient(#70f1f1, #05878c);
+  --basic-gradient: linear-gradient(#fff9f9, #AAA8A8);
 }
 
 

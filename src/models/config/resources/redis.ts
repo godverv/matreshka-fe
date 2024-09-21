@@ -1,4 +1,4 @@
-import {RedisResourceTypePrefix} from "@/models/config/resources/resource_types.ts";
+import {ResourceType} from "@/models/config/resources/resource_types.ts";
 import {appConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 import {resourceRedis} from "@/models/config/resources/resource.ts";
@@ -12,7 +12,7 @@ export function mapRedis(cfg: appConfig, root: Node) {
     }
 
     rds.resource_name = root.name.slice(root.name.indexOf('REDIS')).toLowerCase()
-    rds.resource_type = RedisResourceTypePrefix
+    rds.type = ResourceType.Redis
 
     root.innerNodes?.map(
         (n) => {

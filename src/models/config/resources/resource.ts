@@ -10,7 +10,7 @@ export type oneOfResource = (unknownResource |
 
 type namedResource = {
     resource_name: string
-    resource_type: ResourceType
+    type: ResourceType
 }
 
 export type unknownResource = namedResource & keyMap;
@@ -47,12 +47,12 @@ export type resourceGrpc = namedResource & {
 
 
 export function NormalizeName(res: namedResource): string {
-    if (res.resource_name === res.resource_type ) {
+    if (res.resource_name === res.type ) {
         return res.resource_name
     }
 
 
-    let out = res.resource_name.slice(res.resource_type.length)
+    let out = res.resource_name.slice(res.type.length)
     if (out[0] === '-') {
         out = out.slice(1)
     }

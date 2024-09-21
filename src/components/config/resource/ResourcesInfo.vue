@@ -3,19 +3,22 @@
 import {NormalizeName, oneOfResource} from "@/models/config/resources/resource.ts";
 import {GetImageForResource} from "@/models/config/resources/images.ts";
 import IconButton from "@/components/base/IconButton.vue";
+// import OneOfResource from "@/components/config/resource/OneOfResource.vue"
+
 import {ref} from "vue";
+import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
 const resources = defineModel<oneOfResource[]>()
 
-const selected = ref<number>(0)
+const selectedIdx = ref<number>(0)
 
 function setSelected(i: number) {
-  selected.value = i
+  selectedIdx.value = i
 }
 </script>
 
 <template>
-  <div class="InfoBlock">
+  <div class="InfoBlock" v-if="resources">
     <div class="CarouselWrapper">
       <div class="Carousel">
         <div
@@ -23,20 +26,22 @@ function setSelected(i: number) {
             v-for="(res, i) in resources"
             :key="res.resource_name"
             :style="{
-            background: selected === i ? 'linear-gradient(#70f1f1, #05878c)': 'linear-gradient(#fff9f9, #AAA8A8)',
-          }"
+              'background':  selectedIdx === i ? 'linear-gradient(#70f1f1, #05878c)': 'linear-gradient(#fff9f9, #AAA8A8)',
+            } "
         >
           <IconButton
               :onclick="()=>setSelected(i)"
-              :isSelected="selected === i"
-              :iconPath="GetImageForResource(res.resource_type)"
+              :isSelected="selectedIdx === i"
+              :iconPath="GetImageForResource(res.type)"
               :label="NormalizeName(res)"
           />
         </div>
       </div>
     </div>
     <div class="Content">
-      тут контент
+      <component
+          :is="ResourceType.GetComponent(resources[selectedIdx].type)"
+          v-model="resources[selectedIdx]"/>
     </div>
   </div>
 </template>
@@ -48,5 +53,13 @@ function setSelected(i: number) {
 .CarouselWrapper {
   overflow-x: scroll;
   overflow-y: hidden;
+}
+
+.CarouselItem {
+  background: var(--basic-gradient);
+}
+
+.CarouselItem:focus {
+  background: var(--selected-gradient);
 }
 </style>

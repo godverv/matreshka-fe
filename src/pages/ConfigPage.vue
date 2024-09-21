@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ConfigDisplay from "@/widget/ConfigDisplay.vue";
+import ConfigDisplay from "@/widget/ConfigWidget.vue";
 
 defineProps({
   name: {

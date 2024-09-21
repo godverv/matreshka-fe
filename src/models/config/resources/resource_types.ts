@@ -1,9 +1,10 @@
-const unknownResourceName = 'Unknown';
-const PostgresResourceName = 'Postgres';
-const RedisResourceName = 'Redis';
-const SqliteResourceName = 'Sqlite';
-const GrpcClientResourceName = 'Grpc client';
-const TelegramResourceName = 'Telegram Bot';
+import ResourcePostgres from "@/components/config/resource/types/ResourcePostgres.vue";
+import ResourceGrpc from "@/components/config/resource/types/ResourceGrpc.vue";
+import ResourceRedis from "@/components/config/resource/types/ResourceRedis.vue";
+import ResourceSqlite from "@/components/config/resource/types/ResourceSqlite.vue";
+import ResourceTelegram from "@/components/config/resource/types/ResourceTelegram.vue";
+import KeyMapComponent from "@/components/base/KeyMapComponent.vue";
+import {Component} from "vue";
 
 export enum ResourceType {
     Postgres = "postgres",
@@ -13,30 +14,39 @@ export enum ResourceType {
     Telegram = "telegram"
 }
 
-export const PostgresResourceTypePrefix = "postgres";
-export const RedisResourceTypePrefix = "redis";
-export const SqliteResourceTypePrefix = "sqlite";
-export const GrpcResourceTypePrefix = "grpc";
-export const TelegramResourceTypePrefix = "telegram";
+export namespace ResourceType {
+    export class ResourceDefinition {
+        component: Component;
+        displayName: string;
 
-const resourceTypes =
-        new Map<string, String>();
-
-resourceTypes.
-    set(PostgresResourceTypePrefix, PostgresResourceName).
-    set(RedisResourceTypePrefix, RedisResourceName).
-    set(SqliteResourceTypePrefix, SqliteResourceName).
-    set(GrpcResourceTypePrefix, GrpcClientResourceName).
-    set(TelegramResourceTypePrefix, TelegramResourceName);
-
-
-export function GetResourceName(resourceFullName: string): String {
-    resourceFullName = resourceFullName.split("-")[0]
-
-    const res = resourceTypes.get(resourceFullName)
-    if (res) {
-        return res
+        constructor(component: Component, displayName: string) {
+            this.component = component;
+            this.displayName = displayName;
+        }
     }
 
-    return unknownResourceName
+    const typeToDefinition = new Map<ResourceType, ResourceDefinition>()
+    typeToDefinition.set(ResourceType.Postgres,
+        new ResourceDefinition(ResourcePostgres, "Postgres"))
+
+    typeToDefinition.set(ResourceType.Grpc,
+        new ResourceDefinition(ResourceGrpc, "Grpc"))
+
+    typeToDefinition.set(ResourceType.Redis,
+        new ResourceDefinition(ResourceRedis, "Redis"))
+
+    typeToDefinition.set(ResourceType.Sqlite,
+        new ResourceDefinition(ResourceSqlite, "Sqlite"))
+
+    typeToDefinition.set(ResourceType.Telegram,
+        new ResourceDefinition(ResourceTelegram, "Telegram"))
+
+    export function GetComponent(rt: ResourceType): Component {
+        return typeToDefinition.get(rt)?.component || KeyMapComponent
+    }
+
+    export function DisplayName(rt: ResourceType): string {
+        return typeToDefinition.get(rt)?.displayName || 'unknown'
+
+    }
 }

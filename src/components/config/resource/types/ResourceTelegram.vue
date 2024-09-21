@@ -1,24 +1,18 @@
 <script setup lang="ts">
 
-import {PropType} from "vue";
-
 import ConfigField from "@/components/base/ConfigField.vue";
-import CopyButton from "@/components/base/CopyButton.vue";
 
 import {resourceTelegram} from "@/models/config/resources/resource.ts";
 
-defineProps({
-  val: {
-    type: Object as PropType<resourceTelegram>,
-    required: true,
-  }
-})
+const model = defineModel<resourceTelegram>({required: true})
 </script>
 
 <template>
   <div class="NodeField">
-    <div>Api Key:</div>
-    <ConfigField v-model="val.api_key"/>
+    <ConfigField
+        v-model="model.api_key"
+        field-name="Api Key"
+    />
   </div>
 </template>
 

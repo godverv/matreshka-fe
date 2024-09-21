@@ -1,28 +1,25 @@
 <script setup lang="ts">
-import {PropType} from "vue";
 
 import {resourceGrpc} from "@/models/config/resources/resource.ts";
 
 import ConfigField from "@/components/base/ConfigField.vue";
 
-
-defineProps({
-  val: {
-    type: Object as PropType<resourceGrpc>,
-    required: true,
-  }
-})
+const model = defineModel<resourceGrpc>({required: true})
 </script>
 
 <template>
   <div class="NodeField">
-    <div>Service url:</div>
-    <ConfigField v-model="val.connection_string"/>
+    <ConfigField
+        v-model="model.connection_string"
+        field-name="Service url"
+    />
   </div>
 
   <div class="NodeField">
-    <div>Module:</div>
-    <ConfigField v-model="val.module"/>
+    <ConfigField
+        v-model="model.module"
+        field-name="Module"
+    />
   </div>
 </template>
 

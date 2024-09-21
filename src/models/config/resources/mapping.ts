@@ -1,12 +1,6 @@
 import {appConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 
-import {
-    GrpcResourceTypePrefix,
-    PostgresResourceTypePrefix,
-    RedisResourceTypePrefix,
-    SqliteResourceTypePrefix, TelegramResourceTypePrefix
-} from "@/models/config/resources/resource_types.ts";
 
 import {mapPostgres} from "@/models/config/resources/postgres.ts";
 import {mapRedis} from "@/models/config/resources/redis.ts";
@@ -14,13 +8,14 @@ import {mapSqlite} from "@/models/config/resources/sqlite.ts";
 import {mapTelegram} from "@/models/config/resources/telegram.ts";
 import {mapGrpc} from "@/models/config/resources/grpc.ts";
 import {extractResourceType} from "@/models/config/common.ts";
+import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
 const resourceMapping = new Map<string, (cfg: appConfig, node: Node) => void>()
-resourceMapping.set(PostgresResourceTypePrefix, mapPostgres)
-resourceMapping.set(RedisResourceTypePrefix, mapRedis)
-resourceMapping.set(SqliteResourceTypePrefix, mapSqlite)
-resourceMapping.set(TelegramResourceTypePrefix, mapTelegram)
-resourceMapping.set(GrpcResourceTypePrefix, mapGrpc)
+resourceMapping.set(ResourceType.Postgres, mapPostgres)
+resourceMapping.set(ResourceType.Redis, mapRedis)
+resourceMapping.set(ResourceType.Sqlite, mapSqlite)
+resourceMapping.set(ResourceType.Telegram, mapTelegram)
+resourceMapping.set(ResourceType.Grpc, mapGrpc)
 
 export function mapResource(cfg: appConfig, root: Node) {
     root.innerNodes?.map((n)=> {

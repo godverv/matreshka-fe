@@ -3,7 +3,7 @@ import {ref} from "vue";
 
 import AppInfo from "@/components/config/app_info/AppInfo.vue";
 import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
-import ServersInfo from "@/components/config/server/ServersInfo.vue";
+// import ServersInfo from "@/components/config/server/ServersInfo.vue";
 
 
 import {GetConfigNodes, PatchConfig} from "@/api/api.ts";
@@ -47,7 +47,8 @@ function save() {
       <AppInfo v-model="configData.app_info"/>
     </div>
 
-    <ResourcesInfo v-model="configData.data_sources"/>
+    <ResourcesInfo
+        v-model="configData.data_sources"/>
 
 <!--    <div class="InfoBlock Node">-->
 <!--      <ServersInfo v-model="configData.server"/>-->

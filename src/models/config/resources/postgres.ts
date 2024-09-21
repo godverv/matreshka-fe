@@ -1,8 +1,8 @@
-import {PostgresResourceTypePrefix} from "@/models/config/resources/resource_types.ts";
 import {appConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 import {resourcePostgres} from "@/models/config/resources/resource.ts";
 import {extractNumberValue, extractStringValue} from "@/models/config/common.ts";
+import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
 export function mapPostgres(cfg: appConfig, root: Node) {
     const pg: resourcePostgres = {} as resourcePostgres
@@ -12,7 +12,7 @@ export function mapPostgres(cfg: appConfig, root: Node) {
     }
 
     pg.resource_name = root.name.slice(root.name.indexOf('POSTGRES')).toLowerCase()
-    pg.resource_type = PostgresResourceTypePrefix
+    pg.type = ResourceType.Postgres
 
     root.innerNodes?.map(
         (n) => {

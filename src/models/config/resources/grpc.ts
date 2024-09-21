@@ -1,4 +1,4 @@
-import {GrpcResourceTypePrefix} from "@/models/config/resources/resource_types.ts";
+import {ResourceType} from "@/models/config/resources/resource_types.ts";
 import {appConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 import {resourceGrpc} from "@/models/config/resources/resource.ts";
@@ -12,7 +12,7 @@ export function mapGrpc(cfg: appConfig, root: Node) {
     const grpcClient: resourceGrpc = {} as resourceGrpc
 
     grpcClient.resource_name = root.name.slice(root.name.indexOf('GRPC')).toLowerCase()
-    grpcClient.resource_type = GrpcResourceTypePrefix
+    grpcClient.type = ResourceType.Grpc
 
     root.innerNodes?.map(
         (n) => {

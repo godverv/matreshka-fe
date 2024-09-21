@@ -1,4 +1,4 @@
-import {SqliteResourceTypePrefix} from "@/models/config/resources/resource_types.ts";
+import {ResourceType} from "@/models/config/resources/resource_types.ts";
 import {appConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 import {resourceSqlite} from "@/models/config/resources/resource.ts";
@@ -12,7 +12,7 @@ export function mapSqlite(cfg: appConfig, root: Node) {
     }
 
     sqlite.resource_name = root.name.slice(root.name.indexOf('SQLITE')).toLowerCase()
-    sqlite.resource_type = SqliteResourceTypePrefix
+    sqlite.type = ResourceType.Sqlite
 
     root.innerNodes?.map(
         (n) => {

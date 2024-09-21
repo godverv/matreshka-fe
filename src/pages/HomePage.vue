@@ -6,12 +6,12 @@ import {useToast} from "primevue/usetoast";
 
 import {ListServices} from "@/api/api.ts";
 import {appInfo} from "@/models/config/info/appInfo.ts";
-import ConfigDialog from "@/widget/ConfigDisplay.vue";
+import ConfigWidget from "@/widget/ConfigWidget.vue";
 
-const isDialogOpen = ref(false);
+const isDialogOpen = ref<boolean>(false);
 const toastApi = useToast();
 
-const currentlyOpenService = ref('');
+const currentlyOpenService = ref<string>('');
 
 function openDialog(serviceName: string) {
   currentlyOpenService.value = serviceName
@@ -71,7 +71,7 @@ ListServices(listReq)
           }
         }"
     >
-      <ConfigDialog :service-name="currentlyOpenService"/>
+      <ConfigWidget :service-name="currentlyOpenService"/>
     </Dialog>
   </div>
 </template>

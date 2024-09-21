@@ -13,15 +13,14 @@ const originalValue = defineModel<configValue<string | number>>({
   required: true,
 })
 
-
 defineProps({
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
   fieldName: {
     type: String,
     required: true,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
   units: {
     type: String

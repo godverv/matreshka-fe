@@ -1,8 +1,8 @@
-import {TelegramResourceTypePrefix} from "@/models/config/resources/resource_types.ts";
 import {appConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 import {resourceTelegram} from "@/models/config/resources/resource.ts";
 import {extractStringValue} from "@/models/config/common.ts";
+import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
 export function mapTelegram(cfg: appConfig, root: Node) {
     const tg: resourceTelegram = {} as resourceTelegram
@@ -12,7 +12,7 @@ export function mapTelegram(cfg: appConfig, root: Node) {
     }
 
     tg.resource_name = root.name.slice(root.name.indexOf('TELEGRAM')).toLowerCase()
-    tg.resource_type = TelegramResourceTypePrefix
+    tg.type = ResourceType.Telegram
 
     root.innerNodes?.map(
         (n) => {

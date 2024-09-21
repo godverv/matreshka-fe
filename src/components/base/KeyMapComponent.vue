@@ -1,22 +1,14 @@
 <script setup lang="ts">
-import {PropType} from "vue";
-
-
 import Inputer from "@/components/base/Inputer.vue";
 import {keyMap} from "@/models/config/common.ts";
 
-const props = defineProps({
-  val: {
-    type: Object as PropType<keyMap>,
-  }
-})
-
+const model = defineModel<keyMap>({required: true})
 
 const flatValues: (string | number)[][] = []
 const innerNodes: keyMap[] = []
 
-for (const key in props.val) {
-  const val = props.val[key];
+for (const key in model.value.val) {
+  const val = model.value.val[key];
 
   const valType = typeof val;
   switch (valType) {
@@ -68,7 +60,7 @@ for (const key in props.val) {
         v-model="innerNodes[i].fieldName"></Inputer>
 
     <KeyMapComponent
-        :val="innerNodes[i]"/>
+        v-model="innerNodes[i]"/>
   </div>
 </template>
 

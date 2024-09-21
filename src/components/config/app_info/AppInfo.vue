@@ -17,7 +17,7 @@ const info = defineModel<appInfo>()
       <div class="NodeField">
         <ConfigField
             v-model="info.name"
-            field-name="Service name:"
+            fieldName="Service name:"
         />
       </div>
 
