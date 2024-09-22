@@ -14,6 +14,7 @@ const selectedIdx = ref<number>(0)
 function setSelected(i: number) {
   selectedIdx.value = i
 }
+
 </script>
 
 <template>
@@ -37,7 +38,7 @@ function setSelected(i: number) {
         </div>
       </div>
     </div>
-    <div class="Content">
+    <div ref="content" class="Content">
       <component
           :is="ResourceType.GetComponent(resources[selectedIdx].type)"
           v-model="resources[selectedIdx]"/>
@@ -60,5 +61,11 @@ function setSelected(i: number) {
 
 .BoomBoxItem:focus {
   background: var(--selected-gradient);
+}
+
+.Content {
+  transition: all 1s;
+  box-sizing: border-box;
+  border: 1px red solid;
 }
 </style>

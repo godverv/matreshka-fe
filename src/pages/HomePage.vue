@@ -73,7 +73,7 @@ ListServices(listReq)
         :style="{
           width: '80%',
           height: '95%',
-          }"
+        }"
     >
       <ConfigWidget :service-name="currentlyOpenService"/>
     </Dialog>

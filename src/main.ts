@@ -9,6 +9,7 @@ import Aura from '@primevue/themes/aura';
 
 import {router} from "@/routes/Routes.ts";
 import ToastService from 'primevue/toastservice';
+import 'primeicons/primeicons.css';
 
 createApp(App)
     .use(router)

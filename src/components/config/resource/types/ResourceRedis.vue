@@ -39,7 +39,6 @@ const model = defineModel<resourceRedis>(
   </div>
 
   <div class="NodeField">
-    <div>Db number:</div>
     <ConfigField
         v-model="model.db"
         field-name="Db Number"
