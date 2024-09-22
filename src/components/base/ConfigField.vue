@@ -56,6 +56,10 @@ function changeValue() {
 function changeValueBack() {
   newValRef.value = original.value.value
 }
+
+function isValueChanged() {
+  return newValRef.value != original.value.value
+}
 </script>
 
 <template>
@@ -74,8 +78,12 @@ function changeValueBack() {
         <InputGroupAddon v-if="units">{{ units }}</InputGroupAddon>
       </InputGroup>
     </div>
-    <div class="InputBox OldValue" v-show="newValRef != original.value">
-      <InputGroup >
+    <div class="InputBox OldValue"
+         :style="{
+          flex: isValueChanged() ? 1: 0,
+      }"
+    >
+      <InputGroup>
         <Button :onclick="changeValueBack">⬅</Button>
         <FloatLabel>
           <InputText
@@ -89,6 +97,7 @@ function changeValueBack() {
   </div>
 </template>
 
+//animation: oldValueSlideIn 0.5s ease forwards;
 <style scoped>
 @import "@/assets/styles/config_display.css";
 
@@ -99,10 +108,17 @@ label {
 
 .ConfigInputFields {
   display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
 .InputBox {
-  transition: width 1s ease;
+  transition: 0.5s ease;
+}
+
+.InputBox:first-child {
+  flex: 1;
 }
 
 .NewValue {
@@ -110,19 +126,8 @@ label {
 }
 
 .OldValue {
-  width: 100%;
-  animation: slideIn 0.5s ease forwards;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-50%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  flex: 0;
+  overflow: hidden;
 }
 
 </style>

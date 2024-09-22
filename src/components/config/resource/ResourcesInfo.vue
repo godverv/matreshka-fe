@@ -38,7 +38,7 @@ function setSelected(i: number) {
         </div>
       </div>
     </div>
-    <div ref="content" class="Content">
+    <div class="Content">
       <component
           :is="ResourceType.GetComponent(resources[selectedIdx].type)"
           v-model="resources[selectedIdx]"/>
@@ -64,8 +64,6 @@ function setSelected(i: number) {
 }
 
 .Content {
-  transition: all 1s;
-  box-sizing: border-box;
-  border: 1px red solid;
+  transition: 1s ease;
 }
 </style>
