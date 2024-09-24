@@ -8,18 +8,20 @@ const model = defineModel<resourceGrpc>({required: true})
 </script>
 
 <template>
-  <div class="NodeField">
-    <ConfigField
-        v-model="model.connection_string"
-        field-name="Service url"
-    />
-  </div>
+  <div>
+    <div class="NodeField">
+      <ConfigField
+          v-model="model.connection_string"
+          field-name="Service url"
+      />
+    </div>
 
-  <div class="NodeField">
-    <ConfigField
-        v-model="model.module"
-        field-name="Module"
-    />
+    <div class="NodeField">
+      <ConfigField
+          v-model="model.module"
+          field-name="Module"
+      />
+    </div>
   </div>
 </template>
 

@@ -4,11 +4,12 @@ import {resourcePostgres} from "@/models/config/resources/resource.ts";
 import ConfigField from "@/components/base/ConfigField.vue";
 
 const model = defineModel<resourcePostgres>({
-    required: true,
+  required: true,
 })
 </script>
 
 <template>
+  <div>
     <div class="NodeField">
       <ConfigField
           v-model="model.name"
@@ -43,6 +44,7 @@ const model = defineModel<resourcePostgres>({
           field-name="Password"
       />
     </div>
+  </div>
 </template>
 
 <style scoped>

@@ -10,8 +10,9 @@ import {ResourceType} from "@/models/config/resources/resource_types.ts";
 const resources = defineModel<oneOfResource[]>()
 
 const selectedIdx = ref<number>(0)
-
+const moveToLeft = ref<boolean>(false)
 function setSelected(i: number) {
+  moveToLeft.value = selectedIdx.value > i
   selectedIdx.value = i
 }
 
@@ -39,9 +40,12 @@ function setSelected(i: number) {
       </div>
     </div>
     <div class="Content">
-      <component
-          :is="ResourceType.GetComponent(resources[selectedIdx].type)"
-          v-model="resources[selectedIdx]"/>
+      <transition :name="moveToLeft ? 'slide-left':'slide-right'" mode="out-in">
+        <component
+            :is="ResourceType.GetComponent(resources[selectedIdx].type)"
+            :key="resources[selectedIdx].resource_name"
+            v-model="resources[selectedIdx]"/>
+      </transition>
     </div>
   </div>
 </template>
@@ -64,6 +68,28 @@ function setSelected(i: number) {
 }
 
 .Content {
-  transition: 1s ease;
+  overflow: hidden;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: transform 0.25s ease;
+}
+.slide-left-enter-from {
+  transform: translateX(100%);
+}
+.slide-left-leave-to {
+  transform: translateX(-100%);
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: transform 0.25s ease;
+}
+.slide-right-enter-from {
+  transform: translateX(-100%);
+}
+.slide-right-leave-to {
+  transform: translateX(100%);
 }
 </style>

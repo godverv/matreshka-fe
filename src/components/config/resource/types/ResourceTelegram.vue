@@ -8,11 +8,13 @@ const model = defineModel<resourceTelegram>({required: true})
 </script>
 
 <template>
-  <div class="NodeField">
-    <ConfigField
-        v-model="model.api_key"
-        field-name="Api Key"
-    />
+  <div>
+    <div class="NodeField">
+      <ConfigField
+          v-model="model.api_key"
+          field-name="Api Key"
+      />
+    </div>
   </div>
 </template>
 
