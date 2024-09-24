@@ -11,6 +11,7 @@ const resources = defineModel<oneOfResource[]>()
 
 const selectedIdx = ref<number>(0)
 const moveToLeft = ref<boolean>(false)
+
 function setSelected(i: number) {
   moveToLeft.value = selectedIdx.value > i
   selectedIdx.value = i
