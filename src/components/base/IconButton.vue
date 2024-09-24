@@ -24,8 +24,8 @@ defineProps({
   <div
       class="Button"
       :style="{
-          paddingTop: isSelected ? '2em': '1em',
-          gap: isSelected ? '0.5em': '1em'
+          paddingTop: isSelected ? '1em': '2em',
+          gap: isSelected ? '1em': '0.5em'
       }"
   >
     <div class="ButtonItem">

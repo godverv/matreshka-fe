@@ -18,6 +18,9 @@ export const useOpenedConfigChangesStore = defineStore('openedConfig', {
                     }))
 
             return res
+        },
+        length: (state) => {
+            return state.changesMap.size
         }
     },
     actions: {

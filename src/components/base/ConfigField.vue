@@ -108,8 +108,6 @@ label {
 
 .ConfigInputFields {
   display: flex;
-  overflow: hidden;
-  position: relative;
   width: 100%;
 }
 

@@ -43,23 +43,33 @@ function save() {
   <div v-if="!configData">Отсутствует информация о сервисе</div>
 
   <div v-else class="ConfigDialog">
-    <button @click="save">
-      Save
-    </button>
-    <button @click="rollbackAll">
-      Rollback
-    </button>
+    <transition-group>
+      <div
+          class="Controls"
+          :class="{hidden: configChangesStore.length == 0 }">
 
-    <div class="InfoBlock Node">
-      <AppInfo v-model="configData.app_info"/>
-    </div>
+        <button @click="save">
+          Save
+        </button>
+        <button @click="rollbackAll">
+          Rollback
+        </button>
 
-    <ResourcesInfo
-        v-model="configData.data_sources"/>
+      </div>
 
-    <!--    <div class="InfoBlock Node">-->
-    <!--      <ServersInfo v-model="configData.server"/>-->
-    <!--    </div>-->
+      <div class="InfoBlock Node">
+        <AppInfo v-model="configData.app_info"/>
+      </div>
+
+      <div class="InfoBlock Node">
+        <ResourcesInfo
+            v-model="configData.data_sources"/>
+      </div>
+
+      <!--    <div class="InfoBlock Node">-->
+      <!--      <ServersInfo v-model="configData.server"/>-->
+      <!--    </div>-->
+    </transition-group>
   </div>
 </template>
 
@@ -68,13 +78,29 @@ function save() {
 
 .ConfigDialog {
   width: 100%;
-  height: 100%;
 
   display: flex;
+
   flex-direction: column;
   justify-content: space-between;
   gap: 1em;
 }
 
+.ConfigDialog > * {
+  transition: 0.5s ease;
+}
+
+.ConfigDialog > *.hidden {
+  height: 0;
+  opacity: 0;
+}
+
+.Controls {
+  display: flex;
+  width: 100%;
+
+  flex-direction: column;
+  gap: 1em;
+}
 
 </style>

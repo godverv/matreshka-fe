@@ -18,7 +18,7 @@ function setSelected(i: number) {
 </script>
 
 <template>
-  <div class="InfoBlock" v-if="resources">
+  <div v-if="resources">
     <div class="BoomBoxButtonsWrapper">
       <div class="BoomBox">
         <div
