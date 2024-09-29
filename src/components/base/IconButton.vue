@@ -24,7 +24,7 @@ defineProps({
   <div
       class="Button"
       :style="{
-          paddingTop: isSelected ? '1em': '2em',
+          paddingTop: isSelected ? '1em': '1.5em',
           gap: isSelected ? '1em': '0.5em'
       }"
   >
@@ -59,7 +59,7 @@ defineProps({
 }
 
 .ButtonItem {
-  width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -72,12 +72,12 @@ img {
 
 label {
   flex: 1;
-
-  display: inline-block;
+  line-height: 100%;
+  text-overflow: ellipsis;
 }
 
 .ButtonItem + .ButtonItem {
-  border-top: 3px solid black;
+  border-top: 2px solid black;
 }
 
 </style>

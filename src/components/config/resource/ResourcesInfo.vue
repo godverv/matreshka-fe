@@ -7,30 +7,30 @@ import IconButton from "@/components/base/IconButton.vue";
 import {ref} from "vue";
 import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
-const resources = defineModel<oneOfResource[]>()
+const resources = defineModel<oneOfResource[]>({default: []})
 
 const selectedIdx = ref<number>(0)
 
 function setSelected(i: number) {
   selectedIdx.value = i
-  setTimeout( () => {
-    const elem = document.getElementById('ResourceView')
-    if (!elem) {
-      return
-    }
-
-    elem.scrollIntoView({
-      block: "center",
-      behavior: "smooth"
-    });
-  }, 250)
+  console.log(Object.keys(resources.value[i]))
 }
 
 </script>
 
 <template>
-  <div v-if="resources">
-    <div class="BoomBoxButtonsWrapper">
+  <div
+      v-if="resources.length > 0"
+      class="InfoBlock ResourcesInfo"
+      :style="{
+          /* 22 for buttons row at the top
+            1 for gap before separator
+            1 for gap after
+            8 for each field
+           */
+          height: 22+1+1+8*(Object.keys(resources[selectedIdx]).length-2)+'vh'
+      }">
+    <div class="BoomBoxWrapper">
       <div class="BoomBox">
         <div
             class="BoomBoxItem"
@@ -49,16 +49,16 @@ function setSelected(i: number) {
         </div>
       </div>
     </div>
-    <div class="Content">
-      <div id="ResourceView">
-        <transition name="fade" mode="out-in">
+    <Transition name="fade" mode="out-in">
+      <div
+          :key="resources[selectedIdx].resource_name"
+          class="Content">
           <component
               :is="ResourceType.GetComponent(resources[selectedIdx].type)"
-              :key="resources[selectedIdx].resource_name"
               v-model="resources[selectedIdx]"/>
-        </transition>
       </div>
-    </div>
+    </Transition>
+
   </div>
 </template>
 
@@ -66,9 +66,18 @@ function setSelected(i: number) {
 @import "@/assets/styles/config_display.css";
 @import "@/assets/styles/boombox.css";
 
-.BoomBoxButtonsWrapper {
+.ResourcesInfo {
+  padding: 0;
+}
+
+.BoomBoxWrapper + .Content {
+  border-top: 3px solid black;
+}
+
+.BoomBoxWrapper {
   overflow-x: scroll;
   overflow-y: hidden;
+  padding: 0 3vh 1vh 3vh;
 }
 
 .BoomBoxItem {
@@ -80,7 +89,11 @@ function setSelected(i: number) {
 }
 
 .Content {
-
+  width: 100%;
+  padding: 1vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
 }
 
 .Content > * {
@@ -97,6 +110,10 @@ function setSelected(i: number) {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.ResourcesInfo {
+  transition: height 0.5s ease;
 }
 
 </style>

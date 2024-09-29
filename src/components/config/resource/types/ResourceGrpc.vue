@@ -8,7 +8,6 @@ const model = defineModel<resourceGrpc>({required: true})
 </script>
 
 <template>
-  <div>
     <div class="NodeField">
       <ConfigField
           v-model="model.connection_string"
@@ -22,7 +21,6 @@ const model = defineModel<resourceGrpc>({required: true})
           field-name="Module"
       />
     </div>
-  </div>
 </template>
 
 <style scoped>

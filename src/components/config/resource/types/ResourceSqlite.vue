@@ -8,13 +8,11 @@ const model = defineModel<resourceSqlite>({
 </script>
 
 <template>
-  <div>
     <div class="NodeField">
       <ConfigField
           v-model="model.path"
           field-name="File path"
       />
-    </div>
   </div>
 </template>
 

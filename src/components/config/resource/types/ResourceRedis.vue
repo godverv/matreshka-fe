@@ -11,7 +11,6 @@ const model = defineModel<resourceRedis>(
 </script>
 
 <template>
-  <div>
     <div class="NodeField">
       <ConfigField
           v-model="model.host"
@@ -46,7 +45,6 @@ const model = defineModel<resourceRedis>(
           field-name="Db Number"
       />
     </div>
-  </div>
 </template>
 
 <style scoped>

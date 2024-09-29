@@ -9,7 +9,6 @@ const model = defineModel<resourcePostgres>({
 </script>
 
 <template>
-  <div>
     <div class="NodeField">
       <ConfigField
           v-model="model.name"
@@ -44,7 +43,12 @@ const model = defineModel<resourcePostgres>({
           field-name="Password"
       />
     </div>
-  </div>
+    <div class="NodeField">
+      <ConfigField
+          v-model="model.ssl_mode"
+          field-name="Ssl mode"
+      />
+    </div>
 </template>
 
 <style scoped>

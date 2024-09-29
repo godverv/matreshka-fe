@@ -8,7 +8,7 @@ const info = defineModel<appInfo>()
 <template>
   <div v-if="!info">No app info</div>
 
-  <div v-else class="Node">
+  <div v-else class="InfoBlock Node">
     <div class="NodeHeader">
       AppInfo:
     </div>

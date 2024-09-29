@@ -46,16 +46,10 @@ function save() {
 
   <div v-else class="ConfigDialog">
     <div class="ConfigDisplay">
-      <div
-          class="InfoBlock Node"
-          key="AppInfo">
         <AppInfo v-model="configData.app_info"/>
-      </div>
 
-      <div class="InfoBlock Node" key="Resources">
         <ResourcesInfo
             v-model="configData.data_sources"/>
-      </div>
 
       <!--    <div class="InfoBlock Node">-->
       <!--      <ServersInfo v-model="configData.server"/>-->

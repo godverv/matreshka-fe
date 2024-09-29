@@ -28,9 +28,6 @@
 
     padding: 0.25em;
 
-    border-bottom: gray solid;
-    border-left: gray solid;
-
     overflow: hidden;
 }
 
@@ -39,8 +36,6 @@
     flex-direction: column;
     width: 100%;
     gap: 0;
-
-    border-left: gray solid;
 }
 
 .Node > .Node {
@@ -51,8 +46,6 @@
 }
 
 .InfoBlock {
-    display: flex;
-    flex-direction: column;
     border: var(--good) solid;
     border-radius: 16px;
     padding: 1em;
