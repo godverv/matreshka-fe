@@ -10,11 +10,20 @@ import {ResourceType} from "@/models/config/resources/resource_types.ts";
 const resources = defineModel<oneOfResource[]>()
 
 const selectedIdx = ref<number>(0)
-const moveToLeft = ref<boolean>(false)
 
 function setSelected(i: number) {
-  moveToLeft.value = selectedIdx.value > i
   selectedIdx.value = i
+  setTimeout( () => {
+    const elem = document.getElementById('ResourceView')
+    if (!elem) {
+      return
+    }
+
+    elem.scrollIntoView({
+      block: "center",
+      behavior: "smooth"
+    });
+  }, 250)
 }
 
 </script>
@@ -41,12 +50,14 @@ function setSelected(i: number) {
       </div>
     </div>
     <div class="Content">
-      <transition :name="moveToLeft ? 'slide-left':'slide-right'" mode="out-in">
-        <component
-            :is="ResourceType.GetComponent(resources[selectedIdx].type)"
-            :key="resources[selectedIdx].resource_name"
-            v-model="resources[selectedIdx]"/>
-      </transition>
+      <div id="ResourceView">
+        <transition name="fade" mode="out-in">
+          <component
+              :is="ResourceType.GetComponent(resources[selectedIdx].type)"
+              :key="resources[selectedIdx].resource_name"
+              v-model="resources[selectedIdx]"/>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
@@ -69,28 +80,23 @@ function setSelected(i: number) {
 }
 
 .Content {
+
+}
+
+.Content > * {
   overflow: hidden;
+  height: auto;
+  transition: height 1s ease;
 }
 
-.slide-left-enter-active,
-.slide-left-leave-active {
-  transition: transform 0.25s ease;
-}
-.slide-left-enter-from {
-  transform: translateX(100%);
-}
-.slide-left-leave-to {
-  transform: translateX(-100%);
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
 }
 
-.slide-right-enter-active,
-.slide-right-leave-active {
-  transition: transform 0.25s ease;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
-.slide-right-enter-from {
-  transform: translateX(-100%);
-}
-.slide-right-leave-to {
-  transform: translateX(100%);
-}
+
 </style>

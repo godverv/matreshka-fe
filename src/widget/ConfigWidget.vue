@@ -5,10 +5,12 @@ import AppInfo from "@/components/config/app_info/AppInfo.vue";
 import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
 // import ServersInfo from "@/components/config/server/ServersInfo.vue";
 
+import Button from 'primevue/button';
 
 import {GetConfigNodes, PatchConfig} from "@/api/api.ts";
 import {appConfig} from "@/models/config/appConfig.ts";
 import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
+import InputGroup from "primevue/inputgroup";
 
 const props = defineProps({
   serviceName: {
@@ -43,25 +45,14 @@ function save() {
   <div v-if="!configData">Отсутствует информация о сервисе</div>
 
   <div v-else class="ConfigDialog">
-    <transition-group>
+    <div class="ConfigDisplay">
       <div
-          class="Controls"
-          :class="{hidden: configChangesStore.length == 0 }">
-
-        <button @click="save">
-          Save
-        </button>
-        <button @click="rollbackAll">
-          Rollback
-        </button>
-
-      </div>
-
-      <div class="InfoBlock Node">
+          class="InfoBlock Node"
+          key="AppInfo">
         <AppInfo v-model="configData.app_info"/>
       </div>
 
-      <div class="InfoBlock Node">
+      <div class="InfoBlock Node" key="Resources">
         <ResourcesInfo
             v-model="configData.data_sources"/>
       </div>
@@ -69,7 +60,31 @@ function save() {
       <!--    <div class="InfoBlock Node">-->
       <!--      <ServersInfo v-model="configData.server"/>-->
       <!--    </div>-->
-    </transition-group>
+    </div>
+
+    <Transition name="Controls">
+      <div class="Controls" v-show="configChangesStore.length > 0">
+        <div>
+          <InputGroup>
+            <Button
+                @click="save"
+                label="Save"
+                icon="pi pi-check" iconPos="right"
+                severity="danger"
+            />
+          </InputGroup>
+        </div>
+        <div>
+          <InputGroup>
+            <Button
+                @click="rollbackAll"
+                label="Rollback"
+                icon="pi pi-refresh" iconPos="right"
+            />
+          </InputGroup>
+        </div>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -78,29 +93,55 @@ function save() {
 
 .ConfigDialog {
   width: 100%;
+  max-height: 150vh;
 
-  display: flex;
-
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1em;
+  overflow-x: hidden;
 }
 
 .ConfigDialog > * {
   transition: 0.5s ease;
 }
 
-.ConfigDialog > *.hidden {
-  height: 0;
-  opacity: 0;
+.Controls {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+
+  background-color: var(--background);
+
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 5vh;
 }
 
-.Controls {
-  display: flex;
-  width: 100%;
+.ConfigDisplay {
+  margin-bottom: 30vh;
 
+  display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: 1em;
+}
+
+.Controls-enter-active,
+.Controls-leave-active {
+  transition: 0.25s;
+}
+
+.Controls-enter-to,
+.Controls-leave-from {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.Controls-enter-from,
+.Controls-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
 </style>

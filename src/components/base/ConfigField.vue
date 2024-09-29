@@ -6,9 +6,9 @@ import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
 
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
-import FloatLabel from 'primevue/floatlabel'
-import InputGroupAddon from 'primevue/inputgroupaddon'
-
+import FloatLabel from 'primevue/floatlabel';
+import InputGroupAddon from 'primevue/inputgroupaddon';
+import Button from 'primevue/button';
 
 const original = defineModel<configValue<string | number>>({
   required: true,
@@ -55,6 +55,7 @@ function changeValue() {
 
 function changeValueBack() {
   newValRef.value = original.value.value
+  configChangesStore.deleteValue(original.value.name)
 }
 
 function isValueChanged() {
@@ -84,7 +85,11 @@ function isValueChanged() {
       }"
     >
       <InputGroup>
-        <Button :onclick="changeValueBack">⬅</Button>
+        <Button
+            :onclick="changeValueBack"
+            severity="warn"
+            icon="pi pi-refresh"
+        />
         <FloatLabel>
           <InputText
               v-model="original.value"

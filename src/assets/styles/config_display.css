@@ -53,9 +53,7 @@
 .InfoBlock {
     display: flex;
     flex-direction: column;
-    border: #78042f solid;
+    border: var(--good) solid;
     border-radius: 16px;
-
     padding: 1em;
 }
-

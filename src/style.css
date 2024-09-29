@@ -26,9 +26,12 @@ body {
 
 
 :root {
+  --background: white;
+
   --border-color: #05bc05;
 
-  --basic-outline: #05bc05;
+  --good: #05bc05;
+  --warn: #f67322;
   --value-changed-outline: #e63e18;
   --selected-gradient: linear-gradient(#70f1f1, #05878c);
   --basic-gradient: linear-gradient(#fff9f9, #AAA8A8);

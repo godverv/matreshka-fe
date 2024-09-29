@@ -3,13 +3,14 @@ import {defineStore} from "pinia";
 export const useOpenedConfigChangesStore = defineStore('openedConfig', {
     state: () => {
         return {
-            changesMap: new Map<string, changeWithRollback>()
+            changesMap: new Map<string, changeWithRollback>(),
+            parIsChangedMap: new Map<string, boolean>()
         }
     },
     getters: {
         envVariables: (state) => {
             const res: changes[] = []
-             state
+            state
                 .changesMap
                 .forEach((v) =>
                     res.push({
@@ -24,23 +25,22 @@ export const useOpenedConfigChangesStore = defineStore('openedConfig', {
         }
     },
     actions: {
-        setValue(name: string, value: string, rollback: ()=>void) {
+        setValue(name: string, value: string, rollback: () => void) {
             this.changesMap.set(name, {
                 fieldName: name,
                 fieldValue: value,
                 rollback: rollback
             })
         },
-        deleteValue(name: string) {
+        deleteValue(name: string): void {
             this.changesMap.delete(name)
         },
-        rollbackAll() {
+        rollbackAll(): void {
             this.changesMap.forEach((v) => {
                 v.rollback()
                 this.changesMap.delete(v.fieldName)
             })
-
-        }
+        },
     },
 })
 
