@@ -9,8 +9,10 @@ const fsInfo = defineModel<fsHandler>({required: true})
 
 <template>
   <div class="NodeField">
-    <div> Dist folder:</div>
-    <ConfigField v-model="fsInfo.dist"/>
+    <ConfigField
+        v-model="fsInfo.dist"
+        field-name="Dist folder:"
+    />
   </div>
 </template>
 

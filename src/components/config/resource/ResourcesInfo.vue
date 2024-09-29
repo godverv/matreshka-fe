@@ -21,7 +21,7 @@ function setSelected(i: number) {
 <template>
   <div
       v-if="resources.length > 0"
-      class="InfoBlock ResourcesInfo"
+      class="ResourcesInfo"
       :style="{
           /* 22 for buttons row at the top
             1 for gap before separator

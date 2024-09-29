@@ -44,9 +44,3 @@
 .Node > .NodeField {
     padding: 0 0.5em 0 0.5em;
 }
-
-.InfoBlock {
-    border: var(--good) solid;
-    border-radius: 16px;
-    padding: 1em;
-}

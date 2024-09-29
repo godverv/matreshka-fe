@@ -8,34 +8,21 @@ const info = defineModel<appInfo>()
 <template>
   <div v-if="!info">No app info</div>
 
-  <div v-else class="InfoBlock Node">
-    <div class="NodeHeader">
-      AppInfo:
-    </div>
-
-    <div class="Node">
-      <div class="NodeField">
+  <div v-else class="Node">
         <ConfigField
             v-model="info.name"
-            fieldName="Service name"
-        />
-      </div>
+            fieldName="Service name"/>
 
-      <div class="NodeField">
         <ConfigField
             v-model="info.version"
             field-name="Version"
         />
-      </div>
 
-      <div class="NodeField">
         <ConfigField
             v-model="info.startup_duration"
             field-name="Startup duration"
             units="sec"
         />
-      </div>
-    </div>
   </div>
 
 </template>

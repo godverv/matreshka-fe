@@ -3,7 +3,7 @@ import {ref} from "vue";
 
 import AppInfo from "@/components/config/app_info/AppInfo.vue";
 import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
-// import ServersInfo from "@/components/config/server/ServersInfo.vue";
+import ServersInfo from "@/components/config/server/ServersInfo.vue";
 
 import Button from 'primevue/button';
 
@@ -24,6 +24,7 @@ const configChangesStore = useOpenedConfigChangesStore()
 const configData = ref<appConfig>({} as appConfig);
 
 function setNodes(c: appConfig) {
+  console.log(c)
   configData.value = c
 }
 
@@ -46,14 +47,12 @@ function save() {
 
   <div v-else class="ConfigDialog">
     <div class="ConfigDisplay">
-        <AppInfo v-model="configData.app_info"/>
-
+        <AppInfo
+            v-model="configData.app_info"/>
         <ResourcesInfo
             v-model="configData.data_sources"/>
-
-      <!--    <div class="InfoBlock Node">-->
-      <!--      <ServersInfo v-model="configData.server"/>-->
-      <!--    </div>-->
+        <ServersInfo
+            v-model="configData.server"/>
     </div>
 
     <Transition name="Controls">
@@ -86,14 +85,15 @@ function save() {
 @import "@/assets/styles/config_display.css";
 
 .ConfigDialog {
-  width: 100%;
-  max-height: 150vh;
-
   overflow-x: hidden;
 }
 
-.ConfigDialog > * {
-  transition: 0.5s ease;
+.ConfigDisplay {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+  padding-bottom: 5vh;
 }
 
 .Controls {
@@ -112,13 +112,10 @@ function save() {
   height: 5vh;
 }
 
-.ConfigDisplay {
-  margin-bottom: 30vh;
-
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1em;
+.ConfigDisplay > * {
+  border: var(--good) solid;
+  border-radius: 16px;
+  padding: 1em;
 }
 
 .Controls-enter-active,
