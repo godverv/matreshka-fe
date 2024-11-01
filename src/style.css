@@ -2,54 +2,55 @@
 @import 'primeicons/primeicons.css';
 
 * {
-  font-family: 'Comfortaa', sans-serif;
+    font-family: 'Comfortaa', sans-serif;
 }
 
-:root {
-  color-scheme: light;
-
-  text-rendering: optimizeLegibility;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+/* Sizes */
 body {
-  margin: 0;
+    margin: 0;
 }
 
-#app {
-  margin: 0 auto;
-
-  width: 100%;
+html, body, #app {
+    width: 100%;
+    height: 100%;
 }
-
 
 :root {
-  --background: white;
+    text-rendering: optimizeLegibility;
 
-  --border-color: #05bc05;
-
-  --good: #05bc05;
-  --warn: #f67322;
-  --value-changed-outline: #e63e18;
-  --selected-gradient: linear-gradient(#70f1f1, #05878c);
-  --basic-gradient: linear-gradient(#fff9f9, #AAA8A8);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+/* Coloring scheme*/
+:root {
+    color-scheme: light;
 
-:root{
-  font-size: 20px;
+    --background: white;
+
+    --border-color: #05bc05;
+
+    --good: #05bc05;
+    --warn: #f67322;
+    --value-changed-outline: #e63e18;
+    --selected-gradient: linear-gradient(#70f1f1, #05878c);
+    --basic-gradient: linear-gradient(#fff9f9, #AAA8A8);
+}
+
+/*Font sizes*/
+
+:root {
+    font-size: 20px;
 }
 
 @media (max-width: 400px) {
-  :root{
-    font-size: 16px;
-  }
+    :root {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 200px) {
-  :root {
-    font-size: 8px;
-  }
+    :root {
+        font-size: 8px;
+    }
 }

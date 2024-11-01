@@ -4,20 +4,20 @@ export type keyMap = {
     [key: string]: any
 }
 
-export type configValue<T> = {
-    name: string
+export type ConfigValue<T> = {
+    label: string
     value: T
 }
 
-export function extractStringValue(n: Node) : configValue<string> {
+export function extractStringValue(n: Node) : ConfigValue<string> {
     return {
-        name: n.name ?? "",
+        label: n.name ?? "",
         value: n.value ?? ""
     }
 }
-export function extractNumberValue(n: Node) : configValue<number> {
+export function extractNumberValue(n: Node) : ConfigValue<number> {
     return {
-        name: n.name ?? "",
+        label: n.name ?? "",
         value: Number(n.value) ?? 0
     }
 }

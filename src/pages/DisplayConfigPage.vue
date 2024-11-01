@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ConfigDisplay from "@/widget/ConfigWidget.vue";
+import DisplayConfigDisplay from "@/widget/DisplayConfigWidget.vue";
 
 defineProps({
   name: {
@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <ConfigDisplay :service-name="name"/>
+  <DisplayConfigDisplay :service-name="name"/>
 </template>
 
 <style scoped>

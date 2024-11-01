@@ -1,7 +1,7 @@
-import {configValue} from "@/models/config/common.ts";
+import {ConfigValue} from "@/models/config/common.ts";
 
-export type appInfo = {
-    name: configValue<string>
-    version: configValue<string>
-    startup_duration: configValue<string>
+export type AppInfo = {
+    name: ConfigValue<string>
+    version: ConfigValue<string>
+    startup_duration: ConfigValue<string>
 }

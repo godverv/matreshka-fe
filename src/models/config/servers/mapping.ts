@@ -1,9 +1,9 @@
-import {appConfig} from "@/models/config/appConfig.ts";
+import {AppConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 import {fsHandler, grpcHandler, Server} from "@/models/config/servers/servers.ts";
-import {configValue} from "@/models/config/common.ts";
+import {ConfigValue} from "@/models/config/common.ts";
 
-export function mapServer(cfg: appConfig, root: Node) {
+export function mapServer(cfg: AppConfig, root: Node) {
     if (!root.innerNodes) {
         return
     }
@@ -23,7 +23,7 @@ export function mapServer(cfg: appConfig, root: Node) {
                         extractServerInfo(server, subNod, n.name))
             }
 
-            cfg.server.push(server)
+            cfg.servers.push(server)
         })
 }
 
@@ -58,15 +58,15 @@ function extractGrpcHandler(nodes: Node[], rootPrefix: string): grpcHandler {
         switch (part) {
             case 'GATEWAY':
                 gh.gateway = {
-                    name: n.name,
+                    label: n.name,
                     value: n.value,
-                } as configValue<string>
+                } as ConfigValue<string>
                 break
             case 'MODULE':
                 gh.module = {
-                    name: n.name,
+                    label: n.name,
                     value: n.value,
-                } as configValue<string>
+                } as ConfigValue<string>
                 break
         }
     })
@@ -81,9 +81,9 @@ function extractFsHandler(nodes: Node[], rootPrefix: string): fsHandler {
         switch (part) {
             case 'DIST':
                 fsH.dist = {
-                    name: n.name,
+                    label: n.name,
                     value: n.value,
-                } as configValue<string>
+                } as ConfigValue<string>
         }
     })
 

@@ -1,11 +1,11 @@
-import {appConfig} from "@/models/config/appConfig.ts";
+import {AppConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
-import {resourcePostgres} from "@/models/config/resources/resource.ts";
+import {ResourcePostgres} from "@/models/config/resources/resource.ts";
 import {extractNumberValue, extractStringValue} from "@/models/config/common.ts";
 import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
-export function mapPostgres(cfg: appConfig, root: Node) {
-    const pg: resourcePostgres = {} as resourcePostgres
+export function mapPostgres(cfg: AppConfig, root: Node) {
+    const pg: ResourcePostgres = {} as ResourcePostgres
 
     if (!root.name) {
         return

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {appInfo} from "@/models/config/info/appInfo.ts";
+import {AppInfo} from "@/models/config/info/appInfo.ts";
 import ConfigField from "@/components/base/ConfigField.vue";
 
-const info = defineModel<appInfo>()
+const info = defineModel<AppInfo>()
 </script>
 
 <template>

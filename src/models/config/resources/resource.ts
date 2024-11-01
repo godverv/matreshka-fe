@@ -1,51 +1,51 @@
-import {configValue, keyMap} from "@/models/config/common.ts";
+import {ConfigValue, keyMap} from "@/models/config/common.ts";
 import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
-export type oneOfResource =  (unknownResource |
-    resourcePostgres |
-    resourceRedis |
-    resourceSqlite |
-    resourceTelegram |
-    resourceGrpc);
+export type OneOfResource =  (UnknownResource |
+    ResourcePostgres |
+    ResourceRedis |
+    ResourceSqlite |
+    ResourceTelegram |
+    ResourceGrpc);
 
-type namedResource = {
+type NamedResource = {
     resource_name: string
     type: ResourceType
 }
 
-export type unknownResource = namedResource & keyMap;
+export type UnknownResource = NamedResource & keyMap;
 
-export type resourcePostgres = namedResource & {
-    host: configValue<string>
-    name: configValue<string>
-    port: configValue<number>
-    user: configValue<string>
-    pwd: configValue<string>
-    ssl_mode: configValue<string>
+export type ResourcePostgres = NamedResource & {
+    host: ConfigValue<string>
+    name: ConfigValue<string>
+    port: ConfigValue<number>
+    user: ConfigValue<string>
+    pwd: ConfigValue<string>
+    ssl_mode: ConfigValue<string>
 }
 
-export type resourceRedis = namedResource & {
-    host: configValue<string>
-    port: configValue<number>
-    user: configValue<string>
-    pwd: configValue<string>
-    db: configValue<number>
+export type ResourceRedis = NamedResource & {
+    host: ConfigValue<string>
+    port: ConfigValue<number>
+    user: ConfigValue<string>
+    pwd: ConfigValue<string>
+    db: ConfigValue<number>
 }
 
-export type resourceSqlite = namedResource & {
-    path: configValue<string>
+export type ResourceSqlite = NamedResource & {
+    path: ConfigValue<string>
 }
 
-export type resourceTelegram = namedResource & {
-    api_key: configValue<string>
+export type ResourceTelegram = NamedResource & {
+    api_key: ConfigValue<string>
 }
 
-export type resourceGrpc = namedResource & {
-    connection_string: configValue<string>
-    module: configValue<string>
+export type ResourceGrpc = NamedResource & {
+    connection_string: ConfigValue<string>
+    module: ConfigValue<string>
 }
 
-export function NormalizeName(res: namedResource): string {
+export function NormalizeName(res: NamedResource): string {
     if (res.resource_name === res.type ) {
         return res.resource_name
     }

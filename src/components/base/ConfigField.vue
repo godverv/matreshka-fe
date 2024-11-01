@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {ref} from "vue";
-import {configValue} from "@/models/config/common.ts";
+import {ConfigValue} from "@/models/config/common.ts";
 import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
 
 import InputText from 'primevue/inputtext';
@@ -9,8 +9,9 @@ import InputGroup from 'primevue/inputgroup';
 import FloatLabel from 'primevue/floatlabel';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 import Button from 'primevue/button';
+import {Nullable} from "@primevue/core";
 
-const original = defineModel<configValue<string | number>>({
+const original = defineModel<ConfigValue<string | number>>({
   required: true,
 })
 
@@ -39,11 +40,11 @@ const configChangesStore = useOpenedConfigChangesStore()
 function changeValue() {
   if (newValRef.value === original.value.value) {
     color.value = defaultColor
-    configChangesStore.deleteValue(original.value.name)
+    configChangesStore.deleteValue(original.value.label)
   } else {
     color.value = changedColor
     configChangesStore.setValue(
-        original.value.name,
+        original.value.label,
         newValRef.value.toString(),
         () => {
           newValRef.value = original.value.value
@@ -55,7 +56,7 @@ function changeValue() {
 
 function changeValueBack() {
   newValRef.value = original.value.value
-  configChangesStore.deleteValue(original.value.name)
+  configChangesStore.deleteValue(original.value.label)
 }
 
 function isValueChanged() {
@@ -72,7 +73,7 @@ function isValueChanged() {
         <FloatLabel>
           <InputText
               :invalid="newValRef != original.value"
-              v-model="newValRef"
+              v-model="newValRef as Nullable<string>"
               @input="changeValue"
           />
         </FloatLabel>
@@ -92,7 +93,7 @@ function isValueChanged() {
         />
         <FloatLabel>
           <InputText
-              v-model="original.value"
+              v-model="original.value as Nullable<string>"
               aria-disabled="true"
               @input="changeValue"
           />

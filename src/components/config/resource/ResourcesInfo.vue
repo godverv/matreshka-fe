@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
-import {NormalizeName, oneOfResource} from "@/models/config/resources/resource.ts";
+import {NormalizeName, OneOfResource} from "@/models/config/resources/resource.ts";
 import {GetImageForResource} from "@/models/config/resources/images.ts";
 import IconButton from "@/components/base/IconButton.vue";
 
 import {ref} from "vue";
 import {ResourceType} from "@/models/config/resources/resource_types.ts";
 
-const resources = defineModel<oneOfResource[]>({default: []})
+const resources = defineModel<OneOfResource[]>({default: []})
 
 const selectedIdx = ref<number>(0)
 

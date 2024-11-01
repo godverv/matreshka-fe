@@ -8,7 +8,7 @@ import ServersInfo from "@/components/config/server/ServersInfo.vue";
 import Button from 'primevue/button';
 
 import {GetConfigNodes, PatchConfig} from "@/api/api.ts";
-import {appConfig} from "@/models/config/appConfig.ts";
+import {AppConfig} from "@/models/config/appConfig.ts";
 import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
 import InputGroup from "primevue/inputgroup";
 
@@ -21,10 +21,9 @@ const props = defineProps({
 
 const configChangesStore = useOpenedConfigChangesStore()
 
-const configData = ref<appConfig>({} as appConfig);
+const configData = ref<AppConfig>({} as AppConfig);
 
-function setNodes(c: appConfig) {
-  console.log(c)
+function setNodes(c: AppConfig) {
   configData.value = c
 }
 
@@ -52,7 +51,7 @@ function save() {
         <ResourcesInfo
             v-model="configData.data_sources"/>
         <ServersInfo
-            v-model="configData.server"/>
+            v-model="configData.servers"/>
     </div>
 
     <Transition name="Controls">

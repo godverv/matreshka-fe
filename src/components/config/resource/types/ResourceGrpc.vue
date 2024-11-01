@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-import {resourceGrpc} from "@/models/config/resources/resource.ts";
+import {ResourceGrpc} from "@/models/config/resources/resource.ts";
 
 import ConfigField from "@/components/base/ConfigField.vue";
 
-const model = defineModel<resourceGrpc>({required: true})
+const model = defineModel<ResourceGrpc>({required: true})
 </script>
 
 <template>

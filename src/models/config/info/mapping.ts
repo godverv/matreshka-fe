@@ -1,8 +1,8 @@
-import {appConfig} from "@/models/config/appConfig.ts";
+import {AppConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
 import {extractStringValue} from "@/models/config/common.ts";
 
-export function mapAppInfo(cfg: appConfig, root: Node) {
+export function mapAppInfo(cfg: AppConfig, root: Node) {
     root.innerNodes?.map((n)=> {
         if (!n.name || !root.name) {
             return;

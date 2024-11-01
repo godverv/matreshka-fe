@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
 import ConfigField from "@/components/base/ConfigField.vue";
-import {resourceRedis} from "@/models/config/resources/resource.ts";
+import {ResourceRedis} from "@/models/config/resources/resource.ts";
 
-const model = defineModel<resourceRedis>(
+const model = defineModel<ResourceRedis>(
     {
       required: true,
     })
