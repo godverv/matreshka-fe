@@ -11,6 +11,7 @@ const info = defineModel<AppInfo>()
   <div v-else class="Node">
         <ConfigField
             v-model="info.name"
+            :isDisabled="true"
             fieldName="Service name"/>
 
         <ConfigField

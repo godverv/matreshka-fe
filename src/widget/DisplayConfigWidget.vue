@@ -11,7 +11,6 @@ import {GetConfigNodes, PatchConfig} from "@/api/api.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
 import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
 import InputGroup from "primevue/inputgroup";
-import SpeedDial from "primevue/speeddial";
 
 const props = defineProps({
   serviceName: {

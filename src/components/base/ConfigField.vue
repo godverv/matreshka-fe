@@ -20,7 +20,7 @@ defineProps({
     type: String,
     required: true,
   },
-  disabled: {
+  isDisabled: {
     type: Boolean,
     default: false,
   },
@@ -65,17 +65,17 @@ function isValueChanged() {
 </script>
 
 <template>
-  <label>{{ fieldName }}</label>
-
   <div class="ConfigInputFields">
     <div class="InputBox NewValue">
       <InputGroup>
-        <FloatLabel>
+        <FloatLabel variant="on">
           <InputText
+              :disabled="isDisabled"
               :invalid="newValRef != original.value"
               v-model="newValRef as Nullable<string>"
               @input="changeValue"
           />
+          <label>{{ fieldName }}</label>
         </FloatLabel>
         <InputGroupAddon v-if="units">{{ units }}</InputGroupAddon>
       </InputGroup>
@@ -83,6 +83,7 @@ function isValueChanged() {
     <div class="InputBox OldValue"
          :style="{
           flex: isValueChanged() ? 1: 0,
+          overflow: isValueChanged() ? '' : 'hidden',
       }"
     >
       <InputGroup>
@@ -91,12 +92,13 @@ function isValueChanged() {
             severity="warn"
             icon="pi pi-refresh"
         />
-        <FloatLabel>
+        <FloatLabel variant="on">
           <InputText
               v-model="original.value as Nullable<string>"
               aria-disabled="true"
               @input="changeValue"
           />
+          <label>Old value</label>
         </FloatLabel>
       </InputGroup>
     </div>
@@ -131,7 +133,6 @@ label {
 
 .OldValue {
   flex: 0;
-  overflow: hidden;
 }
 
 </style>

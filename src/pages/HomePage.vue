@@ -125,6 +125,7 @@ const buttons: MenuItem[] = [
 </script>
 
 <template>
+  <!--  List of services -->
   <div class="Home">
     <div class="list" v-if="servicesList.length > 0">
       <div
@@ -141,6 +142,7 @@ const buttons: MenuItem[] = [
     </div>
   </div>
 
+  <!-- Dialog component. Static position -->
   <Dialog
       v-model:visible="isDialogOpen"
       modal
@@ -203,7 +205,7 @@ const buttons: MenuItem[] = [
 
   display: flex;
   gap: 1em;
-  justify-content: left;
+  justify-content: space-around;
   align-items: center;
 
   cursor: pointer;
