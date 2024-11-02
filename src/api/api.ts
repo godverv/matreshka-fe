@@ -77,7 +77,7 @@ export async function PatchConfig(serviceName: string, changeList: changes[]) {
 
 export async function CreateConfig(name: string) {
     const newCfg = {
-        serviceName: name
+        serviceName: encodeURIComponent(name)
     } as CreateConfigRequest
 
     return MatreshkaBeAPI.CreateConfig(newCfg, prefix)

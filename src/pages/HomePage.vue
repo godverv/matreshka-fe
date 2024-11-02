@@ -120,7 +120,7 @@ const buttons: MenuItem[] = [
       <p> No configs on this node</p>
       <SpeedDial
           :style="{ position: 'absolute',  bottom: '2%', right: '2%' }"
-          :tooltipOptions="{ position: 'left' }"
+          :tooltipOptions="{ event: 'hover', position: 'left' }"
           :model="buttons"
           direction="up"
           :radius="100"

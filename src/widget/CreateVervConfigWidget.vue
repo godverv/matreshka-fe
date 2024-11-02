@@ -9,6 +9,7 @@ import FloatLabel from "primevue/floatlabel";
 import InputGroup from "primevue/inputgroup";
 
 import {CreateConfig} from "@/api/api.ts";
+import {GrpcError} from "@/api/model.ts";
 import {ToastMessageOptions} from "primevue";
 
 const toastApi = useToast();
@@ -24,16 +25,24 @@ function inputName() {
 }
 
 function createConfig() {
-  CreateConfig(serviceName.value).then((resp) => {
-    const msg = {} as ToastMessageOptions;
+  CreateConfig(serviceName.value).then((_) => {
+    toastApi.add({
+      closable: true,
+      life: 10_000,
+      severity: 'success',
+      summary: `Service created. Check it out`,
+    })
+  }).catch((err) => {
+
+    const msg = {} as ToastMessageOptions
     msg.closable = true
     msg.life = 10_000
-    if (resp.errorMessage == '') {
-      msg.severity = 'success'
-      msg.summary = `Service created. Check it out`
+    msg.summary = err.message
+
+    if ([3, 6].includes(err.code)) {
+      msg.severity = 'warn'
     } else {
       msg.severity = 'error'
-      msg.summary = resp.errorMessage
     }
 
     toastApi.add(msg)

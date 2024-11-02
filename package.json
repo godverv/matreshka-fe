@@ -12,6 +12,7 @@
     "@grpc/grpc-js": "^1.10.7",
     "@grpc/proto-loader": "^0.7.13",
     "@primevue/themes": "^4.0.7",
+    "@types/grpc-error": "^1.0.3",
     "@types/js-yaml": "^4.0.9",
     "axios": "^1.6.8",
     "browserify": "^17.0.0",
