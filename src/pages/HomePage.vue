@@ -107,17 +107,18 @@ fetchServices()
 
 const buttons: MenuItem[] = [
   {
-    label: 'Verv config',
+    label: 'New Verv config',
     icon: 'pi pi-box',
     command(_) {
       openCreateVervConfigWidget()
     },
   },
   {
-    label: 'Environment config',
+    visible: false,
+    label: 'New environment config',
     icon: 'pi pi-file-plus',
     command(_) {
-      console.log('Env config')
+      // TODO
     },
   },
 ]
@@ -162,6 +163,7 @@ const buttons: MenuItem[] = [
 
   </Dialog>
 
+  <!-- Help button at the bottom -->
   <SpeedDial
       :style="{ position: 'absolute', bottom: '2%', right: '2%' }"
       :tooltipOptions="{ event: 'hover', position: 'left' }"
