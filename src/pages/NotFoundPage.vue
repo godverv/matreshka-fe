@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {HomeUri} from "@/routes/Routes.ts";
+
+import HomeButton from "@/components/home/HomeButton.vue";
 </script>
 
 <template>
-  <RouterLink :to=HomeUri>Go to home</RouterLink>
-  <div>Not found</div>
-
+  <HomeButton/>
+  <div>Unknown page</div>
   <RouterView />
 </template>
 

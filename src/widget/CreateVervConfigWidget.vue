@@ -9,9 +9,9 @@ import FloatLabel from "primevue/floatlabel";
 import InputGroup from "primevue/inputgroup";
 
 import {CreateConfig} from "@/api/api.ts";
-import {GrpcError} from "@/api/model.ts";
+
 import {ToastMessageOptions} from "primevue";
-import {router, RouteToConfigDisplay} from "@/routes/Routes.ts";
+import { RouteToConfigDisplay} from "@/routes/Routes.ts";
 
 const toastApi = useToast();
 
@@ -29,7 +29,7 @@ function createConfig() {
   CreateConfig(serviceName.value).then((_) => {
     toastApi.add({
       closable: true,
-      life: 5_000,
+      life: 2_000,
       severity: 'success',
       summary: `Service created. Check it out`,
     })

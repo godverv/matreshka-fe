@@ -5,16 +5,36 @@ import DisplayConfigPage from "@/pages/DisplayConfigPage.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import NewConfigPage from "@/pages/NewConfigPage.vue";
 
-export const HomeUri = "/"
-export const DisplayConfigPageUri = "/config/"
-export const NewConfigPageUri = "/new/"
+export enum Pages {
+    Unknown = "unknown",
+    Home = "home_page",
+    DisplayConfig = "display_config",
+    NewConfig = "new_config"
+}
 
 export const routes = [
-    {path: "/:pathMatch(.*)*", component: NotFound},
-    {path: HomeUri, component: Home},
+    {
+        name: Pages.Unknown,
+        path: "/:pathMatch(.*)*",
+        component: NotFound,
+    },
+    {
+        name: Pages.Home,
+        path: '/',
+        component: Home,
+    },
 
-    {path: NewConfigPageUri, component: NewConfigPage},
-    {path: DisplayConfigPageUri+":name/", component: DisplayConfigPage, props: true}
+    {
+        name: Pages.NewConfig,
+        path: '/new/',
+        component: NewConfigPage,
+    },
+    {
+        name: Pages.DisplayConfig,
+        path: "/config/:name/",
+        component: DisplayConfigPage,
+        props: true,
+    }
 ]
 
 export const router = createRouter({
@@ -23,9 +43,11 @@ export const router = createRouter({
 })
 
 
-
 export function RouteToConfigDisplay(serviceName: string) {
-    router.
-    push(DisplayConfigPageUri+serviceName).
-    then()
+    router
+        .push({
+            name: Pages.DisplayConfig,
+            params: {name: serviceName}
+        })
+        .then()
 }

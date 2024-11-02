@@ -11,6 +11,7 @@ import {GetConfigNodes, PatchConfig} from "@/api/api.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
 import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
 import InputGroup from "primevue/inputgroup";
+import SpeedDial from "primevue/speeddial";
 
 const props = defineProps({
   serviceName: {
@@ -48,38 +49,36 @@ fetchConfig()
 <template>
   <div v-if="!configData">Отсутствует информация о сервисе</div>
 
-  <div v-else class="ConfigDialog">
-    <div class="ConfigDisplay">
-        <AppInfo
-            v-model="configData.app_info"/>
-        <ResourcesInfo
-            v-model="configData.data_sources"/>
-        <ServersInfo
-            v-model="configData.servers"/>
+  <div v-else class="Display">
+    <div class="Content">
+      <AppInfo
+          v-model="configData.app_info"/>
+      <ResourcesInfo
+          v-model="configData.data_sources"/>
+      <ServersInfo
+          v-model="configData.servers"/>
     </div>
 
-    <Transition name="Controls">
-      <div class="Controls" v-show="configChangesStore.length > 0">
-        <div>
-          <InputGroup>
-            <Button
-                @click="save"
-                label="Save"
-                icon="pi pi-check" iconPos="right"
-                severity="danger"
-            />
-          </InputGroup>
-        </div>
-        <div>
-          <InputGroup>
-            <Button
-                @click="rollbackAll"
-                label="Rollback"
-                icon="pi pi-refresh" iconPos="right"
-            />
-          </InputGroup>
-        </div>
-      </div>
+    <Transition name="BottomControls">
+        <InputGroup
+            v-show="configChangesStore.length > 0"
+            :style="{
+              display: 'flex',
+              justifyContent: 'center'
+            }"
+        >
+          <Button
+              @click="save"
+              label="Save"
+              icon="pi pi-check" iconPos="right"
+              severity="danger"
+          />
+          <Button
+              @click="rollbackAll"
+              label="Rollback"
+              icon="pi pi-refresh" iconPos="right"
+          />
+        </InputGroup>
     </Transition>
   </div>
 </template>
@@ -87,11 +86,14 @@ fetchConfig()
 <style scoped>
 @import "@/assets/styles/config_display.css";
 
-.ConfigDialog {
+.Display {
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
-.ConfigDisplay {
+.Content {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -99,41 +101,25 @@ fetchConfig()
   padding-bottom: 5vh;
 }
 
-.Controls {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-
-  background-color: var(--background);
-
-  display: flex;
-  justify-content: center;
-
-  width: 100%;
-  height: 5vh;
-}
-
-.ConfigDisplay > * {
+.Content > * {
   border: var(--good) solid;
   border-radius: 16px;
   padding: 1em;
 }
 
-.Controls-enter-active,
-.Controls-leave-active {
+.BottomControls-enter-active,
+.BottomControls-leave-active {
   transition: 0.25s;
 }
 
-.Controls-enter-to,
-.Controls-leave-from {
+.BottomControls-enter-to,
+.BottomControls-leave-from {
   transform: translateY(0);
   opacity: 1;
 }
 
-.Controls-enter-from,
-.Controls-leave-to {
+.BottomControls-enter-from,
+.BottomControls-leave-to {
   transform: translateY(-100%);
   opacity: 0;
 }

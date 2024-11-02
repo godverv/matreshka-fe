@@ -12,7 +12,7 @@ import {AppInfo} from "@/models/config/info/appInfo.ts";
 import DisplayConfigWidget from "@/widget/DisplayConfigWidget.vue";
 import CreateVervConfigWidget from "@/widget/CreateVervConfigWidget.vue";
 
-import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
+import {Pages, router} from "@/routes/Routes.ts";
 
 const toastApi = useToast();
 
@@ -58,6 +58,22 @@ function openDisplayConfigDialog(serviceName: string) {
   dialogStyle.height = '95vh'
 
   dialogPosition.value = 'center'
+}
+
+function serviceClicked(event: MouseEvent, serviceName: string) {
+  if (event.ctrlKey || event.metaKey) {
+    window
+        .open(
+            router.resolve(
+                {
+                  name: Pages.DisplayConfig,
+                  params: {name: serviceName},
+                },
+            )
+                .href, '_blank')
+  } else {
+    openDisplayConfigDialog(serviceName ?? '')
+  }
 }
 
 function openCreateVervConfigWidget() {
@@ -115,10 +131,9 @@ const buttons: MenuItem[] = [
           v-for="service in servicesList"
           :key="service.name.value"
           class="listItem"
-          @click="openDisplayConfigDialog(service.name.value ?? '')"
+          @click="(event: MouseEvent) => { serviceClicked(event, service.name.value) }"
       >
         {{ service.name.value }}
-        <!--        TODO Подумать внести за пределы этого списка-->
       </div>
     </div>
     <div v-else>
@@ -141,7 +156,7 @@ const buttons: MenuItem[] = [
     <DisplayConfigWidget
         v-else-if="dialogWidgetName==='displayConfig'"
         :serviceName="openedServiceName"
-        />
+    />
 
   </Dialog>
 
