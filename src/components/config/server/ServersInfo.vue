@@ -10,7 +10,7 @@ const servers = defineModel<Server[]>({default: []})
 <template>
   <div class="Node">
     <div class="NodeHeader">
-      <div v-if="!servers">No servers defined</div>
+      <div v-if="servers.length == 0">No servers defined</div>
       <div v-else>Servers:</div>
     </div>
 

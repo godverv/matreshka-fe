@@ -31,14 +31,18 @@ function rollbackAll() {
   configChangesStore.rollbackAll()
 }
 
-GetConfigNodes(props.serviceName)
-    .then(setNodes)
+function fetchConfig() {
+  GetConfigNodes(props.serviceName)
+      .then(setNodes)
+}
 
 function save() {
   PatchConfig(props.serviceName, configChangesStore.envVariables)
       .then(setNodes)
       .then(rollbackAll)
 }
+
+fetchConfig()
 </script>
 
 <template>

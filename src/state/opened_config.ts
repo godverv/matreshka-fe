@@ -22,7 +22,7 @@ export const useOpenedConfigChangesStore = defineStore('openedConfig', {
         },
         length: (state) => {
             return state.changesMap.size
-        }
+        },
     },
     actions: {
         setValue(name: string, value: string, rollback: () => void) {

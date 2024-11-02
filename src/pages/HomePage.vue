@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, Component as VueComponent, shallowRef} from "vue";
+import {ref} from "vue";
 
 import {useToast} from "primevue/usetoast";
 import Dialog from "primevue/dialog";
@@ -12,14 +12,16 @@ import {AppInfo} from "@/models/config/info/appInfo.ts";
 import DisplayConfigWidget from "@/widget/DisplayConfigWidget.vue";
 import CreateVervConfigWidget from "@/widget/CreateVervConfigWidget.vue";
 
+import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
 
-const isDialogOpen = ref<boolean>(false);
 const toastApi = useToast();
 
-const dialogHeader = ref<string>('');
-const widgetForDialog = shallowRef<VueComponent>();
-
 // Dialog
+const isDialogOpen = ref<boolean>(false);
+
+const dialogHeader = ref<string>('');
+const dialogWidgetName = ref<'displayConfig' | 'newConfig'>('displayConfig');
+
 const dialogStyle = {
   width: '80vw',
   height: '95vh',
@@ -32,10 +34,11 @@ const dialogPt = {
   }
 }
 
-const dialogPosition = ref<string>('')
+const dialogPosition = ref<"center" | "right">('center')
 
 // Service list
 const servicesList = ref<AppInfo[]>([])
+const openedServiceName = ref<string>('')
 
 const listReq = {
   listRequest: {
@@ -45,18 +48,20 @@ const listReq = {
 }
 
 function openDisplayConfigDialog(serviceName: string) {
-  widgetForDialog.value = DisplayConfigWidget
+  dialogWidgetName.value = 'displayConfig'
   dialogHeader.value = serviceName
+  openedServiceName.value = serviceName
+
   isDialogOpen.value = true
 
   dialogStyle.width = '80vw'
   dialogStyle.height = '95vh'
 
-  dialogPosition.value = ''
+  dialogPosition.value = 'center'
 }
 
 function openCreateVervConfigWidget() {
-  widgetForDialog.value = CreateVervConfigWidget
+  dialogWidgetName.value = 'newConfig'
   dialogHeader.value = 'New verv config'
   isDialogOpen.value = true
 
@@ -105,7 +110,7 @@ const buttons: MenuItem[] = [
 
 <template>
   <div class="Home">
-    <div v-if="servicesList.length > 0">
+    <div class="list" v-if="servicesList.length > 0">
       <div
           v-for="service in servicesList"
           :key="service.name.value"
@@ -118,16 +123,8 @@ const buttons: MenuItem[] = [
     </div>
     <div v-else>
       <p> No configs on this node</p>
-      <SpeedDial
-          :style="{ position: 'absolute',  bottom: '2%', right: '2%' }"
-          :tooltipOptions="{ event: 'hover', position: 'left' }"
-          :model="buttons"
-          direction="up"
-          :radius="100"
-      />
     </div>
   </div>
-
 
   <Dialog
       v-model:visible="isDialogOpen"
@@ -138,10 +135,23 @@ const buttons: MenuItem[] = [
       :style="dialogStyle"
       :position="dialogPosition"
   >
-    <component :is="widgetForDialog"/>
-    <!--    <DisplayConfigWidget-->
-    <!--        :service-name="currentlyOpenService"/>-->
+    <CreateVervConfigWidget
+        v-if="dialogWidgetName==='newConfig'"/>
+
+    <DisplayConfigWidget
+        v-else-if="dialogWidgetName==='displayConfig'"
+        :serviceName="openedServiceName"
+        />
+
   </Dialog>
+
+  <SpeedDial
+      :style="{ position: 'absolute', bottom: '2%', right: '2%' }"
+      :tooltipOptions="{ event: 'hover', position: 'left' }"
+      :model="buttons"
+      direction="up"
+      :radius="100"
+  />
 </template>
 
 <style scoped>
@@ -153,21 +163,31 @@ const buttons: MenuItem[] = [
   align-items: center;
 
   gap: 1em;
+  height: 100%;
+}
+
+.list {
+  width: 80vw;
+
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+  gap: 2em;
+
 }
 
 .listItem {
+  max-height: 6em;
   width: 100%;
-
-  height: 3em;
-  max-height: 48px;
-
+  overflow: hidden;
   border: var(--border-color) solid;
 
-  border-radius: 2vh;
+  border-radius: 16px;
 
-  padding: 0 1em 0 1em;
+  padding: 1em 2em 1em 2em;
 
   display: flex;
+  gap: 1em;
   justify-content: left;
   align-items: center;
 

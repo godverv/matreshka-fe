@@ -11,6 +11,7 @@ import InputGroup from "primevue/inputgroup";
 import {CreateConfig} from "@/api/api.ts";
 import {GrpcError} from "@/api/model.ts";
 import {ToastMessageOptions} from "primevue";
+import {router, RouteToConfigDisplay} from "@/routes/Routes.ts";
 
 const toastApi = useToast();
 
@@ -28,12 +29,14 @@ function createConfig() {
   CreateConfig(serviceName.value).then((_) => {
     toastApi.add({
       closable: true,
-      life: 10_000,
+      life: 5_000,
       severity: 'success',
       summary: `Service created. Check it out`,
     })
-  }).catch((err) => {
 
+    RouteToConfigDisplay(serviceName.value)
+
+  }).catch((err) => {
     const msg = {} as ToastMessageOptions
     msg.closable = true
     msg.life = 10_000
@@ -83,13 +86,11 @@ function createConfig() {
   display: flex;
   gap: 1em;
 
-  padding: 0;
+  padding: 1em 0 0 0;
 
   flex-direction: column;
 
   width: 100%;
   height: 100%;
 }
-
-
 </style>
