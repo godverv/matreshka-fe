@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "local-image": "docker buildx build --load --platform linux/arm64 -t matreshka_fe:local ."
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.10.7",
