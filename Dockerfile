@@ -1,11 +1,21 @@
-FROM node:19.8.1-alpine as build
-WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-COPY . /app
-RUN npm install && npm run build
+FROM node:22-alpine3.19 AS build
 
-FROM nginx:1.16.0-alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY deploy/nginx.conf /etc/nginx/conf.d
+WORKDIR /app
+
+ENV PATH=/app/node_modules/.bin:$PATH
+COPY . .
+RUN yarn install && yarn build
+
+# TODO TRY ANGIE
+FROM --platform=$BUILDPLATFORM docker.angie.software/angie:1.7.0-minimal
+
+ARG TARGETARCH
+ARG BUILDPLATFORM
+
+COPY --from=build /app/dist /usr/share/angie/html
+COPY deploy/angie.conf /etc/angie/http.d/matreshka.conf
+
+ENV VITE_MATRESHKA_BACKEND_URL=""
+
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["angie", "-g", "daemon off;"]
