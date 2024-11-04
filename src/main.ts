@@ -7,7 +7,7 @@ import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
 
-import {router} from "@/routes/Routes.ts";
+import {router} from "@/routes/routes.ts";
 import ToastService from 'primevue/toastservice';
 import 'primeicons/primeicons.css';
 

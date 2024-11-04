@@ -1,17 +1,18 @@
 import {ConfigValue} from "@/models/config/common.ts";
 
 export type Server = {
-    port: number
-    name: string // TODO
-    grpc: grpcHandler[]
-    fs: fsHandler[]
+    port: ConfigValue<number>
+    name: ConfigValue<string> // TODO
+    grpc: GrpcHandler[]
+    fs: FsHandler[]
 }
 
-export type grpcHandler = {
+export type GrpcHandler = {
+    path: ConfigValue<string>
     module: ConfigValue<string>
     gateway: ConfigValue<string>
 }
 
-export type fsHandler = {
+export type FsHandler = {
     dist: ConfigValue<string>
 }

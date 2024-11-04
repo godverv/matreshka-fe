@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {Pages, router} from "@/routes/Routes.ts";
+import {Pages, router} from "@/routes/routes.ts";
 import {ref} from "vue";
 
 import Button from 'primevue/button'

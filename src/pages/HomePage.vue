@@ -12,7 +12,7 @@ import {AppInfo} from "@/models/config/info/appInfo.ts";
 import DisplayConfigWidget from "@/widget/DisplayConfigWidget.vue";
 import CreateVervConfigWidget from "@/widget/CreateVervConfigWidget.vue";
 
-import {Pages, router} from "@/routes/Routes.ts";
+import {Pages, router} from "@/routes/routes.ts";
 
 const toastApi = useToast();
 

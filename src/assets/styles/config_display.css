@@ -22,11 +22,14 @@
 }
 
 .NodeHeader {
-    max-width: fit-content;
+    display: flex;
+    flex-direction: row;
 
-    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 
-    padding: 0.25em;
+    padding: 0.5em 0 0.25em 0;
 
     overflow: hidden;
 }
@@ -39,8 +42,9 @@
 }
 
 .Node > .Node {
-    padding: 0 0.5em 0 0.5em;
+    padding: 1em;
 }
+
 .Node > .NodeField {
     padding: 0 0.5em 0 0.5em;
 }

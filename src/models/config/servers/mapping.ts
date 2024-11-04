@@ -1,6 +1,6 @@
 import {AppConfig} from "@/models/config/appConfig.ts";
 import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
-import {fsHandler, grpcHandler, Server} from "@/models/config/servers/servers.ts";
+import {FsHandler, GrpcHandler, Server} from "@/models/config/servers/servers.ts";
 import {ConfigValue} from "@/models/config/common.ts";
 
 export function mapServer(cfg: AppConfig, root: Node) {
@@ -51,8 +51,8 @@ function extractServerInfo(trg: Server, node: Node, rootPrefix: string) {
     }
 }
 
-function extractGrpcHandler(nodes: Node[], rootPrefix: string): grpcHandler {
-    const gh = {} as grpcHandler
+function extractGrpcHandler(nodes: Node[], rootPrefix: string): GrpcHandler {
+    const gh = {} as GrpcHandler
     nodes.map((n) => {
         const part = n.name.substring(rootPrefix.length + 1)
         switch (part) {
@@ -74,8 +74,8 @@ function extractGrpcHandler(nodes: Node[], rootPrefix: string): grpcHandler {
     return gh
 }
 
-function extractFsHandler(nodes: Node[], rootPrefix: string): fsHandler {
-    const fsH = {} as fsHandler
+function extractFsHandler(nodes: Node[], rootPrefix: string): FsHandler {
+    const fsH = {} as FsHandler
     nodes.map((n) => {
         const part = n.name.substring(rootPrefix.length + 1)
         switch (part) {
