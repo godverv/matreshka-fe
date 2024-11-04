@@ -15,7 +15,6 @@ const original = defineModel<ConfigValue<string | number>>({
   required: true,
 })
 
-
 defineProps({
   fieldName: {
     type: String,
@@ -37,10 +36,6 @@ const changedColor = '#FF0000'
 const color = ref(defaultColor)
 
 const configChangesStore = useOpenedConfigChangesStore()
-
-if (original.value.isNew) {
-  changeValue()
-}
 
 function changeValue() {
   if (newValRef.value === original.value.value) {
@@ -67,7 +62,6 @@ function changeValueBack() {
 function isValueChanged() {
   return newValRef.value != original.value.value
 }
-
 </script>
 
 <template>

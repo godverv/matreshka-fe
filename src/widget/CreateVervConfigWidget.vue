@@ -11,7 +11,7 @@ import InputGroup from "primevue/inputgroup";
 import {CreateConfig} from "@/api/api.ts";
 
 import {ToastMessageOptions} from "primevue";
-import { RouteToConfigDisplay} from "@/routes/routes.ts";
+import { RouteToConfigDisplay} from "@/routes/Routes.ts";
 
 const toastApi = useToast();
 

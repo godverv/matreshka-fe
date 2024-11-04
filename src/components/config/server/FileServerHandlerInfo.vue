@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-import {FsHandler} from "@/models/config/servers/servers.ts";
+import {fsHandler} from "@/models/config/servers/servers.ts";
 import ConfigField from "@/components/base/ConfigField.vue";
 
-const fsInfo = defineModel<FsHandler>({required: true})
+const fsInfo = defineModel<fsHandler>({required: true})
 
 </script>
 

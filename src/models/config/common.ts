@@ -7,21 +7,18 @@ export type keyMap = {
 export type ConfigValue<T> = {
     label: string
     value: T
-    isNew: boolean
 }
 
 export function extractStringValue(n: Node) : ConfigValue<string> {
     return {
         label: n.name ?? "",
-        value: n.value ?? "",
-        isNew: false
+        value: n.value ?? ""
     }
 }
 export function extractNumberValue(n: Node) : ConfigValue<number> {
     return {
         label: n.name ?? "",
-        value: Number(n.value) ?? 0,
-        isNew: false,
+        value: Number(n.value) ?? 0
     }
 }
 
