@@ -9,11 +9,14 @@ import {mapNodeToConfig} from "@/api/model.ts";
 import {AppInfo} from "@/models/config/info/appInfo.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
 import {PatchConfigRequest} from "./grpc/matreshka-be_api.pb";
-import {changes} from "@/state/opened_config.ts";
+import {changes} from "@/store/opened_config.ts";
+import {getBackendUrl} from "@/store/settings.ts";
 
-const backendApiURL = import.meta.env.VITE_MATRESHKA_BACKEND_URL
+const prefix = {pathPrefix: getBackendUrl()};
 
-const prefix = {pathPrefix: backendApiURL}
+export function setBackendUrl (url: string) {
+    prefix.pathPrefix = url
+}
 
 export async function ListServices(req: ListConfigsRequest): Promise<AppInfo[]> {
     return MatreshkaBeAPI

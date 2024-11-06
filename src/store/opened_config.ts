@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 
-export const useOpenedConfigChangesStore = defineStore('openedConfig', {
+export const useActiveConfigStore = defineStore('openedConfig', {
     state: () => {
         return {
             changesMap: new Map<string, changeWithRollback>(),

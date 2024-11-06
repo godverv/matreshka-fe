@@ -2,7 +2,7 @@
 
 import {ref} from "vue";
 import {ConfigValue} from "@/models/config/common.ts";
-import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
+import {useActiveConfigStore} from "@/store/opened_config.ts";
 
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
@@ -35,9 +35,9 @@ const defaultColor = '#12c4ca'
 const changedColor = '#FF0000'
 const color = ref(defaultColor)
 
-const configChangesStore = useOpenedConfigChangesStore()
+const configChangesStore = useActiveConfigStore()
 
-function changeValue() {
+function valueChanged() {
   if (newValRef.value === original.value.value) {
     color.value = defaultColor
     configChangesStore.deleteValue(original.value.label)
@@ -73,7 +73,7 @@ function isValueChanged() {
               :disabled="isDisabled"
               :invalid="newValRef != original.value"
               v-model="newValRef as Nullable<string>"
-              @input="changeValue"
+              @input="valueChanged"
           />
           <label>{{ fieldName }}</label>
         </FloatLabel>
@@ -94,9 +94,9 @@ function isValueChanged() {
         />
         <FloatLabel variant="on">
           <InputText
+              :disabled="true"
               v-model="original.value as Nullable<string>"
               aria-disabled="true"
-              @input="changeValue"
           />
           <label>Old value</label>
         </FloatLabel>

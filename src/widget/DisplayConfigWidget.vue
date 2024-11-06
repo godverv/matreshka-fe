@@ -9,7 +9,7 @@ import Button from 'primevue/button';
 
 import {GetConfigNodes, PatchConfig} from "@/api/api.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
-import {useOpenedConfigChangesStore} from "@/state/opened_config.ts";
+import {useActiveConfigStore} from "@/store/opened_config.ts";
 import InputGroup from "primevue/inputgroup";
 
 const props = defineProps({
@@ -19,7 +19,7 @@ const props = defineProps({
   },
 })
 
-const configChangesStore = useOpenedConfigChangesStore()
+const configChangesStore = useActiveConfigStore()
 
 const configData = ref<AppConfig>({} as AppConfig);
 
