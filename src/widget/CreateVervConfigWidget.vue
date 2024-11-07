@@ -12,8 +12,7 @@ import {CreateConfig} from "@/api/api.ts";
 
 import {ToastMessageOptions} from "primevue";
 import { RouteToConfigDisplay} from "@/routes/Routes.ts";
-
-const toastApi = useToast();
+import {handleGrpcError} from "@/api/error_codes.ts";
 
 const serviceName = ref<string>('');
 
@@ -36,20 +35,7 @@ function createConfig() {
 
     RouteToConfigDisplay(serviceName.value)
 
-  }).catch((err) => {
-    const msg = {} as ToastMessageOptions
-    msg.closable = true
-    msg.life = 10_000
-    msg.summary = err.message
-
-    if ([3, 6].includes(err.code)) {
-      msg.severity = 'warn'
-    } else {
-      msg.severity = 'error'
-    }
-
-    toastApi.add(msg)
-  })
+  }).catch(handleGrpcError(useToast()))
 }
 </script>
 

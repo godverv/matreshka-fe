@@ -23,6 +23,10 @@ export function extractNumberValue(n: Node) : ConfigValue<number> {
 }
 
 export function extractResourceType(node: Node, root: Node): string | undefined {
+    if (!node.name || !root.name) {
+        return
+    }
+
     let name = node.name.slice(root.name.length+1)
 
     const resourceNameEndIdx = name.indexOf("_")

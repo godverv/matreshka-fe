@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
 
-import {useToast} from "primevue/usetoast";
 import Dialog from "primevue/dialog";
 import SpeedDial from 'primevue/speeddial';
 import {MenuItem} from "primevue/menuitem";
@@ -13,8 +12,9 @@ import DisplayConfigWidget from "@/widget/DisplayConfigWidget.vue";
 import CreateVervConfigWidget from "@/widget/CreateVervConfigWidget.vue";
 
 import {Pages, router} from "@/routes/Routes.ts";
+import {handleGrpcError} from "@/api/error_codes.ts";
+import {useToast} from "primevue/usetoast";
 
-const toastApi = useToast();
 
 // Dialog
 const isDialogOpen = ref<boolean>(false);
@@ -92,15 +92,7 @@ function fetchServices() {
       .then((resp) => {
         servicesList.value = resp
       })
-      .catch((err) => {
-        toastApi.add({
-          severity: 'error',
-          summary: `Unable to load list of service: ${err.message}.`,
-          closable: false,
-          life: 5000,
-        })
-        return
-      })
+      .catch(handleGrpcError(useToast()))
 }
 
 fetchServices()

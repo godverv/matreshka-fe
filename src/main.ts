@@ -2,8 +2,6 @@ import {createApp} from 'vue'
 import './style.css'
 import App from "./App.vue";
 
-import { createPinia } from 'pinia'
-
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
 
@@ -11,9 +9,11 @@ import {router} from "@/routes/Routes.ts";
 import ToastService from 'primevue/toastservice';
 import 'primeicons/primeicons.css';
 
+import {createPinia} from "pinia";
+
 createApp(App)
-    .use(router)
     .use(createPinia())
+    .use(router)
     .use(PrimeVue, {
         theme: {
             preset: Aura,

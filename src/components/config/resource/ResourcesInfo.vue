@@ -60,6 +60,7 @@ function setSelected(i: number) {
     </Transition>
 
   </div>
+  <div v-else>No resources defined</div>
 </template>
 
 <style scoped>
