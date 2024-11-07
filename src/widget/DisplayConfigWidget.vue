@@ -11,6 +11,8 @@ import {GetConfigNodes, PatchConfig} from "@/api/api.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
 import {useActiveConfigStore} from "@/store/opened_config.ts";
 import InputGroup from "primevue/inputgroup";
+import { handleGrpcError } from "@/api/error_codes.ts";
+import {useToast} from "primevue/usetoast";
 
 const props = defineProps({
   serviceName: {
@@ -34,6 +36,7 @@ function rollbackAll() {
 function fetchConfig() {
   GetConfigNodes(props.serviceName)
       .then(setNodes)
+      .catch(handleGrpcError(useToast()))
 }
 
 function save() {
@@ -59,25 +62,25 @@ fetchConfig()
     </div>
 
     <Transition name="BottomControls">
-        <InputGroup
-            v-show="configChangesStore.length > 0"
-            :style="{
+      <InputGroup
+          v-show="configChangesStore.length > 0"
+          :style="{
               display: 'flex',
               justifyContent: 'center'
             }"
-        >
-          <Button
-              @click="save"
-              label="Save"
-              icon="pi pi-check" iconPos="right"
-              severity="danger"
-          />
-          <Button
-              @click="rollbackAll"
-              label="Rollback"
-              icon="pi pi-refresh" iconPos="right"
-          />
-        </InputGroup>
+      >
+        <Button
+            @click="save"
+            label="Save"
+            icon="pi pi-check" iconPos="right"
+            severity="danger"
+        />
+        <Button
+            @click="rollbackAll"
+            label="Rollback"
+            icon="pi pi-refresh" iconPos="right"
+        />
+      </InputGroup>
     </Transition>
   </div>
 </template>

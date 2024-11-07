@@ -26,11 +26,11 @@ export async function ListServices(req: ListConfigsRequest): Promise<AppInfo[]> 
                     ?.map((v) => {
                         return {
                             name: {
-                                label: "",
+                                label: "Service name",
                                 value: v.name,
                             },
                             version: {
-                                label: "",
+                                label: "Version",
                                 value: v.version,
                             },
                         } as AppInfo
