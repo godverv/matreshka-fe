@@ -10,11 +10,12 @@ import InputGroup from "primevue/inputgroup";
 
 import {CreateConfig} from "@/api/api.ts";
 
-import {ToastMessageOptions} from "primevue";
 import { RouteToConfigDisplay} from "@/routes/Routes.ts";
 import {handleGrpcError} from "@/api/error_codes.ts";
 
 const serviceName = ref<string>('');
+
+const toastApi = useToast()
 
 function isNameValid(): boolean {
   return true

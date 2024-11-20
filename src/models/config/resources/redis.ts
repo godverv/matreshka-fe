@@ -1,6 +1,6 @@
 import {ResourceType} from "@/models/config/resources/resource_types.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
-import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@/api/api/grpc/matreshka-be_api.pb.ts";
 import {ResourceRedis} from "@/models/config/resources/resource.ts";
 import {extractNumberValue, extractStringValue} from "@/models/config/common.ts";
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+
 import {AppInfo} from "@/models/config/info/appInfo.ts";
 import ConfigField from "@/components/base/ConfigField.vue";
 
 const info = defineModel<AppInfo>()
+
 </script>
 
 <template>
@@ -11,7 +13,6 @@ const info = defineModel<AppInfo>()
   <div v-else class="Node">
         <ConfigField
             v-model="info.name"
-            :isDisabled="true"
             fieldName="Service name"/>
 
         <ConfigField

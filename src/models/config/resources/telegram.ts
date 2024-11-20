@@ -1,5 +1,5 @@
 import {AppConfig} from "@/models/config/appConfig.ts";
-import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@/api/api/grpc/matreshka-be_api.pb.ts";
 import {ResourceTelegram} from "@/models/config/resources/resource.ts";
 import {extractStringValue} from "@/models/config/common.ts";
 import {ResourceType} from "@/models/config/resources/resource_types.ts";

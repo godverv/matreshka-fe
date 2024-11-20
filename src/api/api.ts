@@ -3,12 +3,12 @@ import {
     ListConfigsRequest,
     GetConfigNodeRequest,
     Node, CreateConfigRequest,
-} from "./grpc/matreshka-be_api.pb";
+} from "./api/grpc/matreshka-be_api.pb";
 
 import {mapNodeToConfig} from "@/api/model.ts";
 import {AppInfo} from "@/models/config/info/appInfo.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
-import {PatchConfigRequest} from "./grpc/matreshka-be_api.pb";
+import {PatchConfigRequest} from "./api/grpc/matreshka-be_api.pb";
 import {changes} from "@/store/opened_config.ts";
 import {getBackendUrl} from "@/store/settings.ts";
 

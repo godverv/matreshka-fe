@@ -5,7 +5,7 @@
  * This file is a generated Typescript file for GRPC Gateway, DO NOT MODIFY
  */
 
-import * as fm from "../fetch.pb";
+import * as fm from "../../fetch.pb";
 
 
 export type AppInfo = {
@@ -82,6 +82,17 @@ export type CreateConfigResponse = {
 
 export type CreateConfig = Record<string, never>;
 
+export type RenameConfigRequest = {
+  serviceName?: string;
+  newName?: string;
+};
+
+export type RenameConfigResponse = {
+  newName?: string;
+};
+
+export type RenameConfig = Record<string, never>;
+
 export class MatreshkaBeAPI {
   static ApiVersion(this:void, req: ApiVersionRequest, initReq?: fm.InitReq): Promise<ApiVersionResponse> {
     return fm.fetchRequest<ApiVersionResponse>(`/api/version?${fm.renderURLSearchParams(req, [])}`, {...initReq, method: "GET"});
@@ -100,5 +111,8 @@ export class MatreshkaBeAPI {
   }
   static PatchConfig(this:void, req: PatchConfigRequest, initReq?: fm.InitReq): Promise<PatchConfigResponse> {
     return fm.fetchRequest<PatchConfigResponse>(`/api/config/${req.serviceName}/patch`, {...initReq, method: "POST", body: JSON.stringify(req, fm.replacer)});
+  }
+  static RenameConfig(this:void, req: RenameConfigRequest, initReq?: fm.InitReq): Promise<RenameConfigResponse> {
+    return fm.fetchRequest<RenameConfigResponse>(`/api/config/${req.serviceName}/rename/${req.newName}`, {...initReq, method: "POST"});
   }
 }

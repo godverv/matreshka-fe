@@ -1,5 +1,5 @@
 import {AppConfig} from "@/models/config/appConfig.ts";
-import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@/api/api/grpc/matreshka-be_api.pb.ts";
 import {fsHandler, grpcHandler, Server} from "@/models/config/servers/servers.ts";
 import {ConfigValue} from "@/models/config/common.ts";
 

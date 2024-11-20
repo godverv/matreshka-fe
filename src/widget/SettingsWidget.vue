@@ -15,7 +15,6 @@ const settingsStore = useSettingsStore()
 const apiURL = ref<string>(settingsStore.getApiURL)
 
 function changeApiUrl() {
-  console.log(apiURL.value)
   settingsStore.setApiURL(apiURL.value)
 }
 
