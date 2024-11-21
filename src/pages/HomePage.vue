@@ -13,8 +13,8 @@ import CreateVervConfigWidget from "@/widget/CreateVervConfigWidget.vue";
 
 import {Pages, router} from "@/routes/Routes.ts";
 import {handleGrpcError} from "@/api/error_codes.ts";
-import {useToast} from "primevue/usetoast";
 
+import {useToast} from "primevue/usetoast";
 
 // Dialog
 const isDialogOpen = ref<boolean>(false);
