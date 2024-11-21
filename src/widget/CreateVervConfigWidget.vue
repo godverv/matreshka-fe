@@ -8,10 +8,10 @@ import InputText from "primevue/inputtext";
 import FloatLabel from "primevue/floatlabel";
 import InputGroup from "primevue/inputgroup";
 
-import {CreateConfig} from "@/api/api.ts";
+import {RouteToConfigDisplay} from "@/app/routes/routes.ts";
 
-import {RouteToConfigDisplay} from "@/routes/Routes.ts";
-import {handleGrpcError} from "@/api/error_codes.ts";
+import {CreateConfig} from "@/processes/api/api.ts";
+import {handleGrpcError} from "@/processes/api/error_codes.ts";
 
 const serviceName = ref<string>('');
 

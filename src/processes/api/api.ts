@@ -5,12 +5,12 @@ import {
     Node, CreateConfigRequest,
 } from "./api/grpc/matreshka-be_api.pb";
 
-import {mapNodeToConfig} from "@/api/model.ts";
+import {mapNodeToConfig} from "@/processes/api/model_mapping.ts";
 import {AppInfo, ServicesList} from "@/models/config/info/appInfo.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
 import {PatchConfigRequest} from "./api/grpc/matreshka-be_api.pb";
-import {changes} from "@/store/opened_config.ts";
-import {getBackendUrl} from "@/store/settings.ts";
+import {changes} from "@/app/store/opened_config.ts";
+import {getBackendUrl} from "@/app/store/settings.ts";
 
 const prefix = {pathPrefix: getBackendUrl()};
 

@@ -5,14 +5,16 @@ import Dialog from "primevue/dialog";
 import SpeedDial from 'primevue/speeddial';
 import {MenuItem} from "primevue/menuitem";
 
-import {ListServices} from "@/api/api.ts";
 import {AppInfo} from "@/models/config/info/appInfo.ts";
+
+import {ListServices} from "@/processes/api/api.ts";
+import {handleGrpcError} from "@/processes/api/error_codes.ts";
 
 import DisplayConfigWidget from "@/widget/DisplayConfigWidget.vue";
 import CreateVervConfigWidget from "@/widget/CreateVervConfigWidget.vue";
 
-import {Pages, router} from "@/routes/Routes.ts";
-import {handleGrpcError} from "@/api/error_codes.ts";
+import {Pages, router} from "@/app/routes/routes.ts";
+
 
 import {useToast} from "primevue/usetoast";
 import ProgressSpinner from 'primevue/progressspinner';
@@ -24,7 +26,8 @@ import Select from 'primevue/select';
 import FloatLabel from 'primevue/floatlabel';
 import Paginator from 'primevue/paginator';
 
-import {ListConfigsRequest, Paging, Sort, SortType} from "@/api/api/grpc/matreshka-be_api.pb.ts";
+import {ListConfigsRequest, Paging, Sort, SortType} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
+import ServicesListWidget from "@/widget/ServicesListWidget.vue";
 // Dialog
 const isDialogOpen = ref<boolean>(false);
 
@@ -177,16 +180,10 @@ const buttons: MenuItem[] = [
           </FloatLabel>
         </InputGroup>
       </div>
-      <div class="list">
-        <div
-            v-for="service in servicesList"
-            :key="service.name.value"
-            class="listItem"
-            @click="(event: MouseEvent) => { serviceClicked(event, service.name.value) }"
-        >
-          {{ service.name.value }}
-        </div>
-      </div>
+      <ServicesListWidget
+          :services-list="servicesList"
+          @click-service="serviceClicked"
+      />
 
       <div class="BottomControls" v-if="pagingTotalRecords > (paging.limit || 10)">
         <Paginator
@@ -246,9 +243,8 @@ const buttons: MenuItem[] = [
   height: 100%;
 }
 
-.list {
+.ListServices {
   width: 80vw;
-
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
@@ -256,7 +252,7 @@ const buttons: MenuItem[] = [
 
 }
 
-.listItem {
+.ListItem {
   max-height: 6em;
   width: 100%;
   overflow: hidden;

@@ -2,7 +2,7 @@
 
 import {ref} from "vue";
 
-import {useSettingsStore} from "@/store/settings.ts";
+import {useSettingsStore} from "@/app/store/settings.ts";
 
 import {Nullable} from "@primevue/core";
 

@@ -2,7 +2,7 @@
 
 import {ref} from "vue";
 import {ConfigValue} from "@/models/config/common.ts";
-import {useActiveConfigStore} from "@/store/opened_config.ts";
+import {useActiveConfigStore} from "@/app/store/opened_config.ts";
 
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
