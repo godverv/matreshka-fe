@@ -6,7 +6,7 @@ import {
 } from "./api/grpc/matreshka-be_api.pb";
 
 import {mapNodeToConfig} from "@/api/model.ts";
-import {AppInfo} from "@/models/config/info/appInfo.ts";
+import {AppInfo, ServicesList} from "@/models/config/info/appInfo.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
 import {PatchConfigRequest} from "./api/grpc/matreshka-be_api.pb";
 import {changes} from "@/store/opened_config.ts";
@@ -14,15 +14,16 @@ import {getBackendUrl} from "@/store/settings.ts";
 
 const prefix = {pathPrefix: getBackendUrl()};
 
-export function setBackendUrl (url: string) {
+export function setBackendUrl(url: string) {
     prefix.pathPrefix = url
 }
 
-export async function ListServices(req: ListConfigsRequest): Promise<AppInfo[]> {
+export async function ListServices(req: ListConfigsRequest): Promise<ServicesList> {
     return MatreshkaBeAPI
         .ListConfigs(req, prefix)
         .then((r) => {
-            return r.services
+            const out: ServicesList = {} as ServicesList;
+            out.servicesInfo = r.services
                     ?.map((v) => {
                         return {
                             name: {
@@ -36,6 +37,8 @@ export async function ListServices(req: ListConfigsRequest): Promise<AppInfo[]> 
                         } as AppInfo
                     }) ??
                 []
+            out.total = r.totalRecords || out.servicesInfo.length
+            return out
         })
 }
 

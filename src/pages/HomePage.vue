@@ -16,7 +16,15 @@ import {handleGrpcError} from "@/api/error_codes.ts";
 
 import {useToast} from "primevue/usetoast";
 import ProgressSpinner from 'primevue/progressspinner';
+import InputGroup from 'primevue/inputgroup';
+import InputText from 'primevue/inputtext';
+import InputGroupAddon from 'primevue/inputgroupaddon';
+import Button from 'primevue/button';
+import Select from 'primevue/select';
+import FloatLabel from 'primevue/floatlabel';
+import Paginator from 'primevue/paginator';
 
+import {ListConfigsRequest, Paging, Sort, SortType} from "@/api/api/grpc/matreshka-be_api.pb.ts";
 // Dialog
 const isDialogOpen = ref<boolean>(false);
 
@@ -41,12 +49,23 @@ const dialogPosition = ref<"center" | "right">('center')
 const servicesList = ref<AppInfo[] | undefined>(undefined)
 const openedServiceName = ref<string>('')
 
-const listReq = {
-  listRequest: {
-    limit: 10,
-    offset: 0,
-  }
-}
+const paging = ref<Paging>({
+  limit: 1,
+  offset: 0,
+} as Paging);
+
+const selectedPage = ref(0);
+
+const sorting = ref<Sort>({
+  type: SortType.default,
+  desc: false,
+} as Sort)
+
+const sortOptions = ref([
+  {name: 'default', code: SortType.default},
+  {name: 'name', code: SortType.by_name},
+  {name: 'updated at', code: SortType.by_updated_at},
+])
 
 function openDisplayConfigDialog(serviceName: string) {
   dialogWidgetName.value = 'displayConfig'
@@ -63,15 +82,14 @@ function openDisplayConfigDialog(serviceName: string) {
 
 function serviceClicked(event: MouseEvent, serviceName: string) {
   if (event.ctrlKey || event.metaKey) {
-    window
-        .open(
-            router.resolve(
-                {
-                  name: Pages.DisplayConfig,
-                  params: {name: serviceName},
-                },
-            )
-                .href, '_blank')
+    window.open(
+        router.resolve(
+            {
+              name: Pages.DisplayConfig,
+              params: {name: serviceName},
+            },
+        )
+            .href, '_blank')
   } else {
     openDisplayConfigDialog(serviceName ?? '')
   }
@@ -88,15 +106,22 @@ function openCreateVervConfigWidget() {
   dialogPosition.value = 'right'
 }
 
-async function fetchServices() {
-  ListServices(listReq)
+const pagingTotalRecords = ref<number>(0)
+
+async function searchServices() {
+  const req: ListConfigsRequest = {
+    paging: paging.value,
+  } as ListConfigsRequest
+
+  ListServices(req)
       .then((resp) => {
-        servicesList.value = resp
+        servicesList.value = resp.servicesInfo;
+        pagingTotalRecords.value = resp.total;
       })
       .catch(handleGrpcError(useToast()))
 }
 
-onMounted(fetchServices)
+onMounted(searchServices)
 
 
 const buttons: MenuItem[] = [
@@ -122,14 +147,39 @@ const buttons: MenuItem[] = [
 <template>
   <!--  List of services -->
   <div class="Home">
-    <div class="list" v-if="servicesList && servicesList.length > 0">
-      <div
-          v-for="service in servicesList"
-          :key="service.name.value"
-          class="listItem"
-          @click="(event: MouseEvent) => { serviceClicked(event, service.name.value) }"
-      >
-        {{ service.name.value }}
+    <div class="ListWrapper" v-if="servicesList && servicesList.length > 0">
+      <div class="TopControls">
+        <InputGroup>
+          <InputText placeholder="Keyword"/>
+          <InputGroupAddon>
+            <Button icon="pi pi-search" severity="secondary" variant="text" @click="searchServices"/>
+          </InputGroupAddon>
+        </InputGroup>
+
+        <InputGroup>
+          <FloatLabel variant="in">
+            <Select
+                inputId="select_sort_type"
+                v-model="sorting.type"
+                :options="sortOptions"
+                optionLabel="name"
+            />
+            <label for="select_sort_type">Sort by</label>
+          </FloatLabel>
+        </InputGroup>
+      </div>
+      <div class="list">
+        <div
+            v-for="service in servicesList"
+            :key="service.name.value"
+            class="listItem"
+            @click="(event: MouseEvent) => { serviceClicked(event, service.name.value) }"
+        >
+          {{ service.name.value }}
+        </div>
+      </div>
+      <div class="BottomControls" v-if="pagingTotalRecords > (paging.limit || 10)">
+        <Paginator v-model:first="selectedPage" :rows="paging.limit" :totalRecords="pagingTotalRecords"/>
       </div>
     </div>
     <div v-else-if="!servicesList">
@@ -208,5 +258,17 @@ const buttons: MenuItem[] = [
   align-items: center;
 
   cursor: pointer;
+}
+
+.ListWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.TopControls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+  gap: 1em;
 }
 </style>

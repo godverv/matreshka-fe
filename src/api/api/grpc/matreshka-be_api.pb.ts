@@ -8,12 +8,18 @@
 import * as fm from "../../fetch.pb";
 
 
+export enum SortType {
+  default = "default",
+  by_name = "by_name",
+  by_updated_at = "by_updated_at",
+}
+
 export type AppInfo = {
   name?: string;
   version?: string;
 };
 
-export type ListRequest = {
+export type Paging = {
   limit?: number;
   offset?: number;
 };
@@ -46,12 +52,14 @@ export type PatchConfigResponse = Record<string, never>;
 export type PatchConfig = Record<string, never>;
 
 export type ListConfigsRequest = {
-  listRequest?: ListRequest;
+  paging?: Paging;
   searchPattern?: string;
+  sort?: Sort;
 };
 
 export type ListConfigsResponse = {
   services?: AppInfo[];
+  totalRecords?: number;
 };
 
 export type ListConfigs = Record<string, never>;
@@ -92,6 +100,11 @@ export type RenameConfigResponse = {
 };
 
 export type RenameConfig = Record<string, never>;
+
+export type Sort = {
+  type?: SortType;
+  desc?: boolean;
+};
 
 export class MatreshkaBeAPI {
   static ApiVersion(this:void, req: ApiVersionRequest, initReq?: fm.InitReq): Promise<ApiVersionResponse> {
