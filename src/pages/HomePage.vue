@@ -50,11 +50,9 @@ const servicesList = ref<AppInfo[] | undefined>(undefined)
 const openedServiceName = ref<string>('')
 
 const paging = ref<Paging>({
-  limit: 1,
+  limit: 6,
   offset: 0,
 } as Paging);
-
-const selectedPage = ref(0);
 
 const sorting = ref<Sort>({
   type: SortType.default,
@@ -108,7 +106,7 @@ function openCreateVervConfigWidget() {
 
 const pagingTotalRecords = ref<number>(0)
 
-async function searchServices() {
+function searchServices() {
   const req: ListConfigsRequest = {
     paging: paging.value,
   } as ListConfigsRequest
@@ -122,6 +120,11 @@ async function searchServices() {
 }
 
 onMounted(searchServices)
+
+function openPage(page: number) {
+  paging.value.offset = (paging.value.limit || 10) * page
+  searchServices()
+}
 
 
 const buttons: MenuItem[] = [
@@ -178,8 +181,13 @@ const buttons: MenuItem[] = [
           {{ service.name.value }}
         </div>
       </div>
+
       <div class="BottomControls" v-if="pagingTotalRecords > (paging.limit || 10)">
-        <Paginator v-model:first="selectedPage" :rows="paging.limit" :totalRecords="pagingTotalRecords"/>
+        <Paginator
+            :rows="paging.limit"
+            :totalRecords="pagingTotalRecords"
+            @page="event => openPage(event.page)"
+        />
       </div>
     </div>
     <div v-else-if="!servicesList">
