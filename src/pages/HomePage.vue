@@ -60,8 +60,8 @@ const sorting = ref<Sort>({
 } as Sort)
 
 const sortOptions = ref([
-  {name: 'default', code: SortType.default},
-  {name: 'name', code: SortType.by_name},
+  {name:    'default', code: SortType.default},
+  {name:       'name', code: SortType.by_name},
   {name: 'updated at', code: SortType.by_updated_at},
 ])
 
@@ -155,7 +155,12 @@ const buttons: MenuItem[] = [
         <InputGroup>
           <InputText placeholder="Keyword"/>
           <InputGroupAddon>
-            <Button icon="pi pi-search" severity="secondary" variant="text" @click="searchServices"/>
+            <Button
+                icon="pi pi-search"
+                severity="secondary"
+                variant="text"
+                @click="searchServices"
+            />
           </InputGroupAddon>
         </InputGroup>
 
@@ -166,6 +171,7 @@ const buttons: MenuItem[] = [
                 v-model="sorting.type"
                 :options="sortOptions"
                 optionLabel="name"
+                optionValue="code"
             />
             <label for="select_sort_type">Sort by</label>
           </FloatLabel>
