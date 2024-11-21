@@ -18,16 +18,11 @@ import {Pages, router} from "@/app/routes/routes.ts";
 
 import {useToast} from "primevue/usetoast";
 import ProgressSpinner from 'primevue/progressspinner';
-import InputGroup from 'primevue/inputgroup';
-import InputText from 'primevue/inputtext';
-import InputGroupAddon from 'primevue/inputgroupaddon';
-import Button from 'primevue/button';
-import Select from 'primevue/select';
-import FloatLabel from 'primevue/floatlabel';
 import Paginator from 'primevue/paginator';
 
-import {ListConfigsRequest, Paging, Sort, SortType} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
-import ServicesListWidget from "@/widget/ServicesListWidget.vue";
+import {ListConfigsRequest, Paging, Sort} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
+import ServicesListWidget from "@/widget/ServiceList/ServicesListWidget.vue";
+import ServiceListTopControlsWidget from "@/widget/ServiceList/ServiceListTopControlsWidget.vue";
 // Dialog
 const isDialogOpen = ref<boolean>(false);
 
@@ -57,17 +52,6 @@ const paging = ref<Paging>({
   offset: 0,
 } as Paging);
 
-const sorting = ref<Sort>({
-  type: SortType.default,
-  desc: false,
-} as Sort)
-
-const sortOptions = ref([
-  {name:    'default', code: SortType.default},
-  {name:       'name', code: SortType.by_name},
-  {name: 'updated at', code: SortType.by_updated_at},
-])
-
 function openDisplayConfigDialog(serviceName: string) {
   dialogWidgetName.value = 'displayConfig'
   dialogHeader.value = serviceName
@@ -82,18 +66,19 @@ function openDisplayConfigDialog(serviceName: string) {
 }
 
 function serviceClicked(event: MouseEvent, serviceName: string) {
-  if (event.ctrlKey || event.metaKey) {
-    window.open(
-        router.resolve(
-            {
-              name: Pages.DisplayConfig,
-              params: {name: serviceName},
-            },
-        )
-            .href, '_blank')
-  } else {
+  if (!(event.ctrlKey || event.metaKey)) {
     openDisplayConfigDialog(serviceName ?? '')
+    return
   }
+
+  window.open(
+      router.resolve(
+          {
+            name: Pages.DisplayConfig,
+            params: {name: serviceName},
+          },
+      )
+          .href, '_blank')
 }
 
 function openCreateVervConfigWidget() {
@@ -109,7 +94,7 @@ function openCreateVervConfigWidget() {
 
 const pagingTotalRecords = ref<number>(0)
 
-function searchServices() {
+function updateList() {
   const req: ListConfigsRequest = {
     paging: paging.value,
   } as ListConfigsRequest
@@ -122,11 +107,15 @@ function searchServices() {
       .catch(handleGrpcError(useToast()))
 }
 
-onMounted(searchServices)
+onMounted(updateList)
 
 function openPage(page: number) {
   paging.value.offset = (paging.value.limit || 10) * page
-  searchServices()
+  updateList()
+}
+
+function updateSearch(pattern: string, sort: Sort) {
+
 }
 
 
@@ -155,30 +144,9 @@ const buttons: MenuItem[] = [
   <div class="Home">
     <div class="ListWrapper" v-if="servicesList && servicesList.length > 0">
       <div class="TopControls">
-        <InputGroup>
-          <InputText placeholder="Keyword"/>
-          <InputGroupAddon>
-            <Button
-                icon="pi pi-search"
-                severity="secondary"
-                variant="text"
-                @click="searchServices"
-            />
-          </InputGroupAddon>
-        </InputGroup>
-
-        <InputGroup>
-          <FloatLabel variant="in">
-            <Select
-                inputId="select_sort_type"
-                v-model="sorting.type"
-                :options="sortOptions"
-                optionLabel="name"
-                optionValue="code"
-            />
-            <label for="select_sort_type">Sort by</label>
-          </FloatLabel>
-        </InputGroup>
+        <ServiceListTopControlsWidget
+          @search="updateSearch"
+        />
       </div>
       <ServicesListWidget
           :services-list="servicesList"
