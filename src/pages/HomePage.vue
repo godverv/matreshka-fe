@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
 import Dialog from "primevue/dialog";
 import SpeedDial from 'primevue/speeddial';
@@ -15,6 +15,7 @@ import {Pages, router} from "@/routes/Routes.ts";
 import {handleGrpcError} from "@/api/error_codes.ts";
 
 import {useToast} from "primevue/usetoast";
+import ProgressSpinner from 'primevue/progressspinner';
 
 // Dialog
 const isDialogOpen = ref<boolean>(false);
@@ -37,7 +38,7 @@ const dialogPt = {
 const dialogPosition = ref<"center" | "right">('center')
 
 // Service list
-const servicesList = ref<AppInfo[]>([])
+const servicesList = ref<AppInfo[] | undefined>(undefined)
 const openedServiceName = ref<string>('')
 
 const listReq = {
@@ -87,7 +88,7 @@ function openCreateVervConfigWidget() {
   dialogPosition.value = 'right'
 }
 
-function fetchServices() {
+async function fetchServices() {
   ListServices(listReq)
       .then((resp) => {
         servicesList.value = resp
@@ -95,7 +96,8 @@ function fetchServices() {
       .catch(handleGrpcError(useToast()))
 }
 
-fetchServices()
+onMounted(fetchServices)
+
 
 const buttons: MenuItem[] = [
   {
@@ -120,7 +122,7 @@ const buttons: MenuItem[] = [
 <template>
   <!--  List of services -->
   <div class="Home">
-    <div class="list" v-if="servicesList.length > 0">
+    <div class="list" v-if="servicesList && servicesList.length > 0">
       <div
           v-for="service in servicesList"
           :key="service.name.value"
@@ -130,8 +132,11 @@ const buttons: MenuItem[] = [
         {{ service.name.value }}
       </div>
     </div>
+    <div v-else-if="!servicesList">
+      <ProgressSpinner/>
+    </div>
     <div v-else>
-      <p> No configs on this node</p>
+      <p>No configs on this node</p>
     </div>
   </div>
 
