@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onMounted, ref, Component, shallowRef} from "vue";
 
-import Dialog from "primevue/dialog";
 import SpeedDial from 'primevue/speeddial';
 import {MenuItem} from "primevue/menuitem";
 
@@ -14,20 +13,25 @@ import DisplayConfigWidget from "@/widget/DisplayConfigWidget.vue";
 import CreateVervConfigWidget from "@/widget/CreateVervConfigWidget.vue";
 
 import {Pages, router} from "@/app/routes/routes.ts";
-
+import Dialog from "@/components/base/dialog/Dialog.vue"
 
 import {useToast} from "primevue/usetoast";
 import ProgressSpinner from 'primevue/progressspinner';
 import Paginator from 'primevue/paginator';
 
-import {ListConfigsRequest, Paging, Sort} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
 import ServicesListWidget from "@/widget/ServiceList/ServicesListWidget.vue";
 import ServiceListTopControlsWidget from "@/widget/ServiceList/ServiceListTopControlsWidget.vue";
+import {ListServicesReq, Paging, Sort} from "@/models/search/search.ts";
 // Dialog
 const isDialogOpen = ref<boolean>(false);
 
 const dialogHeader = ref<string>('');
-const dialogWidgetName = ref<'displayConfig' | 'newConfig'>('displayConfig');
+const child = shallowRef<Component>(DisplayConfigWidget);
+const childProps = ref<{
+  serviceName: string
+}>({
+  serviceName: '',
+});
 
 const dialogStyle = {
   width: '80vw',
@@ -41,11 +45,12 @@ const dialogPt = {
   }
 }
 
-const dialogPosition = ref<"center" | "right">('center')
+const dialogPosition = ref<'center' | 'right'>('center')
 
 // Service list
 const servicesList = ref<AppInfo[] | undefined>(undefined)
-const openedServiceName = ref<string>('')
+
+const listRequest = ref<ListServicesReq>({} as ListServicesReq)
 
 const paging = ref<Paging>({
   limit: 6,
@@ -53,10 +58,9 @@ const paging = ref<Paging>({
 } as Paging);
 
 function openDisplayConfigDialog(serviceName: string) {
-  dialogWidgetName.value = 'displayConfig'
+  child.value = DisplayConfigWidget
   dialogHeader.value = serviceName
-  openedServiceName.value = serviceName
-
+  childProps.value.serviceName = serviceName
   isDialogOpen.value = true
 
   dialogStyle.width = '80vw'
@@ -65,7 +69,7 @@ function openDisplayConfigDialog(serviceName: string) {
   dialogPosition.value = 'center'
 }
 
-function serviceClicked(event: MouseEvent, serviceName: string) {
+function openServiceInfo(event: MouseEvent, serviceName: string) {
   if (!(event.ctrlKey || event.metaKey)) {
     openDisplayConfigDialog(serviceName ?? '')
     return
@@ -82,7 +86,7 @@ function serviceClicked(event: MouseEvent, serviceName: string) {
 }
 
 function openCreateVervConfigWidget() {
-  dialogWidgetName.value = 'newConfig'
+  child.value = CreateVervConfigWidget
   dialogHeader.value = 'New verv config'
   isDialogOpen.value = true
 
@@ -95,29 +99,25 @@ function openCreateVervConfigWidget() {
 const pagingTotalRecords = ref<number>(0)
 
 function updateList() {
-  const req: ListConfigsRequest = {
-    paging: paging.value,
-  } as ListConfigsRequest
-
-  ListServices(req)
+  ListServices(listRequest.value)
       .then((resp) => {
         servicesList.value = resp.servicesInfo;
         pagingTotalRecords.value = resp.total;
       })
       .catch(handleGrpcError(useToast()))
 }
-
 onMounted(updateList)
 
 function openPage(page: number) {
-  paging.value.offset = (paging.value.limit || 10) * page
+  listRequest.value.paging.offset = (listRequest.value.paging.limit || 10) * page;
   updateList()
 }
 
-function updateSearch(pattern: string, sort: Sort) {
-
+function updateSearchReq(pattern: string, sort: Sort) {
+  listRequest.value.searchPattern = pattern
+  listRequest.value.sort = sort
+  updateList()
 }
-
 
 const buttons: MenuItem[] = [
   {
@@ -145,12 +145,12 @@ const buttons: MenuItem[] = [
     <div class="ListWrapper" v-if="servicesList && servicesList.length > 0">
       <div class="TopControls">
         <ServiceListTopControlsWidget
-          @search="updateSearch"
+          @updateSearchRequest="updateSearchReq"
         />
       </div>
       <ServicesListWidget
           :services-list="servicesList"
-          @click-service="serviceClicked"
+          @click-service="openServiceInfo"
       />
 
       <div class="BottomControls" v-if="pagingTotalRecords > (paging.limit || 10)">
@@ -169,25 +169,15 @@ const buttons: MenuItem[] = [
     </div>
   </div>
 
-  <!-- Dialog component. Static position -->
   <Dialog
-      v-model:visible="isDialogOpen"
-      modal
-      :dismissableMask="true"
-      :header="dialogHeader"
-      :pt="dialogPt"
-      :style="dialogStyle"
-      :position="dialogPosition"
-  >
-    <CreateVervConfigWidget
-        v-if="dialogWidgetName==='newConfig'"/>
-
-    <DisplayConfigWidget
-        v-else-if="dialogWidgetName==='displayConfig'"
-        :serviceName="openedServiceName"
-    />
-
-  </Dialog>
+      v-model="isDialogOpen"
+      :child="child"
+      :child-props="childProps"
+      :dialogHeader="dialogHeader"
+      :dialogPt="dialogPt"
+      :dialogStyle="dialogStyle"
+      :dialogPosition="dialogPosition"
+  />
 
   <!-- Help button at the bottom -->
   <SpeedDial

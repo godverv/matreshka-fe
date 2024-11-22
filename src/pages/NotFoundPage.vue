@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import HomeButton from "@/components/home/HomeButton.vue";
+import HomeButton from "@/components/global/HomeButton.vue";
 </script>
 
 <template>

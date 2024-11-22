@@ -7,10 +7,11 @@ import InputGroupAddon from "primevue/inputgroupaddon";
 import Select from "primevue/select";
 import Button from "primevue/button";
 import {ref} from "vue";
-import {Sort, SortType} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
+import {SortType} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
+import {Sort} from "@/models/search/search.ts";
 
 const emit = defineEmits<{
-  (event: 'search', pattern: string, sort: Sort): void
+  (event: 'updateSearchRequest', pattern: string, sort: Sort): void
 }>();
 
 // Search
@@ -29,7 +30,7 @@ const sortOptions = ref([
 ])
 
 function doSearch() {
-  emit('search', searchPattern.value, sorting.value)
+  emit('updateSearchRequest', searchPattern.value, sorting.value)
 }
 </script>
 

@@ -13,7 +13,6 @@ const selectedIdx = ref<number>(0)
 
 function setSelected(i: number) {
   selectedIdx.value = i
-  console.log(Object.keys(resources.value[i]))
 }
 
 </script>

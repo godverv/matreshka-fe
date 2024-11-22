@@ -2,7 +2,7 @@
 
 import DisplayConfigDisplay from "@/widget/DisplayConfigWidget.vue";
 
-import HomeButton from "@/components/home/HomeButton.vue";
+import HomeButton from "@/components/global/HomeButton.vue";
 
 defineProps({
   name: {
