@@ -26,9 +26,8 @@ export type GrpcError = {
     metadata: object
 }
 
-export function handleGrpcError( toastApi: ToastServiceMethods): (err: GrpcError) => void  {
+export function handleGrpcError(toastApi: ToastServiceMethods): (err: GrpcError) => void  {
     return (err: GrpcError) => {
-
         const msg: ToastMessageOptions = {
             closable: true,
             life: 5_000,

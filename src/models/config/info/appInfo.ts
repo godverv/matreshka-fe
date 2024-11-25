@@ -8,5 +8,6 @@ export type ServicesList = {
 export type AppInfo = {
     name: ConfigValue<string>
     version: ConfigValue<string>
-    startup_duration: ConfigValue<string>
+    startup_duration?: ConfigValue<string>
+    updated_at?: ConfigValue<Date>
 }

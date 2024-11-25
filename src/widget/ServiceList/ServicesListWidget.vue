@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
-import { PropType} from "vue";
+import {PropType} from "vue";
 import {AppInfo} from "@/models/config/info/appInfo.ts";
+import {dateToString} from "@/models/config/converters/date.ts";
 
 defineProps({
   servicesList: {
@@ -20,11 +21,14 @@ const emit = defineEmits<{
   <div class="ListServices">
     <div
         v-for="service in servicesList"
+        v-tooltip.bottom="`updated at ${service.updated_at ? dateToString(service.updated_at.value) : 'NO DATA'}`"
         :key="service.name.value"
         class="ListItem"
         @click="(event: MouseEvent) => { emit('clickService', event, service.name.value) }"
     >
-      {{ service.name.value }}
+      <div>
+        {{ service.name.value }}
+      </div>
     </div>
   </div>
 </template>
@@ -47,7 +51,7 @@ const emit = defineEmits<{
 
   border-radius: 16px;
 
-  padding: 1em 2em 1em 2em;
+  padding: 1em 0.75em 1em 0.75em;
 
   display: flex;
   gap: 1em;

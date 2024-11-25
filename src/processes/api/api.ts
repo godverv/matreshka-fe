@@ -18,28 +18,40 @@ export function setBackendUrl(url: string) {
     prefix.pathPrefix = url
 }
 
+const fallbackErrorConverting = 'error during convertion'
+
 export async function ListServices(req: ListConfigsRequest): Promise<ServicesList> {
     return MatreshkaBeAPI
         .ListConfigs(req, prefix)
         .then((r) => {
-            const out: ServicesList = {} as ServicesList;
-            out.servicesInfo = r.services
-                    ?.map((v) => {
-                        return {
-                            name: {
+                const out: ServicesList = {} as ServicesList;
+                if (r.services) {
+                    out.servicesInfo = r.services
+                        .map((v) => {
+                            const out = {} as AppInfo
+
+                            out.name = {
                                 label: "Service name",
-                                value: v.name,
-                            },
-                            version: {
+                                value: v.name || fallbackErrorConverting,
+                            }
+                            out.version = {
                                 label: "Version",
-                                value: v.version,
-                            },
-                        } as AppInfo
-                    }) ??
-                []
-            out.total = r.totalRecords || out.servicesInfo.length
-            return out
-        })
+                                value: v.version || fallbackErrorConverting,
+                            }
+                            if (v.updatedAtUtcTimestamp) {
+                                out.updated_at = {
+                                    label: "Updated at",
+                                    value: new Date(Number(v.updatedAtUtcTimestamp)*1000),
+                                }
+                            }
+
+                            return out
+                        })
+                }
+                out.total = r.totalRecords || out.servicesInfo.length
+                return out
+            }
+        )
 }
 
 export async function GetConfigNodes(serviceName: string): Promise<AppConfig> {
