@@ -18,7 +18,7 @@ import Paginator from 'primevue/paginator';
 import ServicesListWidget from "@/widget/ServiceList/ServicesListWidget.vue";
 import ServiceListTopControlsWidget from "@/widget/ServiceList/ServiceListTopControlsWidget.vue";
 import {ListServicesReq, Paging, Sort} from "@/models/search/search.ts";
-import {SortType} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
+import {SortType} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
 
 const toastApi = useToast();
 

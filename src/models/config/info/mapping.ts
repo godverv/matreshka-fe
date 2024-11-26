@@ -1,5 +1,5 @@
 import {AppConfig} from "@/models/config/appConfig.ts";
-import {Node} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
 import {extractStringValue} from "@/models/config/common.ts";
 
 export function mapAppInfo(cfg: AppConfig, root: Node) {

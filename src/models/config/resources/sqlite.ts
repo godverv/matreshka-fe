@@ -1,6 +1,6 @@
 import {ResourceType} from "@/models/config/resources/resource_types.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
-import {Node} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
 import {ResourceSqlite} from "@/models/config/resources/resource.ts";
 import {extractStringValue} from "@/models/config/common.ts";
 

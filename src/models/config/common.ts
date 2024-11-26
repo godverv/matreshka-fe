@@ -1,4 +1,4 @@
-import {Node} from "@/processes/api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
 
 export type keyMap = {
     [key: string]: any
