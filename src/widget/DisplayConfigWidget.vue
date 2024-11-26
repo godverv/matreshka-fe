@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import {ref} from "vue";
 
+import {GetConfigNodes, PatchConfig} from "@/processes/api/api.ts";
+import { handleGrpcError } from "@/processes/api/error_codes.ts";
+
+import {AppConfig} from "@/models/config/appConfig.ts";
+import {useActiveConfigStore} from "@/app/store/opened_config.ts";
+
+import Button from 'primevue/button';
+import InputGroup from "primevue/inputgroup";
+import {useToast} from "primevue/usetoast";
+
 import AppInfo from "@/components/config/app_info/AppInfo.vue";
 import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
 import ServersInfo from "@/components/config/server/ServersInfo.vue";
-
-import Button from 'primevue/button';
-
-import {GetConfigNodes, PatchConfig} from "@/api/api.ts";
-import {AppConfig} from "@/models/config/appConfig.ts";
-import {useActiveConfigStore} from "@/store/opened_config.ts";
-import InputGroup from "primevue/inputgroup";
-import { handleGrpcError } from "@/api/error_codes.ts";
-import {useToast} from "primevue/usetoast";
 
 const props = defineProps({
   serviceName: {

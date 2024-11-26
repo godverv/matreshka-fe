@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {Pages, router} from "@/routes/Routes.ts";
+import {Pages, router} from "@/app/routes/routes.ts";
 import {ref} from "vue";
 
 import Button from 'primevue/button'
@@ -21,7 +21,7 @@ function back(event: MouseEvent): void {
 
 <template>
   <Button
-      :icon="'pi ' + ( canGoBack ?  'pi-arrow-left' : 'pi-home')"
+      :icon="'pi ' + ( canGoBack ?  'pi-arrow-left' : 'pi-global')"
       severity="contrast"
       rounded
       @click="back"

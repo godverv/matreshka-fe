@@ -1,5 +1,5 @@
 
-import {Node} from "@/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
 import {mapResource} from "@/models/config/resources/mapping.ts";
 

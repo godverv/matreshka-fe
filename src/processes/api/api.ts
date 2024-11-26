@@ -3,40 +3,55 @@ import {
     ListConfigsRequest,
     GetConfigNodeRequest,
     Node, CreateConfigRequest,
-} from "./grpc/matreshka-be_api.pb";
+} from "matreshka-api/api/grpc/matreshka-be_api.pb";
 
-import {mapNodeToConfig} from "@/api/model.ts";
-import {AppInfo} from "@/models/config/info/appInfo.ts";
+import {mapNodeToConfig} from "@/processes/api/model_mapping.ts";
+import {AppInfo, ServicesList} from "@/models/config/info/appInfo.ts";
 import {AppConfig} from "@/models/config/appConfig.ts";
-import {PatchConfigRequest} from "./grpc/matreshka-be_api.pb";
-import {changes} from "@/store/opened_config.ts";
-import {getBackendUrl} from "@/store/settings.ts";
+import {PatchConfigRequest} from "./api/grpc/matreshka-be_api.pb";
+import {changes} from "@/app/store/opened_config.ts";
+import {getBackendUrl} from "@/app/store/settings.ts";
 
 const prefix = {pathPrefix: getBackendUrl()};
 
-export function setBackendUrl (url: string) {
+export function setBackendUrl(url: string) {
     prefix.pathPrefix = url
 }
 
-export async function ListServices(req: ListConfigsRequest): Promise<AppInfo[]> {
+const fallbackErrorConverting = 'error during convertion'
+
+export async function ListServices(req: ListConfigsRequest): Promise<ServicesList> {
     return MatreshkaBeAPI
         .ListConfigs(req, prefix)
         .then((r) => {
-            return r.services
-                    ?.map((v) => {
-                        return {
-                            name: {
+                const out: ServicesList = {} as ServicesList;
+                if (r.services) {
+                    out.servicesInfo = r.services
+                        .map((v) => {
+                            const out = {} as AppInfo
+
+                            out.name = {
                                 label: "Service name",
-                                value: v.name,
-                            },
-                            version: {
+                                value: v.name || fallbackErrorConverting,
+                            }
+                            out.version = {
                                 label: "Version",
-                                value: v.version,
-                            },
-                        } as AppInfo
-                    }) ??
-                []
-        })
+                                value: v.version || fallbackErrorConverting,
+                            }
+                            if (v.updatedAtUtcTimestamp) {
+                                out.updated_at = {
+                                    label: "Updated at",
+                                    value: new Date(Number(v.updatedAtUtcTimestamp)*1000),
+                                }
+                            }
+
+                            return out
+                        })
+                }
+                out.total = r.totalRecords || out.servicesInfo.length
+                return out
+            }
+        )
 }
 
 export async function GetConfigNodes(serviceName: string): Promise<AppConfig> {

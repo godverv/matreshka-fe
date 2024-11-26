@@ -1,168 +1,148 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref, watch} from "vue";
+
+import {ServicesList} from "@/models/config/info/appInfo.ts";
+
+import {ListServices} from "@/processes/api/api.ts";
+import {handleGrpcError} from "@/processes/api/error_codes.ts";
 
 import Dialog from "primevue/dialog";
-import SpeedDial from 'primevue/speeddial';
-import {MenuItem} from "primevue/menuitem";
-
-import {ListServices} from "@/api/api.ts";
-import {AppInfo} from "@/models/config/info/appInfo.ts";
-
 import DisplayConfigWidget from "@/widget/DisplayConfigWidget.vue";
-import CreateVervConfigWidget from "@/widget/CreateVervConfigWidget.vue";
 
-import {Pages, router} from "@/routes/Routes.ts";
-import {handleGrpcError} from "@/api/error_codes.ts";
+import {Pages, router} from "@/app/routes/routes.ts";
+
 import {useToast} from "primevue/usetoast";
+import ProgressSpinner from 'primevue/progressspinner';
+import Paginator from 'primevue/paginator';
 
+import ServicesListWidget from "@/widget/ServiceList/ServicesListWidget.vue";
+import ServiceListTopControlsWidget from "@/widget/ServiceList/ServiceListTopControlsWidget.vue";
+import {ListServicesReq, Paging, Sort} from "@/models/search/search.ts";
+import {SortType} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
 
-// Dialog
+const toastApi = useToast();
+
 const isDialogOpen = ref<boolean>(false);
-
-const dialogHeader = ref<string>('');
-const dialogWidgetName = ref<'displayConfig' | 'newConfig'>('displayConfig');
-
-const dialogStyle = {
-  width: '80vw',
-  height: '95vh',
-}
-
-const dialogPt = {
-  root: 'border-none',
-  mask: {
-    style: 'backdrop-filter: blur(2px)'
-  }
-}
-
-const dialogPosition = ref<"center" | "right">('center')
-
+const openedConfigName = ref<string>('');
+const isLoading = ref<boolean>(true);
 // Service list
-const servicesList = ref<AppInfo[]>([])
-const openedServiceName = ref<string>('')
-
-const listReq = {
-  listRequest: {
-    limit: 10,
+const listRequest = ref<ListServicesReq>({
+  searchPattern: '',
+  sort: {
+    type: SortType.default,
+    desc: false,
+  } as Sort,
+  paging: {
+    limit: 6,
     offset: 0,
-  }
-}
+  } as Paging
+} as ListServicesReq)
 
-function openDisplayConfigDialog(serviceName: string) {
-  dialogWidgetName.value = 'displayConfig'
-  dialogHeader.value = serviceName
-  openedServiceName.value = serviceName
+const servicesList = ref<ServicesList | undefined>(undefined)
 
-  isDialogOpen.value = true
+const pagingTotalRecords = ref<number>(0)
 
-  dialogStyle.width = '80vw'
-  dialogStyle.height = '95vh'
+function updateList() {
+  isLoading.value = true;
 
-  dialogPosition.value = 'center'
-}
-
-function serviceClicked(event: MouseEvent, serviceName: string) {
-  if (event.ctrlKey || event.metaKey) {
-    window
-        .open(
-            router.resolve(
-                {
-                  name: Pages.DisplayConfig,
-                  params: {name: serviceName},
-                },
-            )
-                .href, '_blank')
-  } else {
-    openDisplayConfigDialog(serviceName ?? '')
-  }
-}
-
-function openCreateVervConfigWidget() {
-  dialogWidgetName.value = 'newConfig'
-  dialogHeader.value = 'New verv config'
-  isDialogOpen.value = true
-
-  dialogStyle.width = '40vw'
-  dialogStyle.height = '50vh'
-
-  dialogPosition.value = 'right'
-}
-
-function fetchServices() {
-  ListServices(listReq)
+  ListServices(listRequest.value)
       .then((resp) => {
         servicesList.value = resp
+        pagingTotalRecords.value = resp.total
+        isLoading.value = false
       })
-      .catch(handleGrpcError(useToast()))
+      .catch(handleGrpcError(toastApi))
 }
 
-fetchServices()
+function openPage(page: number) {
+  listRequest.value.paging.offset = (listRequest.value.paging.limit || 10) * page;
+  updateList()
+}
 
-const buttons: MenuItem[] = [
-  {
-    label: 'New Verv config',
-    icon: 'pi pi-box',
-    command(_) {
-      openCreateVervConfigWidget()
-    },
-  },
-  {
-    visible: false,
-    label: 'New environment config',
-    icon: 'pi pi-file-plus',
-    command(_) {
-      // TODO
-    },
-  },
-]
+function updateSearchReq(pattern: string, sort: Sort) {
+  listRequest.value.searchPattern = pattern
+  listRequest.value.sort = sort
+  updateList()
+}
+
+onMounted(updateList)
+
+watch(isDialogOpen, () => {
+  if (!isDialogOpen.value) {
+    updateList()
+  }
+})
+
+//  Service info
+function openDisplayConfigDialog(serviceName: string) {
+  openedConfigName.value = serviceName
+  isDialogOpen.value = true
+}
+
+function openServiceInfo(event: MouseEvent, serviceName: string) {
+  if (!(event.ctrlKey || event.metaKey)) {
+    openDisplayConfigDialog(serviceName ?? '')
+    return
+  }
+
+  const routeTo = {
+    name: Pages.DisplayConfig,
+    params: {name: serviceName},
+  }
+
+  window.open(
+      router.resolve(routeTo).href, '_blank')
+}
+
 
 </script>
 
 <template>
   <!--  List of services -->
   <div class="Home">
-    <div class="list" v-if="servicesList.length > 0">
-      <div
-          v-for="service in servicesList"
-          :key="service.name.value"
-          class="listItem"
-          @click="(event: MouseEvent) => { serviceClicked(event, service.name.value) }"
-      >
-        {{ service.name.value }}
+    <div class="ListWrapper">
+      <ServiceListTopControlsWidget
+          @updateSearchRequest="updateSearchReq"
+      />
+      <div v-if="!isLoading">
+        <ServicesListWidget
+            v-if="servicesList && servicesList.servicesInfo.length > 0"
+            :services-list="servicesList.servicesInfo"
+            @click-service="openServiceInfo"
+        />
+        <p v-else>No configs on this node</p>
+        <ProgressSpinner v-else/>
       </div>
-    </div>
-    <div v-else>
-      <p> No configs on this node</p>
+
+      <Paginator
+          :rows="listRequest.paging.limit"
+          :totalRecords="pagingTotalRecords"
+          @page="event => openPage(event.page)"
+      />
     </div>
   </div>
 
-  <!-- Dialog component. Static position -->
   <Dialog
       v-model:visible="isDialogOpen"
       modal
+      :header="openedConfigName"
       :dismissableMask="true"
-      :header="dialogHeader"
-      :pt="dialogPt"
-      :style="dialogStyle"
-      :position="dialogPosition"
+      :pt="{
+          root: 'border-none',
+          mask: {
+            style: 'backdrop-filter: blur(2px)'
+          }
+        }"
+      :style="{
+          width: '80vw',
+          height: '95vh',
+        }"
+      position="center"
   >
-    <CreateVervConfigWidget
-        v-if="dialogWidgetName==='newConfig'"/>
-
     <DisplayConfigWidget
-        v-else-if="dialogWidgetName==='displayConfig'"
-        :serviceName="openedServiceName"
+        :service-name="openedConfigName"
     />
-
   </Dialog>
-
-  <!-- Help button at the bottom -->
-  <SpeedDial
-      :style="{ position: 'absolute', bottom: '2%', right: '2%' }"
-      :tooltipOptions="{ event: 'hover', position: 'left' }"
-      :model="buttons"
-      direction="up"
-      :radius="100"
-  />
 </template>
 
 <style scoped>
@@ -177,31 +157,10 @@ const buttons: MenuItem[] = [
   height: 100%;
 }
 
-.list {
-  width: 80vw;
-
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
-  gap: 2em;
-
-}
-
-.listItem {
-  max-height: 6em;
-  width: 100%;
-  overflow: hidden;
-  border: var(--border-color) solid;
-
-  border-radius: 16px;
-
-  padding: 1em 2em 1em 2em;
-
+.ListWrapper {
   display: flex;
-  gap: 1em;
-  justify-content: space-around;
-  align-items: center;
-
-  cursor: pointer;
+  flex-direction: column;
+  gap: 0.5em;
 }
+
 </style>
