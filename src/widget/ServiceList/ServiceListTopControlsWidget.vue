@@ -42,7 +42,9 @@ function doSearch() {
     <InputGroup>
       <InputText
           v-model="searchPattern"
-          placeholder="Keyword"/>
+          placeholder="Keyword"
+          @input="doSearch"
+      />
       <InputGroupAddon>
         <Button
             icon="pi pi-search"

@@ -18,29 +18,36 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="ListServices">
-    <div
-        v-for="service in servicesList"
-        v-tooltip.bottom="`updated at ${service.updated_at ? dateToString(service.updated_at.value) : 'NO DATA'}`"
-        :key="service.name.value"
-        class="ListItem"
-        @click="(event: MouseEvent) => { emit('clickService', event, service.name.value) }"
-    >
-      <div>
-        {{ service.name.value }}
+  <div class="Wrapper">
+    <div class="ListServices">
+      <div
+          v-for="service in servicesList"
+          v-tooltip.bottom="`updated at ${service.updated_at ? dateToString(service.updated_at.value) : 'NO DATA'}`"
+          :key="service.name.value"
+          class="ListItem"
+          @click="(event: MouseEvent) => { emit('clickService', event, service.name.value) }"
+      >
+        <div>
+          {{ service.name.value }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.Wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .ListServices {
-  width: 80vw;
+  width: 100%;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
   gap: 2em;
-
+  place-self: center;
 }
 
 .ListItem {

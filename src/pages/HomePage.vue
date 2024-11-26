@@ -111,8 +111,8 @@ function openServiceInfo(event: MouseEvent, serviceName: string) {
             @click-service="openServiceInfo"
         />
         <p v-else>No configs on this node</p>
-        <ProgressSpinner v-else/>
       </div>
+      <ProgressSpinner v-else/>
 
       <Paginator
           :rows="listRequest.paging.limit"
@@ -161,6 +161,12 @@ function openServiceInfo(event: MouseEvent, serviceName: string) {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  width: 100%;
+  align-items: center;
+}
+
+.ListWrapper > * {
+  width: 100%;
 }
 
 </style>
