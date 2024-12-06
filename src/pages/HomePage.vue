@@ -49,12 +49,11 @@ function updateList() {
       .then((resp) => {
         servicesList.value = resp
         pagingTotalRecords.value = resp.total
-        isLoading.value = false
       })
       .catch((err) => {
         handleGrpcError(toastApi)(err)
-        isLoading.value = false
-      })
+      }).
+      then(() => isLoading.value = false)
 }
 
 function openPage(page: number) {
