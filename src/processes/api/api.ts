@@ -6,8 +6,8 @@ import {
 } from "matreshka-api/api/grpc/matreshka-be_api.pb";
 
 import {mapNodeToConfig} from "@/processes/api/model_mapping.ts";
-import {AppInfo, ServicesList} from "@/models/config/info/appInfo.ts";
-import {AppConfig} from "@/models/config/appConfig.ts";
+import {AppInfo, ServicesList} from "@/models/app_config/info/appInfo.ts";
+import {AppConfig} from "@/models/app_config/appConfig.ts";
 import {changes} from "@/app/store/opened_config.ts";
 import {getBackendUrl} from "@/app/store/settings.ts";
 

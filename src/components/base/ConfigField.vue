@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {ref} from "vue";
-import {ConfigValue} from "@/models/config/common.ts";
+import {ConfigValue} from "@/models/app_config/common.ts";
 import {useActiveConfigStore} from "@/app/store/opened_config.ts";
 
 import InputText from 'primevue/inputtext';

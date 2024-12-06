@@ -4,7 +4,7 @@ import {ref} from "vue";
 import {GetConfigNodes, PatchConfig} from "@/processes/api/api.ts";
 import { handleGrpcError } from "@/processes/api/error_codes.ts";
 
-import {AppConfig} from "@/models/config/appConfig.ts";
+import {AppConfig} from "@/models/app_config/appConfig.ts";
 import {useActiveConfigStore} from "@/app/store/opened_config.ts";
 
 import Button from 'primevue/button';

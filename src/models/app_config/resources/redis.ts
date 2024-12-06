@@ -1,8 +1,8 @@
-import {ResourceType} from "@/models/config/resources/resource_types.ts";
-import {AppConfig} from "@/models/config/appConfig.ts";
+import {ResourceType} from "@/models/app_config/resources/resource_types.ts";
+import {AppConfig} from "@/models/app_config/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
-import {ResourceRedis} from "@/models/config/resources/resource.ts";
-import {extractNumberValue, extractStringValue} from "@/models/config/common.ts";
+import {ResourceRedis} from "@/models/app_config/resources/resource.ts";
+import {extractNumberValue, extractStringValue} from "@/models/app_config/common.ts";
 
 export function mapRedis(cfg: AppConfig, root: Node) {
     const rds: ResourceRedis = {} as ResourceRedis

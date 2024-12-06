@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 
-import {ServicesList} from "@/models/config/info/appInfo.ts";
+import {ServicesList} from "@/models/app_config/info/appInfo.ts";
 
 import {ListServices} from "@/processes/api/api.ts";
 import {handleGrpcError} from "@/processes/api/error_codes.ts";
@@ -51,7 +51,10 @@ function updateList() {
         pagingTotalRecords.value = resp.total
         isLoading.value = false
       })
-      .catch(handleGrpcError(toastApi))
+      .catch((err) => {
+        handleGrpcError(toastApi)(err)
+        isLoading.value = false
+      })
 }
 
 function openPage(page: number) {
@@ -110,7 +113,7 @@ function openServiceInfo(event: MouseEvent, serviceName: string) {
             :services-list="servicesList.servicesInfo"
             @click-service="openServiceInfo"
         />
-        <p v-else>No configs on this node</p>
+        <p v-else class="EmptyNodeMessage">No configs on this node</p>
       </div>
       <ProgressSpinner v-else/>
 
@@ -169,4 +172,8 @@ function openServiceInfo(event: MouseEvent, serviceName: string) {
   width: 100%;
 }
 
+.EmptyNodeMessage {
+  display: flex;
+  justify-content: center;
+}
 </style>

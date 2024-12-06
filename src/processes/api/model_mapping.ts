@@ -1,10 +1,10 @@
 
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
-import {AppConfig} from "@/models/config/appConfig.ts";
-import {mapResource} from "@/models/config/resources/mapping.ts";
+import {AppConfig} from "@/models/app_config/appConfig.ts";
+import {mapResource} from "@/models/app_config/resources/mapping.ts";
 
-import {mapAppInfo} from "@/models/config/info/mapping.ts";
-import {mapServer} from "@/models/config/servers/mapping.ts";
+import {mapAppInfo} from "@/models/app_config/info/mapping.ts";
+import {mapServer} from "@/models/app_config/servers/mapping.ts";
 
 const fromApiMapping = new Map<string, (cfg: AppConfig, node: Node) => void>()
 fromApiMapping.set('APP-INFO', mapAppInfo)

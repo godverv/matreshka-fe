@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import ServerInfo from "@/components/config/server/ServerInfo.vue";
-import {Server} from "@/models/config/servers/servers.ts";
+import {Server} from "@/models/app_config/servers/servers.ts";
 
 const servers = defineModel<Server[]>({default: []})
 

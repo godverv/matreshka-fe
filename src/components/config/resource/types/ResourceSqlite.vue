@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ResourceSqlite} from "@/models/config/resources/resource.ts";
+import {ResourceSqlite} from "@/models/app_config/resources/resource.ts";
 import ConfigField from "@/components/base/ConfigField.vue";
 
 const model = defineModel<ResourceSqlite>({

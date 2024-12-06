@@ -1,13 +1,13 @@
-import {AppConfig} from "@/models/config/appConfig.ts";
+import {AppConfig} from "@/models/app_config/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
 
-import {mapPostgres} from "@/models/config/resources/postgres.ts";
-import {mapRedis} from "@/models/config/resources/redis.ts";
-import {mapSqlite} from "@/models/config/resources/sqlite.ts";
-import {mapTelegram} from "@/models/config/resources/telegram.ts";
-import {mapGrpc} from "@/models/config/resources/grpc.ts";
-import {extractResourceType} from "@/models/config/common.ts";
-import {ResourceType} from "@/models/config/resources/resource_types.ts";
+import {mapPostgres} from "@/models/app_config/resources/postgres.ts";
+import {mapRedis} from "@/models/app_config/resources/redis.ts";
+import {mapSqlite} from "@/models/app_config/resources/sqlite.ts";
+import {mapTelegram} from "@/models/app_config/resources/telegram.ts";
+import {mapGrpc} from "@/models/app_config/resources/grpc.ts";
+import {extractResourceType} from "@/models/app_config/common.ts";
+import {ResourceType} from "@/models/app_config/resources/resource_types.ts";
 
 const resourceMapping = new Map<string, (cfg: AppConfig, node: Node) => void>()
 resourceMapping.set(ResourceType.Postgres, mapPostgres)

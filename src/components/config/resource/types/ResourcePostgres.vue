@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ResourcePostgres} from "@/models/config/resources/resource.ts";
+import {ResourcePostgres} from "@/models/app_config/resources/resource.ts";
 
 import ConfigField from "@/components/base/ConfigField.vue";
 

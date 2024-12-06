@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
 import {PropType} from "vue";
-import {AppInfo} from "@/models/config/info/appInfo.ts";
-import {dateToString} from "@/models/config/converters/date.ts";
+import {AppInfo} from "@/models/app_config/info/appInfo.ts";
+import {dateToString} from "@/models/app_config/converters/date.ts";
 
 defineProps({
   servicesList: {
