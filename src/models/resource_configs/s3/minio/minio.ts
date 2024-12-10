@@ -22,7 +22,7 @@ export enum S3Action {
 
 export type IamMinioExportConfig = {
     Version: string
-    Statements: IamMinioStatementExport[]
+    Statement: IamMinioStatementExport[]
 }
 
 export type IamMinioStatementExport = {

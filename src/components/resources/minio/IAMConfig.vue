@@ -49,7 +49,7 @@ function exportToJson() {
   const exportObject: IamMinioExportConfig = {} as IamMinioExportConfig
   exportObject.Version = model.value.version.value
 
-  exportObject.Statements = model.value.statements.map(exportMinioStatement)
+  exportObject.Statement = model.value.statements.map(exportMinioStatement)
 
   const blob = new Blob([JSON.stringify(exportObject, null, 2)], {
     type: "application/json",
