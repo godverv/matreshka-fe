@@ -6,13 +6,29 @@ on:
       - master
 
 jobs:
-  tag-release:
-    runs-on: ubuntu-latest
+  release:
+    runs-on: ubuntu-24.04
     steps:
-      - name: Release tag
-        id: release
-        uses: RedSockActions/release_tag@v1.1.6
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          token: ${{ github.token }}
-    outputs:
-      tag: ${{ steps.release.outputs.tag }}
+          node-version: 22
+
+      - name: Build
+        run: |
+          yarn install
+          yarn build
+
+      - name: Minio Deploy
+        uses: marverlous811/minio-upload@v1.2.0
+        with:
+          endpoint: ${{ secrets.MINIO_ENDPOINT }}
+          access_key: ${{ secrets.MINIO_ACCESS_KEY }}
+          secret_key: ${{ secrets.MINIO_SECRET_KEY }}
+          bucket: 'verv'
+          local_path: './dist/*'
+          remote_path: '/matreshka/'
+          recursive: true

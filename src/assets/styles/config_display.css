@@ -18,17 +18,8 @@
 .Node {
     display: flex;
     flex-direction: column;
-    gap: 0.75em;
-}
-
-.NodeHeader {
-    max-width: fit-content;
-
-    display: inline-block;
-
-    padding: 0.25em;
-
-    overflow: hidden;
+    gap: 1em;
+    overflow-x: scroll;
 }
 
 .NodeField {

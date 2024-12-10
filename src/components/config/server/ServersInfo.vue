@@ -9,21 +9,21 @@ const servers = defineModel<Server[]>({default: []})
 
 <template>
   <div class="Node">
-    <div class="NodeHeader">
+    <div class="Node">
       <div v-if="servers.length == 0">No servers defined</div>
       <div v-else>Servers:</div>
-    </div>
 
-    <div
-        v-if="servers"
-        class="Node"
-        v-for="(s, i) in servers" :key="s.port"
-    >
-      <div class="NodeHeader"> :{{ s.port }}
 
-        <!--     TODO ADD CONNECTION STRING -->
+      <div
+          v-if="servers"
+          class="Node"
+          v-for="(s, i) in servers" :key="s.port"
+      >
+        <div class="Node"> :{{ s.port }}
+          <!--     TODO ADD CONNECTION STRING -->
+        </div>
+        <ServerInfo v-model="servers[i]"/>
       </div>
-      <ServerInfo v-model="servers[i]"/>
     </div>
   </div>
 

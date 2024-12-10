@@ -1,4 +1,4 @@
-import {ConfigValue} from "@/models/app_config/common.ts";
+import {ConfigValue} from "@/models/shared/common.ts";;
 
 export type Server = {
     port: number

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {ref} from "vue";
-import {ConfigValue} from "@/models/app_config/common.ts";
+import {ConfigValue} from "@/models/shared/common.ts";
 import {useActiveConfigStore} from "@/app/store/opened_config.ts";
 
 import InputText from 'primevue/inputtext';
@@ -18,7 +18,6 @@ const original = defineModel<ConfigValue<string | number>>({
 defineProps({
   fieldName: {
     type: String,
-    required: true,
   },
   isDisabled: {
     type: Boolean,
@@ -75,7 +74,7 @@ function isValueChanged() {
               v-model="newValRef as Nullable<string>"
               @input="valueChanged"
           />
-          <label>{{ fieldName }}</label>
+          <label>{{ fieldName || modelValue.label }}</label>
         </FloatLabel>
         <InputGroupAddon v-if="units">{{ units }}</InputGroupAddon>
       </InputGroup>

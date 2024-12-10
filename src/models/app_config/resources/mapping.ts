@@ -6,7 +6,7 @@ import {mapRedis} from "@/models/app_config/resources/redis.ts";
 import {mapSqlite} from "@/models/app_config/resources/sqlite.ts";
 import {mapTelegram} from "@/models/app_config/resources/telegram.ts";
 import {mapGrpc} from "@/models/app_config/resources/grpc.ts";
-import {extractResourceType} from "@/models/app_config/common.ts";
+import {extractResourceType} from "@/models/shared/common.ts";;
 import {ResourceType} from "@/models/app_config/resources/resource_types.ts";
 
 const resourceMapping = new Map<string, (cfg: AppConfig, node: Node) => void>()

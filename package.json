@@ -23,7 +23,7 @@
     "matreshka-api": "^1.0.0",
     "pinia": "^2.1.7",
     "primeicons": "^7.0.0",
-    "primevue": "^4.2.2",
+    "primevue": "^4.2.4",
     "vue": "^3.4.21",
     "vue-router": "4",
     "vuex": "^4.0.2",

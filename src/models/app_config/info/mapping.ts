@@ -1,6 +1,6 @@
 import {AppConfig} from "@/models/app_config/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
-import {extractStringValue} from "@/models/app_config/common.ts";
+import {extractStringValue} from "@/models/shared/common.ts";;
 
 export function mapAppInfo(cfg: AppConfig, root: Node) {
     root.innerNodes?.map((n)=> {

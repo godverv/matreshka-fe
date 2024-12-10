@@ -1,4 +1,4 @@
-import {ConfigValue, keyMap} from "@/models/app_config/common.ts";
+import {ConfigValue, keyMap} from "@/models/shared/common.ts";;
 import {ResourceType} from "@/models/app_config/resources/resource_types.ts";
 
 export type OneOfResource =  (UnknownResource |

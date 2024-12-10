@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import ConfigField from "@/components/base/ConfigField.vue";
+import ConfigField from "@/components/base/ConfigInput.vue";
 import {grpcHandler} from "@/models/app_config/servers/servers.ts";
 
 const grpcInfo = defineModel<grpcHandler>({required: true})

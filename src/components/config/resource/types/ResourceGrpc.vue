@@ -2,7 +2,7 @@
 
 import {ResourceGrpc} from "@/models/app_config/resources/resource.ts";
 
-import ConfigField from "@/components/base/ConfigField.vue";
+import ConfigField from "@/components/base/ConfigInput.vue";
 
 const model = defineModel<ResourceGrpc>({required: true})
 </script>

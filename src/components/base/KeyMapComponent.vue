@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Inputer from "@/components/base/Inputer.vue";
-import {keyMap} from "@/models/app_config/common.ts";
+import {keyMap} from "@/models/shared/common.ts";;
 
 const model = defineModel<keyMap>({required: true})
 
