@@ -30,5 +30,5 @@ jobs:
           secret_key: ${{ secrets.MINIO_SECRET_KEY }}
           bucket: 'verv'
           local_path: './dist/*'
-          remote_path: '/matreshka'
+          remote_path: '/matreshka/'
           recursive: true
