@@ -31,8 +31,8 @@
 }
 
 .Node > .Node {
-    padding: 0 0 0 0.75em;
+    padding: 0 0 0 0.25em;
 }
 .Node > .NodeField {
-    padding: 0 0 0 0.5em;
+    padding: 0 0 0 0.25em;
 }

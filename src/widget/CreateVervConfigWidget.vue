@@ -43,7 +43,6 @@ function createConfig() {
 </script>
 
 <template>
-
   <div class="container">
     <InputGroup>
       <FloatLabel variant="on">

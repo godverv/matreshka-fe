@@ -39,7 +39,7 @@ function doSearch() {
 
 <template>
   <div class="TopControls">
-    <InputGroup>
+    <InputGroup >
       <InputText
           v-model="searchPattern"
           placeholder="Keyword"
@@ -84,5 +84,9 @@ function doSearch() {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
   gap: 1em;
+}
+
+.TopControls > * {
+  height: 100%;
 }
 </style>
