@@ -21,8 +21,7 @@ function back(event: MouseEvent): void {
 
 <template>
   <Button
-      :icon="'pi ' + ( canGoBack ?  'pi-arrow-left' : 'pi-global')"
-      severity="contrast"
+      :icon="canGoBack ? 'pi pi-arrow-left': 'pi pi-home'"
       rounded
       @click="back"
   />

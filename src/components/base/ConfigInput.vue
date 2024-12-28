@@ -122,7 +122,7 @@ label {
 
 .InputBox {
   transition: 0.75s ease;
-  padding-top: 0.5em;
+  padding-top: 0.35em;
   overflow: hidden;
 }
 
