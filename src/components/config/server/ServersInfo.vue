@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-import ConfigInput from "@/components/base/ConfigInput.vue"
 import ServerInfo from "@/components/config/server/ServerInfo.vue";
 import {Server} from "@/models/app_config/servers/servers.ts";
 import ConfigField from "@/components/base/ConfigInput.vue";
@@ -15,18 +14,15 @@ const servers = defineModel<Server[]>({default: []})
         <div v-else>Servers:</div>
     <div
         class="Node"
-        v-for="(s, i) in servers" :key="s.port"
+        v-for="(s, i) in servers" :key="s.name"
     >
-      <div class="NodeField ShortField">
-        <ConfigInput
-            v-model="s.name"
-        />
+      <div class="NodeField">
+        {{ s.name }}
       </div>
-      <div class="NodeField ShortField">
+      <div class="NodeField PortField">
         <ConfigField
             v-model="s.port"
             field-name="Port"
-            :is-disabled="true"
         />
       </div>
       <div class="Node">
@@ -40,5 +36,8 @@ const servers = defineModel<Server[]>({default: []})
 
 <style scoped>
 @import "@/assets/styles/config_display.css";
-
+.PortField {
+  flex-direction: row;
+  align-items: center;
+}
 </style>

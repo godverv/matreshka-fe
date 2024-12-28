@@ -25,10 +25,14 @@ defineProps({
   },
   units: {
     type: String
+  },
+  isRestartRequired: {
+    type: Boolean,
+    default: false
   }
 })
 
-const newValRef = ref(original.value.value as string | number)
+const newValRef = ref<string | number>(original.value.value as string | number)
 
 const defaultColor = '#12c4ca'
 const changedColor = '#FF0000'
@@ -37,13 +41,13 @@ const color = ref(defaultColor)
 const configChangesStore = useActiveConfigStore()
 
 function valueChanged() {
-  if (newValRef.value === original.value.value) {
+  if (newValRef.value == original.value.value) {
     color.value = defaultColor
-    configChangesStore.deleteValue(original.value.label)
+    configChangesStore.deleteValue(original.value.envName)
   } else {
     color.value = changedColor
     configChangesStore.setValue(
-        original.value.label,
+        original.value.envName,
         newValRef.value.toString(),
         () => {
           newValRef.value = original.value.value
@@ -55,7 +59,7 @@ function valueChanged() {
 
 function changeValueBack() {
   newValRef.value = original.value.value
-  configChangesStore.deleteValue(original.value.label)
+  configChangesStore.deleteValue(original.value.envName)
 }
 
 function isValueChanged() {
@@ -116,6 +120,7 @@ label {
 .ConfigInputFields {
   display: flex;
   width: 100%;
+  flex-direction: row;
 }
 
 .InputBox {

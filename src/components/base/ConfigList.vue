@@ -17,7 +17,7 @@ const model = defineModel<ConfigValue<T[]>>({required: true})
   <div class="Node">
 
     <div class="TopControls">
-      <p>{{ model.label }}</p>
+      <p>{{ model.envName }}</p>
       <Button
         rounded
         icon="pi pi-plus"

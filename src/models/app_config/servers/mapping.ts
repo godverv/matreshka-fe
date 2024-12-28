@@ -17,11 +17,7 @@ export function mapServer(cfg: AppConfig, root: Node) {
             const parts = n.name.split("_")
 
             const server: Server = {} as Server
-            server.name = {
-                label: "Name",
-                value: parts[1]
-            } as ConfigValue<string>
-
+            server.name = parts[1]
             server.grpc = []
             server.fs = []
 
@@ -57,7 +53,7 @@ function extractServerInfo(trg: Server, node: Node, rootPrefix: string) {
             break
         case 'PORT':
             trg.port = {
-                label: node.name,
+                envName: node.name,
                 value: Number(node.value),
             } as ConfigValue<number>
             break
@@ -77,13 +73,13 @@ function extractGrpcHandler(nodes: Node[], rootPrefix: string): grpcHandler {
         switch (part) {
             case 'GATEWAY':
                 gh.gateway = {
-                    label: n.name,
+                    envName: n.name,
                     value: n.value,
                 } as ConfigValue<string>
                 break
             case 'MODULE':
                 gh.module = {
-                    label: n.name,
+                    envName: n.name,
                     value: n.value,
                 } as ConfigValue<string>
                 break
@@ -104,7 +100,7 @@ function extractFsHandler(nodes: Node[], rootPrefix: string): fsHandler {
         switch (part) {
             case 'DIST':
                 fsH.dist = {
-                    label: n.name,
+                    envName: n.name,
                     value: n.value,
                 } as ConfigValue<string>
         }

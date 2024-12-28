@@ -12,7 +12,7 @@ const model = defineModel<ConfigValue<boolean>>({required: true})
 
 <template>
   <div class="ConfigToggle">
-    <div> {{ model.label }}</div>
+    <div> {{ model.envName }}</div>
     <ToggleSwitch
         v-model="model.value"
     >

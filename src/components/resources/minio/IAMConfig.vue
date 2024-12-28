@@ -22,7 +22,7 @@ import Button from "primevue/button";
 
 const model = ref<IamConfig>({
   version: {
-    label: "Version",
+    envName: "Version",
     value: "2012-10-17"
   },
   statements: []
@@ -31,15 +31,15 @@ const model = ref<IamConfig>({
 function addStatement() {
   model.value.statements.push({
     allow: {
-      label: 'Effect',
+      envName: 'Effect',
       value: true,
     } as ConfigValue<boolean>,
     action: {
-      label: 'Action(s)',
+      envName: 'Action(s)',
       value: []
     } as ConfigValue<S3Action[]>,
     resources: {
-      label: 'Resources',
+      envName: 'Resources',
       value: [''],
     } as ConfigValue<string[]>,
   } as Statement)

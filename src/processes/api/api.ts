@@ -30,16 +30,16 @@ export async function ListServices(req: ListConfigsRequest): Promise<ServicesLis
                             const out = {} as AppInfo
 
                             out.name = {
-                                label: "Service name",
+                                envName: "Service name",
                                 value: v.name || fallbackErrorConverting,
                             }
                             out.version = {
-                                label: "Version",
+                                envName: "Version",
                                 value: v.version || fallbackErrorConverting,
                             }
                             if (v.updatedAtUtcTimestamp) {
                                 out.updated_at = {
-                                    label: "Updated at",
+                                    envName: "Updated at",
                                     value: new Date(Number(v.updatedAtUtcTimestamp)*1000),
                                 }
                             }

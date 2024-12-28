@@ -28,7 +28,7 @@ const props = defineProps({
             display="chip"
             :options="props.options"
         />
-        <label>{{ model.label }}</label>
+        <label>{{ model.envName }}</label>
       </FloatLabel>
     </InputGroup>
   </div>

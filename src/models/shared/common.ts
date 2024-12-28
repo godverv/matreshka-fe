@@ -5,19 +5,19 @@ export type keyMap = {
 }
 
 export type ConfigValue<T> = {
-    label: string
+    envName: string
     value: T
 }
 
 export function extractStringValue(n: Node) : ConfigValue<string> {
     return {
-        label: n.name ?? "",
+        envName: n.name ?? "",
         value: n.value ?? ""
     }
 }
 export function extractNumberValue(n: Node) : ConfigValue<number> {
     return {
-        label: n.name ?? "",
+        envName: n.name ?? "",
         value: Number(n.value) ?? 0
     }
 }

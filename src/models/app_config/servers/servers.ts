@@ -2,7 +2,7 @@ import {ConfigValue} from "@/models/shared/common.ts";
 
 export type Server = {
     port:  ConfigValue<number>
-    name: ConfigValue<string> // TODO
+    name: string
     grpc: grpcHandler[]
     fs: fsHandler[]
 }

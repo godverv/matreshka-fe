@@ -21,7 +21,7 @@ const fromToList = ref<any[][]>([options, model.value.value])
 
 <template>
   <div class="Node">
-    <div>{{ model.label }}</div>
+    <div>{{ model.envName }}</div>
     <div class="Node">
       <PickList
           v-model="fromToList"
