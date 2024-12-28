@@ -32,41 +32,48 @@ defineProps({
   }
 })
 
-const newValRef = ref<string | number>(original.value.value as string | number)
+const defaultColor = '#12c4ca';
+const changedColor = '#FF0000';
 
-const defaultColor = '#12c4ca'
-const changedColor = '#FF0000'
-const color = ref(defaultColor)
 
-const configChangesStore = useActiveConfigStore()
+const newValRef = ref<string | number>(original.value.value as string | number);
+const isValueChanged = ref<boolean>(false);
+
+const color = ref(defaultColor);
+
+const configChangesStore = useActiveConfigStore();
 
 function valueChanged() {
   if (newValRef.value == original.value.value) {
-    color.value = defaultColor
-    configChangesStore.deleteValue(original.value.envName)
+    rollbackConfigValue()
   } else {
-    color.value = changedColor
-    configChangesStore.setValue(
-        original.value.envName,
-        newValRef.value.toString(),
-        () => {
-          newValRef.value = original.value.value
-          color.value = defaultColor
-        }
-    )
+    setNewConfigValue()
   }
 }
 
 
-function changeValueBack() {
+function rollbackConfigValue() {
+  color.value = defaultColor;
   newValRef.value = original.value.value
   configChangesStore.deleteValue(original.value.envName)
+
+  isValueChanged.value = false
 }
 
-function isValueChanged() {
-  console.log(newValRef.value != original.value.value)
-  return newValRef.value != original.value.value
+function setNewConfigValue() {
+  isValueChanged.value = true
+
+  color.value = changedColor
+  configChangesStore.setValue(
+      original.value.envName,
+      newValRef.value.toString(),
+      () => {
+        newValRef.value = original.value.value
+        color.value = defaultColor
+      }
+  )
 }
+
 </script>
 
 <template>
@@ -78,7 +85,7 @@ function isValueChanged() {
               :disabled="isDisabled"
               :invalid="newValRef != original.value"
               v-model="newValRef as Nullable<string>"
-              @change="valueChanged"
+              @input="valueChanged"
           />
           <label>{{ fieldName || modelValue.envName }}</label>
         </FloatLabel>
@@ -87,12 +94,12 @@ function isValueChanged() {
     </div>
     <div class="InputBox OldValue"
          :style="{
-          flex: isValueChanged() ? 1: 0,
+          flex: isValueChanged ? 1: 0,
       }"
     >
       <InputGroup>
         <Button
-            :onclick="changeValueBack"
+            :onclick="rollbackConfigValue"
             severity="warn"
             icon="pi pi-refresh"
         />
