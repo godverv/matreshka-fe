@@ -78,7 +78,7 @@ function isValueChanged() {
               v-model="newValRef as Nullable<string>"
               @input="valueChanged"
           />
-          <label>{{ fieldName || modelValue.label }}</label>
+          <label>{{ fieldName || modelValue.envName }}</label>
         </FloatLabel>
         <InputGroupAddon v-if="units">{{ units }}</InputGroupAddon>
       </InputGroup>
