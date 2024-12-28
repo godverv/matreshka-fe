@@ -3,6 +3,7 @@
 import {Server} from "@/models/app_config/servers/servers.ts";
 import GrpcHandlerInfo from "@/components/config/server/GrpcHandlerInfo.vue";
 import FileServerHandlerInfo from "@/components/config/server/FileServerHandlerInfo.vue";
+import ConfigField from "@/components/base/ConfigInput.vue";
 
 const cfg = defineModel<Server>({required: true})
 </script>

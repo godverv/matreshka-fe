@@ -19,7 +19,7 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    overflow-x: scroll;
+    padding: 1em 0 0 0;
 }
 
 .NodeField {
@@ -31,8 +31,8 @@
 }
 
 .Node > .Node {
-    padding: 0 0.5em 0 0.5em;
+    padding: 0 0 0 0.75em;
 }
 .Node > .NodeField {
-    padding: 0 0.5em 0 0.5em;
+    padding: 0 0 0 0.5em;
 }

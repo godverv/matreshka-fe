@@ -1,7 +1,7 @@
 import {AppConfig} from "@/models/app_config/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
 import {fsHandler, grpcHandler, Server} from "@/models/app_config/servers/servers.ts";
-import {ConfigValue} from "@/models/shared/common.ts";;
+import {ConfigValue} from "@/models/shared/common.ts";
 
 export function mapServer(cfg: AppConfig, root: Node) {
     if (!root.innerNodes) {
@@ -10,17 +10,26 @@ export function mapServer(cfg: AppConfig, root: Node) {
 
     root.innerNodes
         .map((n) => {
+            if (!n.name) {
+                return
+            }
+
             const parts = n.name.split("_")
 
             const server: Server = {} as Server
-            server.port = Number(parts[1])
+            server.name = {
+                label: "Name",
+                value: parts[1]
+            } as ConfigValue<string>
+
             server.grpc = []
             server.fs = []
 
             if (n.innerNodes) {
                 n.innerNodes.map(
-                    (subNod) =>
-                        extractServerInfo(server, subNod, n.name))
+                    (subNod) => {
+                        if (n.name) extractServerInfo(server, subNod, n.name)
+                    })
             }
 
             cfg.servers.push(server)
@@ -29,7 +38,7 @@ export function mapServer(cfg: AppConfig, root: Node) {
 
 
 function extractServerInfo(trg: Server, node: Node, rootPrefix: string) {
-    if (!node.innerNodes) {
+    if (!node.innerNodes || !node.name) {
         return
     }
 
@@ -46,6 +55,12 @@ function extractServerInfo(trg: Server, node: Node, rootPrefix: string) {
                     node.innerNodes, node.name))
 
             break
+        case 'PORT':
+            trg.port = {
+                label: node.name,
+                value: Number(node.value),
+            } as ConfigValue<number>
+            break
         default:
         // TODO http сервер
     }
@@ -54,6 +69,10 @@ function extractServerInfo(trg: Server, node: Node, rootPrefix: string) {
 function extractGrpcHandler(nodes: Node[], rootPrefix: string): grpcHandler {
     const gh = {} as grpcHandler
     nodes.map((n) => {
+        if (!n.name) {
+            return
+        }
+
         const part = n.name.substring(rootPrefix.length + 1)
         switch (part) {
             case 'GATEWAY':
@@ -77,6 +96,10 @@ function extractGrpcHandler(nodes: Node[], rootPrefix: string): grpcHandler {
 function extractFsHandler(nodes: Node[], rootPrefix: string): fsHandler {
     const fsH = {} as fsHandler
     nodes.map((n) => {
+        if (!n.name) {
+            return
+        }
+
         const part = n.name.substring(rootPrefix.length + 1)
         switch (part) {
             case 'DIST':
