@@ -34,6 +34,8 @@ defineProps({
 
 const newValRef = ref<string | number>(original.value.value as string | number)
 
+const isValueChangedRef = ref<boolean>(false)
+
 const defaultColor = '#12c4ca'
 const changedColor = '#FF0000'
 const color = ref(defaultColor)
@@ -57,12 +59,14 @@ function valueChanged() {
   }
 }
 
+
 function changeValueBack() {
   newValRef.value = original.value.value
   configChangesStore.deleteValue(original.value.envName)
 }
 
 function isValueChanged() {
+  console.log(newValRef.value != original.value.value)
   return newValRef.value != original.value.value
 }
 </script>
@@ -76,7 +80,7 @@ function isValueChanged() {
               :disabled="isDisabled"
               :invalid="newValRef != original.value"
               v-model="newValRef as Nullable<string>"
-              @input="valueChanged"
+              @change="valueChanged"
           />
           <label>{{ fieldName || modelValue.envName }}</label>
         </FloatLabel>
