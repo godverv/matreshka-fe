@@ -34,8 +34,6 @@ defineProps({
 
 const newValRef = ref<string | number>(original.value.value as string | number)
 
-const isValueChangedRef = ref<boolean>(false)
-
 const defaultColor = '#12c4ca'
 const changedColor = '#FF0000'
 const color = ref(defaultColor)
@@ -112,7 +110,6 @@ function isValueChanged() {
   </div>
 </template>
 
-//animation: oldValueSlideIn 0.5s ease forwards;
 <style scoped>
 @import "@/assets/styles/config_display.css";
 
