@@ -32,14 +32,8 @@ defineProps({
   }
 })
 
-const defaultColor = '#12c4ca';
-const changedColor = '#FF0000';
-
-
 const newValRef = ref<string | number>(original.value.value as string | number);
 const isValueChanged = ref<boolean>(false);
-
-const color = ref(defaultColor);
 
 const configChangesStore = useActiveConfigStore();
 
@@ -53,7 +47,6 @@ function valueChanged() {
 
 
 function rollbackConfigValue() {
-  color.value = defaultColor;
   newValRef.value = original.value.value
   configChangesStore.deleteValue(original.value.envName)
 
@@ -63,14 +56,10 @@ function rollbackConfigValue() {
 function setNewConfigValue() {
   isValueChanged.value = true
 
-  color.value = changedColor
   configChangesStore.setValue(
       original.value.envName,
       newValRef.value.toString(),
-      () => {
-        newValRef.value = original.value.value
-        color.value = defaultColor
-      }
+      rollbackConfigValue
   )
 }
 
