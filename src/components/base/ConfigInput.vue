@@ -88,7 +88,6 @@ function isValueChanged() {
     <div class="InputBox OldValue"
          :style="{
           flex: isValueChanged() ? 1: 0,
-          overflow: isValueChanged() ? '' : 'hidden',
       }"
     >
       <InputGroup>
@@ -115,7 +114,8 @@ function isValueChanged() {
 
 label {
   display: inline-block;
-  overflow: hidden;
+  box-sizing: content-box;
+  white-space: nowrap;
 }
 
 .ConfigInputFields {
@@ -125,7 +125,9 @@ label {
 }
 
 .InputBox {
-  transition: 0.5s ease;
+  transition: 0.75s ease;
+  padding-top: 0.5em;
+  overflow: hidden;
 }
 
 .InputBox:first-child {
