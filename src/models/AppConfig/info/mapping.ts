@@ -1,4 +1,4 @@
-import {AppConfig} from "@/models/app_config/appConfig.ts";
+import {AppConfig} from "@/models/AppConfig/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
 import {extractStringValue} from "@/models/shared/common.ts";;
 

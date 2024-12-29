@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
-import {AppInfo} from "@/models/app_config/info/appInfo.ts";
-import ConfigField from "@/components/base/ConfigInput.vue";
+import {AppInfo} from "@/models/AppConfig/info/appInfo.ts";
+import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
+import ServiceName from "@/components/config/app_info/ServiceName.vue";
 
 const info = defineModel<AppInfo>()
 
@@ -11,9 +12,9 @@ const info = defineModel<AppInfo>()
   <div v-if="!info">No app info</div>
 
   <div v-else class="Node">
-        <ConfigField
+        <ServiceName
             v-model="info.name"
-            fieldName="Service name"/>
+        />
 
         <ConfigField
             v-model="info.version"

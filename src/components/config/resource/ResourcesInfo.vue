@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-import {NormalizeName, OneOfResource} from "@/models/app_config/resources/resource.ts";
-import {GetImageForResource} from "@/models/app_config/resources/images.ts";
+import {NormalizeName, OneOfResource} from "@/models/AppConfig/resources/resource.ts";
+import {GetImageForResource} from "@/models/AppConfig/resources/images.ts";
 import IconButton from "@/components/base/IconButton.vue";
 
 import {ref} from "vue";
-import {ResourceType} from "@/models/app_config/resources/resource_types.ts";
+import {ResourceType} from "@/models/AppConfig/resources/resource_types.ts";
 
 const resources = defineModel<OneOfResource[]>({default: []})
 

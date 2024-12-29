@@ -1,6 +1,6 @@
-import {AppConfig} from "@/models/app_config/appConfig.ts";
+import {AppConfig} from "@/models/AppConfig/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
-import {fsHandler, grpcHandler, Server} from "@/models/app_config/servers/servers.ts";
+import {fsHandler, grpcHandler, Server} from "@/models/AppConfig/servers/servers.ts";
 import {ConfigValue} from "@/models/shared/common.ts";
 
 export function mapServer(cfg: AppConfig, root: Node) {

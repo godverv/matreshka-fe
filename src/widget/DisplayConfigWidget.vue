@@ -4,7 +4,7 @@ import {ref} from "vue";
 import {GetConfigNodes, PatchConfig} from "@/processes/api/api.ts";
 import { handleGrpcError } from "@/processes/api/error_codes.ts";
 
-import {AppConfig} from "@/models/app_config/appConfig.ts";
+import {AppConfig} from "@/models/AppConfig/appConfig.ts";
 import {useActiveConfigStore} from "@/app/store/opened_config.ts";
 
 import Button from 'primevue/button';
@@ -101,7 +101,6 @@ fetchConfig()
   justify-content: center;
   flex-direction: column;
   gap: 1em;
-  padding-bottom: 5vh;
 }
 
 .Content > * {

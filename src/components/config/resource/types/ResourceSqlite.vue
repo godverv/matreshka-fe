@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {ResourceSqlite} from "@/models/app_config/resources/resource.ts";
-import ConfigField from "@/components/base/ConfigInput.vue";
+import {ResourceSqlite} from "@/models/AppConfig/resources/resource.ts";
+import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
 
 const model = defineModel<ResourceSqlite>({
   required: true,

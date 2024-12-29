@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 
-import {ServicesList} from "@/models/app_config/info/appInfo.ts";
+import {ServicesList} from "@/models/AppConfig/info/appInfo.ts";
 
 import {ListServices} from "@/processes/api/api.ts";
 import {handleGrpcError} from "@/processes/api/error_codes.ts";

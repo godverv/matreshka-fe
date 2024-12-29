@@ -10,6 +10,7 @@ import FloatLabel from 'primevue/floatlabel';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 import Button from 'primevue/button';
 import {Nullable} from "@primevue/core";
+import {FieldAddon} from "@/models/shared/FieldAddon.ts";
 
 const original = defineModel<ConfigValue<string | number>>({
   required: true,
@@ -29,6 +30,10 @@ defineProps({
   isRestartRequired: {
     type: Boolean,
     default: false
+  },
+  preAddons: {
+    type: Array<FieldAddon>,
+    default: []
   }
 })
 
@@ -67,7 +72,7 @@ function setNewConfigValue() {
 
 <template>
   <div class="ConfigInputFields">
-    <div class="InputBox NewValue">
+    <div class="InputBox">
       <InputGroup>
         <FloatLabel variant="on">
           <InputText
@@ -81,7 +86,7 @@ function setNewConfigValue() {
         <InputGroupAddon v-if="units">{{ units }}</InputGroupAddon>
       </InputGroup>
     </div>
-    <div class="InputBox OldValue"
+    <div class="InputBox"
          :style="{
           flex: isValueChanged ? 1: 0,
       }"
@@ -128,14 +133,6 @@ label {
 
 .InputBox:first-child {
   flex: 1;
-}
-
-.NewValue {
-  width: 100%;
-}
-
-.OldValue {
-  flex: 0;
 }
 
 </style>

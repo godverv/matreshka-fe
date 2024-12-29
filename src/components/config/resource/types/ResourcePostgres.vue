@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {ResourcePostgres} from "@/models/app_config/resources/resource.ts";
+import {ResourcePostgres} from "@/models/AppConfig/resources/resource.ts";
 
-import ConfigField from "@/components/base/ConfigInput.vue";
+import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
 
 const model = defineModel<ResourcePostgres>({
   required: true,
