@@ -22,12 +22,12 @@ function setSelected(i: number) {
       v-if="resources.length > 0"
       class="ResourcesInfo"
       :style="{
-          /* 22 for buttons row at the top
-            1 for gap before separator
-            1 for gap after
-            8 for each field
+          /*
+            9 - Carousel
+            2.85 - per field
+            0.75 - per gap between fields
            */
-          height: 22+1+1+8*(Object.keys(resources[selectedIdx]).length-2)+'vh'
+          height: (9 + 2.85*((Object.keys(resources[selectedIdx]).length)-1) + 0.75*((Object.keys(resources[selectedIdx]).length)-3))+'em'
       }">
     <div class="BoomBoxWrapper">
       <div class="BoomBox">
@@ -47,11 +47,12 @@ function setSelected(i: number) {
           />
         </div>
       </div>
+
     </div>
     <Transition name="fade" mode="out-in">
       <div
           :key="resources[selectedIdx].resource_name"
-          class="Content">
+          class="ResourceInfoContent">
           <component
               :is="ResourceType.GetComponent(resources[selectedIdx].type)"
               v-model="resources[selectedIdx]"/>
@@ -70,14 +71,15 @@ function setSelected(i: number) {
   padding: 0;
 }
 
-.BoomBoxWrapper + .Content {
-  border-top: 3px solid black;
+.ResourcesInfo {
+  transition: height 0.5s ease;
 }
 
 .BoomBoxWrapper {
   overflow-x: scroll;
   overflow-y: hidden;
-  padding: 0 3vh 1vh 3vh;
+  padding: 0 3vh 0 3vh;
+  height: 9em;
 }
 
 .BoomBoxItem {
@@ -88,15 +90,14 @@ function setSelected(i: number) {
   background: var(--selected-gradient);
 }
 
-.Content {
+.ResourceInfoContent {
   width: 100%;
-  padding: 1vh;
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  gap: 0.75em;
 }
 
-.Content > * {
+.ResourceInfoContent > * {
   overflow: hidden;
   height: auto;
   transition: height 1s ease;
@@ -112,8 +113,5 @@ function setSelected(i: number) {
   opacity: 0;
 }
 
-.ResourcesInfo {
-  transition: height 0.5s ease;
-}
 
 </style>
