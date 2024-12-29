@@ -1,4 +1,4 @@
-import {ConfigValue} from "@/models/shared/common.ts";;
+import {ConfigValue} from "@/models/shared/common.ts";
 
 export type ServicesList = {
     servicesInfo: AppInfo[]
@@ -12,16 +12,25 @@ export type AppInfo = {
     updated_at?: ConfigValue<Date>
 }
 
-
-export type ServiceName = {
-    name: ConfigValue<string>
-    link?: ServiceLink
+export enum SourceCodeSystem {
+    unknown = 0,
+    github = 1,
 }
 
-
-export type ServiceLink = {
-    type: 'github' | 'gitlab' |'unknown'
-    link: string
+export function ExtractSourceCodeSystemFromServiceName(name: string): SourceCodeSystem | undefined {
+    if (name.includes("github")) {
+        return SourceCodeSystem.github
+    }
 }
 
+const scsToPiIcon = new Map<SourceCodeSystem, string>()
+scsToPiIcon.set(SourceCodeSystem.github, 'pi-github')
+
+export function PiIconFromSourceCodeSystem(sourceCodeSystem: SourceCodeSystem | undefined): string | undefined {
+    if (!sourceCodeSystem) {
+        return
+    }
+
+    return scsToPiIcon.get(sourceCodeSystem)
+}
 
