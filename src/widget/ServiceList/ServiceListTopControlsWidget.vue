@@ -42,7 +42,6 @@ function doSearch() {
     <InputGroup >
       <InputText
           v-model="searchPattern"
-          placeholder="Keyword"
           @input="doSearch"
       />
       <InputGroupAddon>
