@@ -1,13 +1,12 @@
 <script setup lang="ts">
 
-import {NormalizeName, OneOfResource} from "@/models/AppConfig/resources/resource.ts";
-import {GetImageForResource} from "@/models/AppConfig/resources/images.ts";
+import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
+import {GetImageForResource} from "@/models/AppConfig/Resources/images.ts";
 import IconButton from "@/components/base/IconButton.vue";
 
 import {ref} from "vue";
-import {ResourceType} from "@/models/AppConfig/resources/resource_types.ts";
 
-const resources = defineModel<OneOfResource[]>({default: []})
+const resources = defineModel<DataSourceClass[]>({default: []})
 
 const selectedIdx = ref<number>(0)
 
@@ -34,7 +33,7 @@ function setSelected(i: number) {
         <div
             class="BoomBoxItem"
             v-for="(res, i) in resources"
-            :key="res.resource_name"
+            :key="res.resourceName"
             :style="{
               'background':  selectedIdx === i ? 'linear-gradient(#70f1f1, #05878c)': 'linear-gradient(#fff9f9, #AAA8A8)',
             } "
@@ -43,7 +42,7 @@ function setSelected(i: number) {
               :onclick="()=>setSelected(i)"
               :isSelected="selectedIdx === i"
               :iconPath="GetImageForResource(res.type)"
-              :label="NormalizeName(res)"
+              :label="res.normalizeName()"
           />
         </div>
       </div>
@@ -51,10 +50,10 @@ function setSelected(i: number) {
     </div>
     <Transition name="fade" mode="out-in">
       <div
-          :key="resources[selectedIdx].resource_name"
+          :key="resources[selectedIdx].resourceName"
           class="ResourceInfoContent">
           <component
-              :is="ResourceType.GetComponent(resources[selectedIdx].type)"
+              :is="resources[selectedIdx].getComponent()"
               v-model="resources[selectedIdx]"/>
       </div>
     </Transition>

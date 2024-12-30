@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {ResourceSqlite} from "@/models/AppConfig/resources/resource.ts";
+import {Sqlite} from "@/models/AppConfig/Resources/Resource.ts";
 import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
 import SelectButton from "@/components/base/SelectButton.vue"
 
 import {ref} from "vue";
 
-const model = defineModel<ResourceSqlite>({
+const model = defineModel<Sqlite>({
   required: true,
 })
 

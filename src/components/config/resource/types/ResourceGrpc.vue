@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
-import {ResourceGrpc} from "@/models/AppConfig/resources/resource.ts";
+import {GrpcClient} from "@/models/AppConfig/Resources/Resource.ts";
 
 import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
 
-const model = defineModel<ResourceGrpc>({required: true})
+const model = defineModel<GrpcClient>({required: true})
 </script>
 
 <template>
     <div class="NodeField">
       <ConfigField
-          v-model="model.connection_string"
+          v-model="model.connectionString"
           field-name="Service url"
       />
     </div>

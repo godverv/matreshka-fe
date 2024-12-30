@@ -2,18 +2,18 @@
 
 import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
 
-import {ResourceTelegram} from "@/models/AppConfig/resources/resource.ts";
+import {Telegram} from "@/models/AppConfig/Resources/Resource.ts";
 
-const model = defineModel<ResourceTelegram>({required: true})
+const model = defineModel<Telegram>({required: true})
 </script>
 
 <template>
-    <div class="NodeField">
-      <ConfigField
-          v-model="model.api_key"
-          field-name="Api Key"
-      />
-    </div>
+  <div class="NodeField">
+    <ConfigField
+        v-model="model.apiKey"
+        field-name="Api Key"
+    />
+  </div>
 </template>
 
 <style scoped>

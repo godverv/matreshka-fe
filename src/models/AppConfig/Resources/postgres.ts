@@ -1,18 +1,13 @@
-import {AppConfig} from "@/models/AppConfig/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
-import {ResourcePostgres} from "@/models/AppConfig/resources/resource.ts";
-import {extractNumberValue, extractStringValue} from "@/models/shared/common.ts";;
-import {ResourceType} from "@/models/AppConfig/resources/resource_types.ts";
+import {DataSourceClass, Postgres} from "@/models/AppConfig/Resources/Resource.ts";
+import {extractNumberValue, extractStringValue} from "@/models/shared/common.ts";
 
-export function mapPostgres(cfg: AppConfig, root: Node) {
-    const pg: ResourcePostgres = {} as ResourcePostgres
-
+export function mapPostgres(root: Node): DataSourceClass {
     if (!root.name) {
-        return
+        throw {message: "No data for postgres to map"}
     }
 
-    pg.resource_name = root.name.slice(root.name.indexOf('POSTGRES')).toLowerCase()
-    pg.type = ResourceType.Postgres
+    const pg = new Postgres(root.name.slice(root.name.indexOf('POSTGRES')).toLowerCase())
 
     root.innerNodes?.map(
         (n) => {
@@ -43,5 +38,6 @@ export function mapPostgres(cfg: AppConfig, root: Node) {
             }
         }
     )
-    cfg.data_sources.push(pg)
+
+    return pg
 }

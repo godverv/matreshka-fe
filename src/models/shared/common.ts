@@ -27,17 +27,12 @@ export class ConfigValueClass<T> {
     }
 }
 
-export function extractStringValue(n: Node) : ConfigValue<string> {
-    return {
-        envName: n.name ?? "",
-        value: n.value ?? ""
-    }
+export function extractStringValue(n: Node): ConfigValueClass<string> {
+    return new ConfigValueClass<string>(n.name ?? "", n.value ?? "")
 }
-export function extractNumberValue(n: Node) : ConfigValue<number> {
-    return {
-        envName: n.name ?? "",
-        value: Number(n.value) ?? 0
-    }
+
+export function extractNumberValue(n: Node): ConfigValueClass<number> {
+    return new ConfigValueClass(n.name ?? "", Number(n.value) ?? 0)
 }
 
 export function extractResourceType(node: Node, root: Node): string | undefined {
@@ -45,7 +40,7 @@ export function extractResourceType(node: Node, root: Node): string | undefined 
         return
     }
 
-    let name = node.name.slice(root.name.length+1)
+    let name = node.name.slice(root.name.length + 1)
 
     const resourceNameEndIdx = name.indexOf("_")
     if (resourceNameEndIdx > 0) {
@@ -55,7 +50,7 @@ export function extractResourceType(node: Node, root: Node): string | undefined 
 
     let resType = name
     const resourceTypeNameEndIdx = resType.indexOf("-")
-    if (resourceTypeNameEndIdx > 0 ) {
+    if (resourceTypeNameEndIdx > 0) {
         resType = name.slice(0, resourceTypeNameEndIdx)
     }
 

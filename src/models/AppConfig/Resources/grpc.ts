@@ -1,18 +1,13 @@
-import {ResourceType} from "@/models/AppConfig/resources/resource_types.ts";
-import {AppConfig} from "@/models/AppConfig/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
-import {ResourceGrpc} from "@/models/AppConfig/resources/resource.ts";
+import {GrpcClient} from "@/models/AppConfig/Resources/Resource.ts";
 import {extractStringValue} from "@/models/shared/common.ts";;
 
-export function mapGrpc(cfg: AppConfig, root: Node) {
+export function mapGrpc(root: Node): GrpcClient {
     if (!root.name) {
-        return
+        throw {message: 'Can\'t parse grpc client config'}
     }
 
-    const grpcClient: ResourceGrpc = {} as ResourceGrpc
-
-    grpcClient.resource_name = root.name.slice(root.name.indexOf('GRPC')).toLowerCase()
-    grpcClient.type = ResourceType.Grpc
+    const grpcClient = new  GrpcClient(root.name.slice(root.name.indexOf('GRPC')).toLowerCase())
 
     root.innerNodes?.map(
         (n) => {
@@ -24,7 +19,7 @@ export function mapGrpc(cfg: AppConfig, root: Node) {
 
             switch (fieldName) {
                 case 'CONNECTION-STRING':
-                    grpcClient.connection_string = extractStringValue(n)
+                    grpcClient.connectionString = extractStringValue(n)
                     break
                 case 'MODULE':
                     grpcClient.module = extractStringValue(n)
@@ -32,5 +27,6 @@ export function mapGrpc(cfg: AppConfig, root: Node) {
             }
         }
     )
-    cfg.data_sources.push(grpcClient)
+
+    return grpcClient
 }

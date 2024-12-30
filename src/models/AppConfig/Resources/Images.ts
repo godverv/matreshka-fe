@@ -1,4 +1,4 @@
-import {ResourceType} from "@/models/AppConfig/resources/resource_types.ts";
+import {ResourceType} from "@/models/AppConfig/Resources/ResourceTypes.ts";
 
 import unknownImage from "@/assets/resource_icons/unknown.png";
 import pgImage from "@/assets/resource_icons/pg.png";

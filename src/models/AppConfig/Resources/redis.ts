@@ -1,18 +1,14 @@
-import {ResourceType} from "@/models/AppConfig/resources/resource_types.ts";
-import {AppConfig} from "@/models/AppConfig/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
-import {ResourceRedis} from "@/models/AppConfig/resources/resource.ts";
-import {extractNumberValue, extractStringValue} from "@/models/shared/common.ts";;
+import {DataSourceClass, Redis} from "@/models/AppConfig/Resources/Resource.ts";
+import {extractNumberValue, extractStringValue} from "@/models/shared/common.ts";
 
-export function mapRedis(cfg: AppConfig, root: Node) {
-    const rds: ResourceRedis = {} as ResourceRedis
+export function mapRedis(root: Node) : DataSourceClass {
 
     if (!root.name) {
-        return
+        throw  {message: "Can't parse redis config"}
     }
 
-    rds.resource_name = root.name.slice(root.name.indexOf('REDIS')).toLowerCase()
-    rds.type = ResourceType.Redis
+    const rds = new Redis(root.name.slice(root.name.indexOf('REDIS')).toLowerCase())
 
     root.innerNodes?.map(
         (n) => {
@@ -39,5 +35,6 @@ export function mapRedis(cfg: AppConfig, root: Node) {
             }
         }
     )
-    cfg.data_sources.push(rds)
+
+    return rds;
 }

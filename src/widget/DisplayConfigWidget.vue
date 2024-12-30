@@ -12,7 +12,7 @@ import InputGroup from "primevue/inputgroup";
 import {useToast} from "primevue/usetoast";
 
 import AppInfo from "@/components/config/AppInfo/AppInfo.vue";
-// import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
+import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
 // import ServersInfo from "@/components/config/server/ServersInfo.vue";
 
 const props = defineProps({
@@ -56,8 +56,8 @@ fetchConfig()
     <div class="Content">
       <AppInfo
           v-model="configData.appInfo"/>
-<!--      <ResourcesInfo-->
-<!--          v-model="configData.data_sources"/>-->
+      <ResourcesInfo
+          v-model="configData.dataSources"/>
 <!--      <ServersInfo-->
 <!--          v-model="configData.servers"/>-->
     </div>
