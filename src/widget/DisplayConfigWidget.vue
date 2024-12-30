@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {ref} from "vue";
 
-import {GetConfigNodes, PatchConfig} from "@/processes/api/api.ts";
-import { handleGrpcError } from "@/processes/api/error_codes.ts";
+import {GetConfigNodes, PatchConfig} from "@/processes/Api/Api.ts";
+import { handleGrpcError } from "@/processes/Api/ErrorCodes.ts";
 
 import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
 import {useActiveConfigStore} from "@/app/store/opened_config.ts";

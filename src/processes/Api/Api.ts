@@ -5,7 +5,7 @@ import {
     Node, CreateConfigRequest, PatchConfigRequest
 } from "matreshka-api/api/grpc/matreshka-be_api.pb";
 
-import {parseAppConfigFromEnv} from "@/processes/api/model_mapping.ts";
+import {parseAppConfigFromEnv} from "@/processes/Api/ModelMapping.ts";
 import {AppInfoClass, ServicesList} from "@/models/AppConfig/Info/AppInfo.ts";
 import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
 import {changes} from "@/app/store/opened_config.ts";

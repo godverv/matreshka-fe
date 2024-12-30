@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {setBackendUrl} from "@/processes/api/api.ts";
+import {setBackendUrl} from "@/processes/Api/Api.ts";
 
 
 export const useSettingsStore = defineStore('settings', {
