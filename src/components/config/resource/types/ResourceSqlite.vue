@@ -18,4 +18,5 @@ const model = defineModel<ResourceSqlite>({
 
 <style scoped>
 @import "@/assets/styles/config_display.css";
+
 </style>
