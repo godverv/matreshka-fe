@@ -1,13 +1,11 @@
 <script setup lang="ts">
 
-import {PropType} from "vue";
-import {AppInfo} from "@/models/AppConfig/info/appInfo.ts";
+import {AppInfoClass} from "@/models/AppConfig/Info/AppInfo.ts";
 import {dateToString} from "@/models/AppConfig/converters/date.ts";
 
 defineProps({
   servicesList: {
-    type: Object as PropType<AppInfo[]>,
-    required: true,
+    type: Object as () => AppInfoClass[],
   }
 })
 
@@ -22,7 +20,7 @@ const emit = defineEmits<{
     <div class="ListServices">
       <div
           v-for="service in servicesList"
-          v-tooltip.bottom="`updated at ${service.updated_at ? dateToString(service.updated_at.value) : 'NO DATA'}`"
+          v-tooltip.bottom="`updated at ${service.updated_at ? dateToString(service.updated_at) : 'NO DATA'}`"
           :key="service.name.value"
           class="ListItem"
           @click="(event: MouseEvent) => { emit('clickService', event, service.name.value) }"

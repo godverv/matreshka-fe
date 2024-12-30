@@ -4,7 +4,7 @@ import {ConfigValue} from "@/models/shared/common.ts";
 import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
 import Button from "primevue/button";
 import {ref} from "vue";
-import {ExtractSourceCodeSystemFromServiceName, PiIconFromSourceCodeSystem} from "@/models/AppConfig/info/appInfo.ts";
+import {ExtractSourceCodeSystemFromServiceName, PiIconFromSourceCodeSystem} from "@/models/AppConfig/Info/AppInfo.ts";
 
 const model = defineModel<ConfigValue<string>>({required: true})
 

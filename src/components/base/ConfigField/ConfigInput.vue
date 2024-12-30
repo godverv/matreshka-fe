@@ -12,10 +12,12 @@ import Button from 'primevue/button';
 import {Nullable} from "@primevue/core";
 import {FieldAddon} from "@/models/shared/FieldAddon.ts";
 
-const original = defineModel<ConfigValue<string | number>>({
+const model = defineModel<ConfigValue<string | number>>({
   required: true,
 })
 
+
+const originalValue = model.value.value;
 defineProps({
   fieldName: {
     type: String,
@@ -37,13 +39,12 @@ defineProps({
   }
 })
 
-const newValRef = ref<string | number>(original.value.value as string | number);
 const isValueChanged = ref<boolean>(false);
 
 const configChangesStore = useActiveConfigStore();
 
 function valueChanged() {
-  if (newValRef.value == original.value.value) {
+  if (model.value.value == originalValue) {
     rollbackConfigValue()
   } else {
     setNewConfigValue()
@@ -52,8 +53,8 @@ function valueChanged() {
 
 
 function rollbackConfigValue() {
-  newValRef.value = original.value.value
-  configChangesStore.deleteValue(original.value.envName)
+  model.value.value = originalValue
+  configChangesStore.deleteValue(model.value.envName)
 
   isValueChanged.value = false
 }
@@ -62,8 +63,8 @@ function setNewConfigValue() {
   isValueChanged.value = true
 
   configChangesStore.setValue(
-      original.value.envName,
-      newValRef.value.toString(),
+      model.value.envName,
+      model.value.value.toString(),
       rollbackConfigValue
   )
 }
@@ -77,11 +78,12 @@ function setNewConfigValue() {
         <FloatLabel variant="on">
           <InputText
               :disabled="isDisabled"
-              :invalid="newValRef != original.value"
-              v-model="newValRef as Nullable<string>"
+              :invalid="model.value != model.value"
+              v-model="model.value as Nullable<string>"
               @input="valueChanged"
+              @update:modelValue="valueChanged"
           />
-          <label>{{ fieldName || modelValue.envName }}</label>
+          <label>{{ fieldName || model.envName }}</label>
         </FloatLabel>
         <InputGroupAddon v-if="units">{{ units }}</InputGroupAddon>
       </InputGroup>
@@ -100,7 +102,7 @@ function setNewConfigValue() {
         <FloatLabel variant="on">
           <InputText
               :disabled="true"
-              v-model="original.value as Nullable<string>"
+              v-model="model.value as Nullable<string>"
               aria-disabled="true"
           />
           <label>Old value</label>

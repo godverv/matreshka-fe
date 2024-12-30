@@ -2,14 +2,15 @@ import {
     MatreshkaBeAPI,
     ListConfigsRequest,
     GetConfigNodeRequest,
-    Node, CreateConfigRequest,PatchConfigRequest
+    Node, CreateConfigRequest, PatchConfigRequest
 } from "matreshka-api/api/grpc/matreshka-be_api.pb";
 
-import {mapNodeToConfig} from "@/processes/api/model_mapping.ts";
-import {AppInfo, ServicesList} from "@/models/AppConfig/info/appInfo.ts";
-import {AppConfig} from "@/models/AppConfig/appConfig.ts";
+import {parseAppConfigFromEnv} from "@/processes/api/model_mapping.ts";
+import {AppInfoClass, ServicesList} from "@/models/AppConfig/Info/AppInfo.ts";
+import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
 import {changes} from "@/app/store/opened_config.ts";
 import {getBackendUrl} from "@/app/store/settings.ts";
+import {ConfigValueClass} from "@/models/shared/common.ts";
 
 const prefix = {pathPrefix: getBackendUrl()};
 
@@ -27,24 +28,24 @@ export async function ListServices(req: ListConfigsRequest): Promise<ServicesLis
                 if (r.services) {
                     out.servicesInfo = r.services
                         .map((v) => {
-                            const out = {} as AppInfo
 
-                            out.name = {
-                                envName: "Service name",
-                                value: v.name || fallbackErrorConverting,
-                            }
-                            out.version = {
-                                envName: "Version",
-                                value: v.version || fallbackErrorConverting,
-                            }
+
+                            const name = new ConfigValueClass(
+                                "Service name",
+                                v.name || fallbackErrorConverting,
+                            )
+
+                            const version = new ConfigValueClass(
+                                "Version",
+                                v.version || fallbackErrorConverting,
+                            )
+
+                            const appInfo = new AppInfoClass(name, version)
                             if (v.updatedAtUtcTimestamp) {
-                                out.updated_at = {
-                                    envName: "Updated at",
-                                    value: new Date(Number(v.updatedAtUtcTimestamp)*1000),
-                                }
+                                appInfo.updated_at = new Date(Number(v.updatedAtUtcTimestamp) * 1000)
                             }
 
-                            return out
+                            return appInfo
                         })
                 }
                 out.total = r.totalRecords || out.servicesInfo.length
@@ -53,7 +54,7 @@ export async function ListServices(req: ListConfigsRequest): Promise<ServicesLis
         )
 }
 
-export async function GetConfigNodes(serviceName: string): Promise<AppConfig> {
+export async function GetConfigNodes(serviceName: string): Promise<AppConfigClass> {
     const req = {
         serviceName: serviceName,
     } as GetConfigNodeRequest;
@@ -61,19 +62,10 @@ export async function GetConfigNodes(serviceName: string): Promise<AppConfig> {
     return MatreshkaBeAPI.GetConfigNodes(req, prefix)
         .then((res) => {
             if (!res.root) {
-                return {} as AppConfig;
+                throw {message: "Empty env config root"}
             }
 
-            const cfg: AppConfig = {} as AppConfig;
-            cfg.app_info = {} as AppInfo;
-            cfg.data_sources = []
-            cfg.servers = []
-
-            res.root.innerNodes?.map((n) => {
-                mapNodeToConfig(cfg, n)
-            })
-
-            return cfg;
+            return parseAppConfigFromEnv(res.root);
         })
 }
 

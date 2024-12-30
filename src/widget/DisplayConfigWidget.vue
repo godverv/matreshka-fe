@@ -4,16 +4,16 @@ import {ref} from "vue";
 import {GetConfigNodes, PatchConfig} from "@/processes/api/api.ts";
 import { handleGrpcError } from "@/processes/api/error_codes.ts";
 
-import {AppConfig} from "@/models/AppConfig/appConfig.ts";
+import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
 import {useActiveConfigStore} from "@/app/store/opened_config.ts";
 
 import Button from 'primevue/button';
 import InputGroup from "primevue/inputgroup";
 import {useToast} from "primevue/usetoast";
 
-import AppInfo from "@/components/config/app_info/AppInfo.vue";
-import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
-import ServersInfo from "@/components/config/server/ServersInfo.vue";
+import AppInfo from "@/components/config/AppInfo/AppInfo.vue";
+// import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
+// import ServersInfo from "@/components/config/server/ServersInfo.vue";
 
 const props = defineProps({
   serviceName: {
@@ -24,9 +24,9 @@ const props = defineProps({
 
 const configChangesStore = useActiveConfigStore()
 
-const configData = ref<AppConfig>({} as AppConfig);
+const configData = ref<AppConfigClass>();
 
-function setNodes(c: AppConfig) {
+function setData(c: AppConfigClass) {
   configData.value = c
 }
 
@@ -36,13 +36,13 @@ function rollbackAll() {
 
 function fetchConfig() {
   GetConfigNodes(props.serviceName)
-      .then(setNodes)
+      .then(setData)
       .catch(handleGrpcError(useToast()))
 }
 
 function save() {
   PatchConfig(props.serviceName, configChangesStore.envVariables)
-      .then(setNodes)
+      .then(setData)
       .then(rollbackAll)
 }
 
@@ -50,16 +50,16 @@ fetchConfig()
 </script>
 
 <template>
-  <div v-if="!configData">Отсутствует информация о сервисе</div>
+  <div v-if="!configData">No App config data</div>
 
   <div v-else class="Display">
     <div class="Content">
       <AppInfo
-          v-model="configData.app_info"/>
-      <ResourcesInfo
-          v-model="configData.data_sources"/>
-      <ServersInfo
-          v-model="configData.servers"/>
+          v-model="configData.appInfo"/>
+<!--      <ResourcesInfo-->
+<!--          v-model="configData.data_sources"/>-->
+<!--      <ServersInfo-->
+<!--          v-model="configData.servers"/>-->
     </div>
 
     <Transition name="BottomControls">

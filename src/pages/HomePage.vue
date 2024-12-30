@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 
-import {ServicesList} from "@/models/AppConfig/info/appInfo.ts";
+import { ServiceListClass } from "@/models/AppConfig/Info/AppInfo.ts";
 
 import {ListServices} from "@/processes/api/api.ts";
 import {handleGrpcError} from "@/processes/api/error_codes.ts";
@@ -38,7 +38,7 @@ const listRequest = ref<ListServicesReq>({
   } as Paging
 } as ListServicesReq)
 
-const servicesList = ref<ServicesList | undefined>(undefined)
+const servicesList = ref<ServiceListClass>()
 
 const pagingTotalRecords = ref<number>(0)
 
@@ -75,7 +75,7 @@ watch(isDialogOpen, () => {
   }
 })
 
-//  Service info
+//  Service Info
 function openDisplayConfigDialog(serviceName: string) {
   openedConfigName.value = serviceName
   isDialogOpen.value = true
@@ -109,7 +109,7 @@ function openServiceInfo(event: MouseEvent, serviceName: string) {
       <div v-if="!isLoading">
         <ServicesListWidget
             v-if="servicesList && servicesList.servicesInfo.length > 0"
-            :services-list="servicesList.servicesInfo"
+            :servicesList="servicesList.servicesInfo"
             @click-service="openServiceInfo"
         />
         <p v-else class="EmptyNodeMessage">No configs on this node</p>

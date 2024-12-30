@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-import {AppInfo} from "@/models/AppConfig/info/appInfo.ts";
+import {AppInfoClass} from "@/models/AppConfig/Info/AppInfo.ts";
 import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
-import ServiceName from "@/components/config/app_info/ServiceName.vue";
+import ServiceName from "@/components/config/AppInfo/ServiceName.vue";
 
-const info = defineModel<AppInfo>()
+const info = defineModel<AppInfoClass>({required: true})
 
 </script>
 
@@ -19,12 +19,6 @@ const info = defineModel<AppInfo>()
         <ConfigField
             v-model="info.version"
             field-name="Version"
-        />
-
-        <ConfigField
-            v-model="info.startup_duration"
-            field-name="Startup duration"
-            units="sec"
         />
   </div>
 

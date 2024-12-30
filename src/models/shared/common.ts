@@ -9,6 +9,24 @@ export type ConfigValue<T> = {
     value: T
 }
 
+export class ConfigValueClass<T> {
+    envName: string
+    value: T
+
+    private readonly originalValue: T
+
+    constructor(envName: string, value: T) {
+        this.envName = envName
+        this.value = value
+
+        this.originalValue = value
+    }
+
+    isChanged() {
+        return this.value != this.originalValue
+    }
+}
+
 export function extractStringValue(n: Node) : ConfigValue<string> {
     return {
         envName: n.name ?? "",

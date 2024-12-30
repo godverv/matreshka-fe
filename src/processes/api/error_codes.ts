@@ -20,13 +20,14 @@ export enum GrpcCodes {
     UNAUTHENTICATED,
 }
 
+
 export type GrpcError = {
     code: number
     message: string
     metadata: object
 }
 
-export function handleGrpcError(toastApi: ToastServiceMethods): (err: GrpcError) => void  {
+export function handleGrpcError(toastApi: ToastServiceMethods): (err: GrpcError) => void {
     return (err: GrpcError) => {
         const msg: ToastMessageOptions = {
             closable: true,
