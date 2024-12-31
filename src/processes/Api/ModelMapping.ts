@@ -3,10 +3,10 @@ import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
 import {extractDataSources} from "@/models/AppConfig/Resources/mapping.ts";
 
 import {mapAppInfo} from "@/models/AppConfig/Info/Mapping.ts";
-import {mapServer} from "@/models/AppConfig/servers/mapping.ts";
+import {mapServer} from "@/models/AppConfig/Servers/Mapping.ts";
 import {AppInfoClass} from "@/models/AppConfig/Info/AppInfo.ts";
 import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
-import {ServerClass} from "@/models/AppConfig/servers/servers.ts";
+import {ServerClass} from "@/models/AppConfig/Servers/Servers.ts";
 
 export function parseAppConfigFromEnv(root: Node): AppConfigClass {
     let appInfo: AppInfoClass | undefined;

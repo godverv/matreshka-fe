@@ -1,6 +1,6 @@
 import {AppInfoClass} from "@/models/AppConfig/Info/AppInfo.ts";
 import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
-import {ServerClass} from "@/models/AppConfig/servers/servers.ts";
+import {ServerClass} from "@/models/AppConfig/Servers/Servers.ts";
 
 export class AppConfigClass {
     appInfo: AppInfoClass

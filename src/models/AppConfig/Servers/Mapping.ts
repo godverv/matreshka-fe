@@ -1,5 +1,5 @@
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
-import {FsHandler, GrpcHandler, ServerClass} from "@/models/AppConfig/servers/servers.ts";
+import {FsHandler, GrpcHandler, ServerClass} from "@/models/AppConfig/Servers/Servers.ts";
 import {ConfigValueClass, extractStringValue} from "@/models/shared/common.ts";
 
 export function mapServer(root: Node): ServerClass[] {
