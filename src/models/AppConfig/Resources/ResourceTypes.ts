@@ -1,8 +1,8 @@
-import ResourcePostgres from "@/components/config/resource/types/ResourcePostgres.vue";
-import ResourceGrpc from "@/components/config/resource/types/ResourceGrpc.vue";
-import ResourceRedis from "@/components/config/resource/types/ResourceRedis.vue";
-import ResourceSqlite from "@/components/config/resource/types/ResourceSqlite.vue";
-import ResourceTelegram from "@/components/config/resource/types/ResourceTelegram.vue";
+import ResourcePostgres from "@/components/config/Resource/types/ResourcePostgres.vue";
+import ResourceGrpc from "@/components/config/Resource/types/ResourceGrpc.vue";
+import ResourceRedis from "@/components/config/Resource/types/ResourceRedis.vue";
+import ResourceSqlite from "@/components/config/Resource/types/ResourceSqlite.vue";
+import ResourceTelegram from "@/components/config/Resource/types/ResourceTelegram.vue";
 import KeyMapComponent from "@/components/base/KeyMapComponent.vue";
 import {Component} from "vue";
 
@@ -15,7 +15,6 @@ export enum ResourceType {
 }
 
 export namespace ResourceType {
-
     const typeToDefinition = new Map<ResourceType, Component>()
     typeToDefinition.set(ResourceType.Postgres, ResourcePostgres)
     typeToDefinition.set(ResourceType.Grpc, ResourceGrpc)

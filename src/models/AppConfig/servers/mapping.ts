@@ -1,12 +1,13 @@
-import {AppConfig} from "@/models/AppConfig/appConfig.ts";
 import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
-import {fsHandler, grpcHandler, Server} from "@/models/AppConfig/servers/servers.ts";
-import {ConfigValue} from "@/models/shared/common.ts";
+import {FsHandler, GrpcHandler, ServerClass} from "@/models/AppConfig/servers/servers.ts";
+import {ConfigValueClass, extractStringValue} from "@/models/shared/common.ts";
 
-export function mapServer(cfg: AppConfig, root: Node) {
+export function mapServer(root: Node): ServerClass[] {
     if (!root.innerNodes) {
-        return
+        throw {message: "Empty server node"}
     }
+
+    const servers: ServerClass[] = []
 
     root.innerNodes
         .map((n) => {
@@ -16,10 +17,7 @@ export function mapServer(cfg: AppConfig, root: Node) {
 
             const parts = n.name.split("_")
 
-            const server: Server = {} as Server
-            server.name = parts[1]
-            server.grpc = []
-            server.fs = []
+            const server: ServerClass = new ServerClass(parts[1])
 
             if (n.innerNodes) {
                 n.innerNodes.map(
@@ -28,12 +26,14 @@ export function mapServer(cfg: AppConfig, root: Node) {
                     })
             }
 
-            cfg.servers.push(server)
+            servers.push(server)
         })
+
+    return servers
 }
 
 
-function extractServerInfo(trg: Server, node: Node, rootPrefix: string) {
+function extractServerInfo(trg: ServerClass, node: Node, rootPrefix: string) {
     if (!node.innerNodes || !node.name) {
         return
     }
@@ -52,18 +52,15 @@ function extractServerInfo(trg: Server, node: Node, rootPrefix: string) {
 
             break
         case 'PORT':
-            trg.port = {
-                envName: node.name,
-                value: Number(node.value),
-            } as ConfigValue<number>
+            trg.port = new ConfigValueClass<number>(node.name, Number(node.value))
             break
         default:
         // TODO http сервер
     }
 }
 
-function extractGrpcHandler(nodes: Node[], rootPrefix: string): grpcHandler {
-    const gh = {} as grpcHandler
+function extractGrpcHandler(nodes: Node[], rootPrefix: string): GrpcHandler {
+    const gh = new GrpcHandler()
     nodes.map((n) => {
         if (!n.name) {
             return
@@ -72,16 +69,10 @@ function extractGrpcHandler(nodes: Node[], rootPrefix: string): grpcHandler {
         const part = n.name.substring(rootPrefix.length + 1)
         switch (part) {
             case 'GATEWAY':
-                gh.gateway = {
-                    envName: n.name,
-                    value: n.value,
-                } as ConfigValue<string>
+                gh.gateway = extractStringValue(n)
                 break
             case 'MODULE':
-                gh.module = {
-                    envName: n.name,
-                    value: n.value,
-                } as ConfigValue<string>
+                gh.module = extractStringValue(n)
                 break
         }
     })
@@ -89,8 +80,8 @@ function extractGrpcHandler(nodes: Node[], rootPrefix: string): grpcHandler {
     return gh
 }
 
-function extractFsHandler(nodes: Node[], rootPrefix: string): fsHandler {
-    const fsH = {} as fsHandler
+function extractFsHandler(nodes: Node[], rootPrefix: string): FsHandler {
+    const fsH = new FsHandler()
     nodes.map((n) => {
         if (!n.name) {
             return
@@ -99,10 +90,7 @@ function extractFsHandler(nodes: Node[], rootPrefix: string): fsHandler {
         const part = n.name.substring(rootPrefix.length + 1)
         switch (part) {
             case 'DIST':
-                fsH.dist = {
-                    envName: n.name,
-                    value: n.value,
-                } as ConfigValue<string>
+                fsH.dist = extractStringValue(n)
         }
     })
 

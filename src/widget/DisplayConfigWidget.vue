@@ -12,8 +12,8 @@ import InputGroup from "primevue/inputgroup";
 import {useToast} from "primevue/usetoast";
 
 import AppInfo from "@/components/config/AppInfo/AppInfo.vue";
-import ResourcesInfo from "@/components/config/resource/ResourcesInfo.vue";
-// import ServersInfo from "@/components/config/server/ServersInfo.vue";
+import ResourcesInfo from "@/components/config/Resource/ResourcesInfo.vue";
+import ServersInfo from "@/components/config/Server/ServersInfo.vue";
 
 const props = defineProps({
   serviceName: {
@@ -58,8 +58,8 @@ fetchConfig()
           v-model="configData.appInfo"/>
       <ResourcesInfo
           v-model="configData.dataSources"/>
-<!--      <ServersInfo-->
-<!--          v-model="configData.servers"/>-->
+      <ServersInfo
+          v-model="configData.servers"/>
     </div>
 
     <Transition name="BottomControls">

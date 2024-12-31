@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import ServerInfo from "@/components/config/server/ServerInfo.vue";
+import ServerInfo from "@/components/config/Server/ServerInfo.vue";
 import {Server} from "@/models/AppConfig/servers/servers.ts";
 import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
 
