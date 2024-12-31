@@ -42,6 +42,7 @@ function doSearch() {
     <InputGroup >
       <InputText
           v-model="searchPattern"
+          placeholder="Search"
           @input="doSearch"
       />
       <InputGroupAddon>
@@ -67,6 +68,7 @@ function doSearch() {
         <label for="select_sort_type">Sort by</label>
       </FloatLabel>
         <ToggleButton
+            :style="{width: '8em'}"
             v-model="sorting.desc"
             off-label="ASC"
             off-icon="pi pi-arrow-up"

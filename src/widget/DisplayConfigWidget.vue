@@ -2,7 +2,7 @@
 import {ref} from "vue";
 
 import {GetConfigNodes, PatchConfig} from "@/processes/Api/Api.ts";
-import { handleGrpcError } from "@/processes/Api/ErrorCodes.ts";
+import {handleGrpcError} from "@/processes/Api/ErrorCodes.ts";
 
 import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
 import {useActiveConfigStore} from "@/app/store/opened_config.ts";
@@ -15,6 +15,8 @@ import AppInfo from "@/components/config/AppInfo/AppInfo.vue";
 import ResourcesInfo from "@/components/config/Resource/ResourcesInfo.vue";
 import ServersInfo from "@/components/config/Server/ServersInfo.vue";
 
+const toastApi = useToast();
+
 const props = defineProps({
   serviceName: {
     type: String,
@@ -24,7 +26,7 @@ const props = defineProps({
 
 const configChangesStore = useActiveConfigStore()
 
-const configData = ref<AppConfigClass>();
+const configData = ref<AppConfigClass | undefined>();
 
 function setData(c: AppConfigClass) {
   configData.value = c
@@ -35,15 +37,18 @@ function rollbackAll() {
 }
 
 function fetchConfig() {
+  configData.value = undefined
   GetConfigNodes(props.serviceName)
       .then(setData)
-      .catch(handleGrpcError(useToast()))
+      .catch(handleGrpcError(toastApi))
 }
 
 function save() {
   PatchConfig(props.serviceName, configChangesStore.envVariables)
       .then(setData)
       .then(rollbackAll)
+      .then(fetchConfig)
+      .catch(handleGrpcError(toastApi))
 }
 
 fetchConfig()
