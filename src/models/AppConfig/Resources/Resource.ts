@@ -1,4 +1,4 @@
-import {ConfigValue, ConfigValueClass} from "@/models/shared/common.ts";
+import {ConfigValueClass} from "@/models/shared/common.ts";
 import {ResourceType} from "@/models/AppConfig/Resources/ResourceTypes.ts";
 import {Component} from "vue";
 
@@ -9,16 +9,16 @@ type NamedResource = {
 }
 
 export type ResourceSqlite = NamedResource & {
-    path: ConfigValue<string>
+    path: ConfigValueClass<string>
 }
 
 export type ResourceTelegram = NamedResource & {
-    api_key: ConfigValue<string>
+    api_key: ConfigValueClass<string>
 }
 
 export type ResourceGrpc = NamedResource & {
-    connection_string: ConfigValue<string>
-    module: ConfigValue<string>
+    connection_string: ConfigValueClass<string>
+    module: ConfigValueClass<string>
 }
 
 export function NormalizeName(res: NamedResource): string {
@@ -107,8 +107,8 @@ export class Telegram extends DataSourceClass {
 }
 
 export class GrpcClient extends DataSourceClass {
-    connectionString: ConfigValueClass<string>  = new ConfigValueClass("", "")
-    module: ConfigValueClass<string>  = new ConfigValueClass("", "")
+    connectionString: ConfigValueClass<string> = new ConfigValueClass("", "")
+    module: ConfigValueClass<string> = new ConfigValueClass("", "")
 
     constructor(resourceName: string) {
         super(resourceName, ResourceType.Grpc);

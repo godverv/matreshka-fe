@@ -4,12 +4,12 @@
     generic="T"
 >
 
-import {ConfigValue} from "@/models/shared/common.ts";
+import {ConfigValueClass} from "@/models/shared/common.ts";
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import {Nullable} from "@primevue/core";
 
-const model = defineModel<ConfigValue<T[]>>({required: true})
+const model = defineModel<ConfigValueClass<T[]>>({required: true})
 
 </script>
 
@@ -19,8 +19,8 @@ const model = defineModel<ConfigValue<T[]>>({required: true})
     <div class="TopControls">
       <p>{{ model.envName }}</p>
       <Button
-        rounded
-        icon="pi pi-plus"
+          rounded
+          icon="pi pi-plus"
       />
     </div>
     <div

@@ -1,15 +1,15 @@
-import {ConfigValue} from "@/models/shared/common.ts";;
+import {ConfigValueClass} from "@/models/shared/common.ts";
 
 export type IamConfig = {
-    version: ConfigValue<string>;
+    version: ConfigValueClass<string>;
     statements: Statement[]
 }
 
 
 export type Statement = {
-    allow: ConfigValue<boolean>
-    action: ConfigValue<S3Action[]>
-    resources: ConfigValue<string[]>
+    allow: ConfigValueClass<boolean>
+    action: ConfigValueClass<S3Action[]>
+    resources: ConfigValueClass<string[]>
 }
 
 export enum S3Action {
@@ -32,10 +32,10 @@ export type IamMinioStatementExport = {
 }
 
 
-export function exportMinioStatement(s: Statement) :IamMinioStatementExport {
+export function exportMinioStatement(s: Statement): IamMinioStatementExport {
     return {
         Effect: s.allow.value ? 'Allow' : 'Deny',
         Action: s.action.value.map(v => v.toString()),
-        Resource: s.resources.value.map((s) => 'arn:aws:s3:::'+s),
+        Resource: s.resources.value.map((s) => 'arn:aws:s3:::' + s),
     } as IamMinioStatementExport
 }

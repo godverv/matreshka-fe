@@ -4,11 +4,6 @@ export type keyMap = {
     [key: string]: any
 }
 
-export type ConfigValue<T> = {
-    envName: string
-    value: T
-}
-
 export class ConfigValueClass<T> {
     envName: string
     value: T

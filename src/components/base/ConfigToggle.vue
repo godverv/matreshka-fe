@@ -3,10 +3,10 @@
     lang="ts"
 >
 
-import {ConfigValue} from '@/models/shared/common';
+import {ConfigValueClass} from '@/models/shared/common';
 import ToggleSwitch from 'primevue/toggleswitch';
 
-const model = defineModel<ConfigValue<boolean>>({required: true})
+const model = defineModel<ConfigValueClass<boolean>>({required: true})
 
 </script>
 

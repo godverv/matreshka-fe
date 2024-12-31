@@ -2,7 +2,8 @@
 
 import {ref} from "vue";
 
-import {ConfigValue} from "@/models/shared/common.ts";
+import {ConfigValueClass} from "@/models/shared/common.ts";
+
 import {
   exportMinioStatement,
   IamConfig,
@@ -33,15 +34,15 @@ function addStatement() {
     allow: {
       envName: 'Effect',
       value: true,
-    } as ConfigValue<boolean>,
+    } as ConfigValueClass<boolean>,
     action: {
       envName: 'Action(s)',
       value: []
-    } as ConfigValue<S3Action[]>,
+    } as ConfigValueClass<S3Action[]>,
     resources: {
       envName: 'Resources',
       value: [''],
-    } as ConfigValue<string[]>,
+    } as ConfigValueClass<string[]>,
   } as Statement)
 }
 

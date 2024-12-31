@@ -1,17 +1,17 @@
 <script setup lang="ts">
 
 import ServerInfo from "@/components/config/Server/ServerInfo.vue";
-import {Server} from "@/models/AppConfig/servers/servers.ts";
+import {ServerClass} from "@/models/AppConfig/servers/servers.ts";
 import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
 
-const servers = defineModel<Server[]>({default: []})
+const servers = defineModel<ServerClass[]>({default: []})
 
 </script>
 
 <template>
   <div class="Node">
     <div v-if="servers.length == 0">No servers defined</div>
-        <div v-else>Servers:</div>
+    <div v-else>Servers:</div>
     <div
         class="Node"
         v-for="(s, i) in servers" :key="s.name"
@@ -36,6 +36,7 @@ const servers = defineModel<Server[]>({default: []})
 
 <style scoped>
 @import "@/assets/styles/config_display.css";
+
 .PortField {
   flex-direction: row;
   align-items: center;
