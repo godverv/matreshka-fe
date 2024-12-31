@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
-import {GetImageForResource} from "@/models/AppConfig/Resources/images.ts";
+import {GetImageForResource} from "@/models/AppConfig/Resources/Images.ts";
 import IconButton from "@/components/base/IconButton.vue";
 
 import {ref} from "vue";

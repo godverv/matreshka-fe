@@ -31,14 +31,14 @@ function valueChanged() {
 <template>
   <div class="Node">
     <div class="InputPath">
-      <div class="Inputer">
+      <div class="SqlitePathInputer">
         <ConfigField
             v-model="model.path"
             field-name="File path"
         />
       </div>
 
-      <div class="SelectButton">
+      <div class="SqliteTypeSelectButton">
         <SelectButton
             v-model="selectedOption"
             :options="options"
@@ -55,8 +55,17 @@ function valueChanged() {
 .InputPath {
   display: flex;
   flex-direction: row;
+  justify-content: stretch;
   align-items: end;
+  width: 100%;
+  gap: 1em;
 }
 
+.SqlitePathInputer {
+  flex: 2;
+}
 
+.SqliteTypeSelectButton {
+  flex: 1;
+}
 </style>

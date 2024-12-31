@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {ref} from "vue";
-import {ConfigValue} from "@/models/shared/common.ts";
+import {ConfigValueClass} from "@/models/shared/common.ts";
 import {useActiveConfigStore} from "@/app/store/opened_config.ts";
 
 import InputText from 'primevue/inputtext';
@@ -12,12 +12,11 @@ import Button from 'primevue/button';
 import {Nullable} from "@primevue/core";
 import {FieldAddon} from "@/models/shared/FieldAddon.ts";
 
-const model = defineModel<ConfigValue<string | number>>({
+const model = defineModel<ConfigValueClass<string | number>>({
   required: true,
 })
 
 
-const originalValue = model.value.value;
 defineProps({
   fieldName: {
     type: String,
@@ -39,6 +38,7 @@ defineProps({
   }
 })
 
+const originalValue = model.value.getOriginalValue()
 const isValueChanged = ref<boolean>(false);
 
 const configChangesStore = useActiveConfigStore();
@@ -90,7 +90,7 @@ function setNewConfigValue() {
     </div>
     <div class="InputBox"
          :style="{
-          flex: isValueChanged ? 1: 0,
+          flex: model.isChanged() ? 1: 0,
       }"
     >
       <InputGroup>
@@ -102,8 +102,8 @@ function setNewConfigValue() {
         <FloatLabel variant="on">
           <InputText
               :disabled="true"
-              v-model="model.value as Nullable<string>"
               aria-disabled="true"
+              v-model="originalValue as Nullable<string>"
           />
           <label>Old value</label>
         </FloatLabel>

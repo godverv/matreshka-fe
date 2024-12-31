@@ -22,8 +22,12 @@ export class ConfigValueClass<T> {
         this.originalValue = value
     }
 
-    isChanged() {
+    isChanged() : boolean{
         return this.value != this.originalValue
+    }
+
+    getOriginalValue() : T {
+        return this.originalValue
     }
 }
 
