@@ -4,6 +4,7 @@ import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
 import IconButton from "@/components/base/IconButton.vue";
 
 import {ref} from "vue";
+import {ConfigValueClass} from "@/models/shared/common.ts";
 
 const resources = defineModel<DataSourceClass[]>({default: []})
 
@@ -11,6 +12,17 @@ const selectedIdx = ref<number>(0)
 
 function setSelected(i: number) {
   selectedIdx.value = i
+}
+
+function countConfigFields<T>(config: T): number {
+  let count = 0;
+  for (const key in config) {
+    if (config[key] instanceof ConfigValueClass) {
+      count++
+    }
+  }
+
+  return count;
 }
 
 </script>
@@ -25,7 +37,7 @@ function setSelected(i: number) {
             2.85 - per field
             0.75 - per gap between fields
            */
-          height: (9 + 2.85*((Object.keys(resources[selectedIdx]).length)-1) + 0.75*((Object.keys(resources[selectedIdx]).length)-3))+'em'
+          height: (9 + 2.85*(countConfigFields(resources[selectedIdx])) + 0.75*(countConfigFields(resources[selectedIdx])-1))+'em'
       }">
     <div class="BoomBoxWrapper">
       <div class="BoomBox">
@@ -51,9 +63,9 @@ function setSelected(i: number) {
       <div
           :key="resources[selectedIdx].resourceName"
           class="ResourceInfoContent">
-          <component
-              :is="resources[selectedIdx].getComponent()"
-              v-model="resources[selectedIdx]"/>
+        <component
+            :is="resources[selectedIdx].getComponent()"
+            v-model="resources[selectedIdx]"/>
       </div>
     </Transition>
 

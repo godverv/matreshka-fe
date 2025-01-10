@@ -42,11 +42,12 @@ export function NormalizeName(res: NamedResource): string {
 }
 
 
+
 export abstract class DataSourceClass {
     resourceName: string
     readonly type: ResourceType
 
-    private readonly resourceTypeToImagePath = new Map<string, string>()
+    private readonly  resourceTypeToImagePath = new Map<string, string>()
         .set(ResourceType.Postgres, pgImage)
         .set(ResourceType.Redis, redisImage)
         .set(ResourceType.Sqlite, sqliteImage)
