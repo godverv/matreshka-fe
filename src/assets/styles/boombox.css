@@ -8,6 +8,7 @@
     max-width: 6em;
 
     flex: 1;
+    position: relative;
 }
 
 .BoomBoxItem + .BoomBoxItem {

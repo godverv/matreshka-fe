@@ -55,6 +55,9 @@ function countConfigFields<T>(config: T): number {
               :iconPath="res.getIcon()"
               :label="res.normalizeName()"
           />
+          <div
+              v-if="res.isChanged()"
+              class="ResourceChanged">*</div>
         </div>
       </div>
 
@@ -121,6 +124,12 @@ function countConfigFields<T>(config: T): number {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.ResourceChanged {
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
 }
 
 

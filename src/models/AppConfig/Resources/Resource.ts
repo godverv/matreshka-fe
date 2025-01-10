@@ -41,8 +41,6 @@ export function NormalizeName(res: NamedResource): string {
     return out
 }
 
-
-
 export abstract class DataSourceClass {
     resourceName: string
     readonly type: ResourceType
