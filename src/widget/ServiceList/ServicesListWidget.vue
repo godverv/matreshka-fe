@@ -52,7 +52,7 @@ const emit = defineEmits<{
   max-height: 6em;
   width: 100%;
   overflow: hidden;
-  border: var(--border-color) solid;
+  border: var(--good) solid;
 
   border-radius: 16px;
 

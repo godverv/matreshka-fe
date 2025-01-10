@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
-import {GetImageForResource} from "@/models/AppConfig/Resources/Images.ts";
 import IconButton from "@/components/base/IconButton.vue";
 
 import {ref} from "vue";
@@ -41,7 +40,7 @@ function setSelected(i: number) {
           <IconButton
               :onclick="()=>setSelected(i)"
               :isSelected="selectedIdx === i"
-              :iconPath="GetImageForResource(res.type)"
+              :iconPath="res.getIcon()"
               :label="res.normalizeName()"
           />
         </div>

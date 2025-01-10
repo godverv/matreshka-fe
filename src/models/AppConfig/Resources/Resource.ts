@@ -2,6 +2,12 @@ import {ConfigValueClass} from "@/models/shared/common.ts";
 import {ResourceType} from "@/models/AppConfig/Resources/ResourceTypes.ts";
 import {Component} from "vue";
 
+import unknownImage from "@/assets/resource_icons/unknown.png";
+import pgImage from "@/assets/resource_icons/pg.png";
+import redisImage from "@/assets/resource_icons/redis.png"
+import sqliteImage from "@/assets/resource_icons/sqlite.png"
+import grpcImage from "@/assets/resource_icons/grpc.png"
+import telegramImage from "@/assets/resource_icons/telegram.png"
 
 type NamedResource = {
     resource_name: string
@@ -36,9 +42,16 @@ export function NormalizeName(res: NamedResource): string {
 }
 
 
-export class DataSourceClass {
+export abstract class DataSourceClass {
     resourceName: string
-    private readonly type: ResourceType
+    readonly type: ResourceType
+
+    private readonly resourceTypeToImagePath = new Map<string, string>()
+        .set(ResourceType.Postgres, pgImage)
+        .set(ResourceType.Redis, redisImage)
+        .set(ResourceType.Sqlite, sqliteImage)
+        .set(ResourceType.Grpc, grpcImage)
+        .set(ResourceType.Telegram, telegramImage)
 
     constructor(resourceName: string, resType: ResourceType) {
         this.resourceName = resourceName;
@@ -62,6 +75,17 @@ export class DataSourceClass {
     getComponent(): Component {
         return ResourceType.GetComponent(this.type)
     }
+
+    getIcon(): string {
+        const imagePath = this.resourceTypeToImagePath.get(this.type)
+        if (imagePath) {
+            return imagePath
+        }
+
+        return unknownImage;
+    }
+
+    abstract isChanged(): boolean
 }
 
 export class Postgres extends DataSourceClass {
@@ -75,14 +99,26 @@ export class Postgres extends DataSourceClass {
     constructor(resourceName: string) {
         super(resourceName, ResourceType.Postgres);
     }
-}
 
+    isChanged(): boolean {
+        return this.host.isChanged() ||
+            this.name.isChanged() ||
+            this.port.isChanged() ||
+            this.user.isChanged() ||
+            this.pwd.isChanged() ||
+            this.ssl_mode.isChanged();
+    }
+}
 
 export class Sqlite extends DataSourceClass {
     path: ConfigValueClass<string> = new ConfigValueClass("", "")
 
     constructor(resourceName: string) {
         super(resourceName, ResourceType.Sqlite);
+    }
+
+    isChanged(): boolean {
+        return this.path.isChanged()
     }
 }
 
@@ -96,6 +132,14 @@ export class Redis extends DataSourceClass {
     constructor(resourceName: string) {
         super(resourceName, ResourceType.Redis);
     }
+
+    isChanged(): boolean {
+        return this.host.isChanged() ||
+            this.port.isChanged() ||
+            this.user.isChanged() ||
+            this.pwd.isChanged() ||
+            this.db.isChanged();
+    }
 }
 
 export class Telegram extends DataSourceClass {
@@ -103,6 +147,10 @@ export class Telegram extends DataSourceClass {
 
     constructor(resourceName: string) {
         super(resourceName, ResourceType.Telegram);
+    }
+
+    isChanged(): boolean {
+        return this.apiKey.isChanged()
     }
 }
 
@@ -112,6 +160,11 @@ export class GrpcClient extends DataSourceClass {
 
     constructor(resourceName: string) {
         super(resourceName, ResourceType.Grpc);
+    }
+
+    isChanged(): boolean {
+        return this.connectionString.isChanged() ||
+            this.module.isChanged()
     }
 }
 

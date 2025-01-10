@@ -12,4 +12,29 @@ export class AppConfigClass {
         this.dataSources = dataSources;
         this.servers = servers;
     }
+
+    public isChanged(): boolean {
+        return this.appInfo.isChanged()
+    }
+
+    public getChangedDataSources(): string[] {
+        const changedDataSourceNames: string[] =[]
+        this.dataSources.map(ds => {
+            if (ds.isChanged()) {
+                changedDataSourceNames.push(ds.resourceName)
+            }
+        })
+
+        return changedDataSourceNames
+    }
+
+    public getChangedServers() : string[] {
+        const changedServerNames: string[] = []
+        this.servers.map(serv => {
+            if (serv.isChanged()) {
+                changedServerNames.push(serv.name)
+            }
+        })
+        return changedServerNames
+    }
 }

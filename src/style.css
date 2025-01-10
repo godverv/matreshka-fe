@@ -28,9 +28,7 @@ html, body, #app {
 
     --background: white;
 
-    --border-color: #05bc05;
-
-    --good: #05bc05;
+    --good: #96dd96;
     --warn: #f67322;
     --value-changed-outline: #e63e18;
     --selected-gradient: linear-gradient(#70f1f1, #05878c);
@@ -38,7 +36,6 @@ html, body, #app {
 }
 
 /*Font sizes*/
-
 :root {
     font-size: 20px;
 }

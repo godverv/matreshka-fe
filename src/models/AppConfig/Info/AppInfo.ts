@@ -28,7 +28,15 @@ export class AppInfoClass {
     }
 
     getChanges(): Change[] {
-        return []
+        const changes: Change[] = []
+        changes.push(...this.name.getChanges())
+        changes.push(...this.version.getChanges())
+
+        return changes
+    }
+
+    isChanged() : boolean{
+        return this.getChanges().length != 0
     }
 
 }

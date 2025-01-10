@@ -59,12 +59,33 @@ fetchConfig()
 
   <div v-else class="Display">
     <div class="Content">
-      <AppInfo
-          v-model="configData.appInfo"/>
-      <ResourcesInfo
-          v-model="configData.dataSources"/>
-      <ServersInfo
-          v-model="configData.servers"/>
+      <div
+          class="ContentBlock"
+          :style="{
+            borderColor: configData.appInfo.isChanged() ? 'var(--warn)':'var(--good)',
+          }"
+      >
+        <AppInfo
+            v-model="configData.appInfo"/>
+      </div>
+      <div
+          class="ContentBlock"
+          :style="{
+            borderColor: configData.getChangedDataSources().length != 0 ? 'var(--warn)':'var(--good)',
+          }"
+      >
+        <ResourcesInfo
+            v-model="configData.dataSources"/>
+      </div>
+      <div
+          class="ContentBlock"
+          :style="{
+            borderColor: configData.getChangedServers().length != 0 ? 'var(--warn)':'var(--good)',
+          }"
+      >
+        <ServersInfo
+            v-model="configData.servers"/>
+      </div>
     </div>
 
     <Transition name="BottomControls">
@@ -108,8 +129,9 @@ fetchConfig()
   gap: 1em;
 }
 
-.Content > * {
-  border: var(--good) solid;
+.ContentBlock {
+  border: solid;
+  /*border: var(--good) solid;*/
   border-radius: 16px;
   padding: 1em;
 }
