@@ -1,4 +1,4 @@
-import {AppInfoClass} from "@/models/AppConfig/Info/AppInfo.ts";
+import {AppInfoClass, Change} from "@/models/AppConfig/Info/AppInfo.ts";
 import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
 import {ServerClass} from "@/models/AppConfig/Servers/Servers.ts";
 
@@ -14,11 +14,22 @@ export class AppConfigClass {
     }
 
     public isChanged(): boolean {
-        return this.appInfo.isChanged()
+        return this.getChanges().length != 0
     }
 
-    public getChangedDataSources(): string[] {
-        const changedDataSourceNames: string[] =[]
+    public getChanges(): Change[] {
+        const changes: Change[] = []
+        changes.push(...this.appInfo.getChanges())
+
+        this.dataSources.map(ds => changes.push(...ds.getChanges()))
+
+        this.servers.map(s => changes.push(...s.getChanges()))
+
+        return changes
+    }
+
+    public getChangedDataSourcesNames(): string[] {
+        const changedDataSourceNames: string[] = []
         this.dataSources.map(ds => {
             if (ds.isChanged()) {
                 changedDataSourceNames.push(ds.resourceName)
@@ -28,7 +39,7 @@ export class AppConfigClass {
         return changedDataSourceNames
     }
 
-    public getChangedServers() : string[] {
+    public getChangedServersNames(): string[] {
         const changedServerNames: string[] = []
         this.servers.map(serv => {
             if (serv.isChanged()) {
@@ -36,5 +47,11 @@ export class AppConfigClass {
             }
         })
         return changedServerNames
+    }
+
+    public rollback() {
+        this.appInfo.rollback()
+        this.dataSources.map(ds => ds.rollback())
+        this.servers.map(s => s.rollback())
     }
 }

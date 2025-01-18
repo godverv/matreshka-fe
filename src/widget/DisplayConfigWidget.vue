@@ -5,7 +5,6 @@ import {GetConfigNodes, PatchConfig} from "@/processes/Api/Api.ts";
 import {handleGrpcError} from "@/processes/Api/ErrorCodes.ts";
 
 import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
-import {useActiveConfigStore} from "@/app/store/opened_config.ts";
 
 import Button from 'primevue/button';
 import InputGroup from "primevue/inputgroup";
@@ -24,7 +23,6 @@ const props = defineProps({
   },
 })
 
-const configChangesStore = useActiveConfigStore()
 
 const configData = ref<AppConfigClass | undefined>();
 
@@ -33,7 +31,7 @@ function setData(c: AppConfigClass) {
 }
 
 function rollbackAll() {
-  configChangesStore.rollbackAll()
+  configData.value?.rollback()
 }
 
 function fetchConfig() {
@@ -44,9 +42,10 @@ function fetchConfig() {
 }
 
 function save() {
-  PatchConfig(props.serviceName, configChangesStore.envVariables)
+
+  const changes = configData.value?.getChanges()
+  PatchConfig(props.serviceName, changes)
       .then(setData)
-      .then(rollbackAll)
       .then(fetchConfig)
       .catch(handleGrpcError(toastApi))
 }
@@ -71,7 +70,7 @@ fetchConfig()
       <div
           class="ContentBlock"
           :style="{
-            borderColor: configData.getChangedDataSources().length != 0 ? 'var(--warn)':'var(--good)',
+            borderColor: configData?.getChangedDataSourcesNames().length != 0 ? 'var(--warn)':'var(--good)',
           }"
       >
         <ResourcesInfo
@@ -80,7 +79,7 @@ fetchConfig()
       <div
           class="ContentBlock"
           :style="{
-            borderColor: configData.getChangedServers().length != 0 ? 'var(--warn)':'var(--good)',
+            borderColor: configData?.getChangedServersNames().length != 0 ? 'var(--warn)':'var(--good)',
           }"
       >
         <ServersInfo
@@ -90,7 +89,7 @@ fetchConfig()
 
     <Transition name="BottomControls">
       <InputGroup
-          v-show="configChangesStore.length > 0"
+          v-show="configData?.isChanged()"
           :style="{
               display: 'flex',
               justifyContent: 'center'

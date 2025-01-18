@@ -1,4 +1,4 @@
-import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@godverv/matreshka";
 import {Change} from "@/models/AppConfig/Info/AppInfo.ts";
 
 export type keyMap = {
@@ -28,13 +28,17 @@ export class ConfigValueClass<T> {
 
     getChanges(): Change[] {
         const changes: Change[] = []
-        if (this.originalValue != this.originalValue) {
+        if (this.value != this.originalValue) {
             changes.push({
                 envName: this.envName,
                 newValue: this.value
             } as Change)
         }
         return changes
+    }
+
+    rollback() {
+        this.value = this.originalValue
     }
 }
 

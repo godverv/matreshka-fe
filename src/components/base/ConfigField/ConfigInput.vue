@@ -1,9 +1,6 @@
 <script setup lang="ts">
 
-import {ref} from "vue";
 import {ConfigValueClass} from "@/models/shared/common.ts";
-import {useActiveConfigStore} from "@/app/store/opened_config.ts";
-
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
 import FloatLabel from 'primevue/floatlabel';
@@ -39,35 +36,6 @@ defineProps({
 })
 
 const originalValue = model.value.getOriginalValue()
-const isValueChanged = ref<boolean>(false);
-
-const configChangesStore = useActiveConfigStore();
-
-function valueChanged() {
-  if (model.value.value == originalValue) {
-    rollbackConfigValue()
-  } else {
-    setNewConfigValue()
-  }
-}
-
-
-function rollbackConfigValue() {
-  model.value.value = originalValue
-  configChangesStore.deleteValue(model.value.envName)
-
-  isValueChanged.value = false
-}
-
-function setNewConfigValue() {
-  isValueChanged.value = true
-
-  configChangesStore.setValue(
-      model.value.envName,
-      model.value.value.toString(),
-      rollbackConfigValue
-  )
-}
 
 </script>
 
@@ -80,8 +48,6 @@ function setNewConfigValue() {
               :disabled="isDisabled"
               :invalid="model.value != model.value"
               v-model="model.value as Nullable<string>"
-              @input="valueChanged"
-              @update:modelValue="valueChanged"
           />
           <label>{{ fieldName || model.envName }}</label>
         </FloatLabel>
@@ -95,7 +61,7 @@ function setNewConfigValue() {
     >
       <InputGroup>
         <Button
-            :onclick="rollbackConfigValue"
+            :onclick="() => model.rollback()"
             severity="warn"
             icon="pi pi-refresh"
         />

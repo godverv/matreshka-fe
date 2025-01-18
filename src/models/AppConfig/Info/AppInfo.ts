@@ -31,7 +31,6 @@ export class AppInfoClass {
         const changes: Change[] = []
         changes.push(...this.name.getChanges())
         changes.push(...this.version.getChanges())
-
         return changes
     }
 
@@ -39,6 +38,10 @@ export class AppInfoClass {
         return this.getChanges().length != 0
     }
 
+    rollback() {
+        this.name.rollback()
+        this.version.rollback()
+    }
 }
 
 export type Change = {

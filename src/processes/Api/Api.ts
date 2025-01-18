@@ -3,12 +3,11 @@ import {
     ListConfigsRequest,
     GetConfigNodeRequest,
     Node, CreateConfigRequest, PatchConfigRequest
-} from "@godverv/matreshka/dist/api/grpc/matreshka-be_api.pb";
+} from "@godverv/matreshka";
 
 import {parseAppConfigFromEnv} from "@/processes/Api/ModelMapping.ts";
-import {AppInfoClass, ServicesList} from "@/models/AppConfig/Info/AppInfo.ts";
+import {AppInfoClass, Change, ServicesList} from "@/models/AppConfig/Info/AppInfo.ts";
 import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
-import {changes} from "@/app/store/opened_config.ts";
 import {getBackendUrl} from "@/app/store/settings.ts";
 import {ConfigValueClass} from "@/models/shared/common.ts";
 
@@ -69,13 +68,13 @@ export async function GetConfigNodes(serviceName: string): Promise<AppConfigClas
         })
 }
 
-export async function PatchConfig(serviceName: string, changeList: changes[]) {
+export async function PatchConfig(serviceName: string, changeList: Change[]) {
     const req: PatchConfigRequest = {
         serviceName: serviceName,
         changes: changeList.map((n) => {
             return {
-                name: n.fieldName,
-                value: n.fieldValue,
+                name: n.envName,
+                value: n.newValue,
             } as Node
         }),
     } as PatchConfigRequest;

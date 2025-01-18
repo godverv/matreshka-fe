@@ -2,7 +2,7 @@
 
 import {ref} from "vue";
 
-import {SortType} from "@godverv/matreshka/dist/api/grpc/matreshka-be_api.pb";
+import {SortType} from "@godverv/matreshka";
 import {Sort} from "@/models/search/search.ts";
 
 import FloatLabel from "primevue/floatlabel";

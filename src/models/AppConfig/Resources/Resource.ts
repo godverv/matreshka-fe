@@ -8,6 +8,7 @@ import redisImage from "@/assets/resource_icons/redis.png"
 import sqliteImage from "@/assets/resource_icons/sqlite.png"
 import grpcImage from "@/assets/resource_icons/grpc.png"
 import telegramImage from "@/assets/resource_icons/telegram.png"
+import {Change} from "@/models/AppConfig/Info/AppInfo.ts";
 
 type NamedResource = {
     resource_name: string
@@ -45,7 +46,7 @@ export abstract class DataSourceClass {
     resourceName: string
     readonly type: ResourceType
 
-    private readonly  resourceTypeToImagePath = new Map<string, string>()
+    private readonly resourceTypeToImagePath = new Map<string, string>()
         .set(ResourceType.Postgres, pgImage)
         .set(ResourceType.Redis, redisImage)
         .set(ResourceType.Sqlite, sqliteImage)
@@ -84,7 +85,13 @@ export abstract class DataSourceClass {
         return unknownImage;
     }
 
-    abstract isChanged(): boolean
+    isChanged(): boolean {
+        return this.getChanges().length != 0
+    }
+
+    abstract rollback(): void
+
+    abstract getChanges(): Change[]
 }
 
 export class Postgres extends DataSourceClass {
@@ -99,13 +106,26 @@ export class Postgres extends DataSourceClass {
         super(resourceName, ResourceType.Postgres);
     }
 
-    isChanged(): boolean {
-        return this.host.isChanged() ||
-            this.name.isChanged() ||
-            this.port.isChanged() ||
-            this.user.isChanged() ||
-            this.pwd.isChanged() ||
-            this.ssl_mode.isChanged();
+    rollback(): void {
+        this.host.rollback()
+        this.name.rollback()
+        this.port.rollback()
+        this.user.rollback()
+        this.pwd.rollback()
+        this.ssl_mode.rollback()
+    }
+
+    getChanges(): Change[] {
+        const changes: Change[] = []
+
+        changes.push(...this.host.getChanges())
+        changes.push(...this.name.getChanges())
+        changes.push(...this.port.getChanges())
+        changes.push(...this.user.getChanges())
+        changes.push(...this.pwd.getChanges())
+        changes.push(...this.ssl_mode.getChanges())
+
+        return changes
     }
 }
 
@@ -116,8 +136,16 @@ export class Sqlite extends DataSourceClass {
         super(resourceName, ResourceType.Sqlite);
     }
 
-    isChanged(): boolean {
-        return this.path.isChanged()
+    rollback(): void {
+        this.path.rollback()
+    }
+
+    getChanges(): Change[] {
+        const changes: Change[] = []
+
+        changes.push(...this.path.getChanges())
+
+        return changes
     }
 }
 
@@ -132,12 +160,24 @@ export class Redis extends DataSourceClass {
         super(resourceName, ResourceType.Redis);
     }
 
-    isChanged(): boolean {
-        return this.host.isChanged() ||
-            this.port.isChanged() ||
-            this.user.isChanged() ||
-            this.pwd.isChanged() ||
-            this.db.isChanged();
+    rollback(): void {
+        this.host.rollback()
+        this.port.rollback()
+        this.user.rollback()
+        this.pwd.rollback()
+        this.db.rollback()
+    }
+
+    getChanges(): Change[] {
+        const changes: Change[] = []
+
+        changes.push(...this.host.getChanges())
+        changes.push(...this.port.getChanges())
+        changes.push(...this.user.getChanges())
+        changes.push(...this.pwd.getChanges())
+        changes.push(...this.db.getChanges())
+
+        return changes
     }
 }
 
@@ -148,9 +188,18 @@ export class Telegram extends DataSourceClass {
         super(resourceName, ResourceType.Telegram);
     }
 
-    isChanged(): boolean {
-        return this.apiKey.isChanged()
+    rollback(): void {
+        this.apiKey.rollback()
     }
+
+    getChanges(): Change[] {
+        const changes: Change[] = []
+
+        changes.push(...this.apiKey.getChanges())
+
+        return changes
+    }
+
 }
 
 export class GrpcClient extends DataSourceClass {
@@ -161,9 +210,18 @@ export class GrpcClient extends DataSourceClass {
         super(resourceName, ResourceType.Grpc);
     }
 
-    isChanged(): boolean {
-        return this.connectionString.isChanged() ||
-            this.module.isChanged()
+    rollback(): void {
+        this.connectionString.rollback()
+        this.module.rollback()
+    }
+
+    getChanges(): Change[] {
+        const changes: Change[] = []
+
+        changes.push(...this.connectionString.getChanges())
+        changes.push(...this.module.getChanges())
+
+        return changes
     }
 }
 
