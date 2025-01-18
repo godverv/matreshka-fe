@@ -35,7 +35,7 @@ defineProps({
   }
 })
 
-const originalValue = model.value.getOriginalValue()
+const originalValue = model.value.getOriginalValue().toString() as Nullable<string>
 
 </script>
 
@@ -61,7 +61,7 @@ const originalValue = model.value.getOriginalValue()
     >
       <InputGroup>
         <Button
-            :onclick="() => model.rollback()"
+            @click="() => model.rollback()"
             severity="warn"
             icon="pi pi-refresh"
         />
@@ -69,7 +69,7 @@ const originalValue = model.value.getOriginalValue()
           <InputText
               :disabled="true"
               aria-disabled="true"
-              v-model="originalValue as Nullable<string>"
+              v-model="originalValue"
           />
           <label>Old value</label>
         </FloatLabel>
