@@ -3,7 +3,7 @@ import {
     ListConfigsRequest,
     GetConfigNodeRequest,
     Node, CreateConfigRequest, PatchConfigRequest
-} from "matreshka-api/api/grpc/matreshka-be_api.pb";
+} from "@godverv/matreshka/dist/api/grpc/matreshka-be_api.pb";
 
 import {parseAppConfigFromEnv} from "@/processes/Api/ModelMapping.ts";
 import {AppInfoClass, ServicesList} from "@/models/AppConfig/Info/AppInfo.ts";
