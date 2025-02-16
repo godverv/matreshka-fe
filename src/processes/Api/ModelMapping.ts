@@ -1,4 +1,4 @@
-import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@godverv/matreshka";
 import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
 import {extractDataSources} from "@/models/AppConfig/Resources/mapping.ts";
 

@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import {ref} from "vue";
 
-import {GetConfigNodes, PatchConfig} from "@/processes/Api/Api.ts";
+import {ListConfigsRequest} from "@godverv/matreshka";
+import {GetConfigNodes, ListServices, PatchConfig} from "@/processes/Api/Api.ts";
 import {handleGrpcError} from "@/processes/Api/ErrorCodes.ts";
 
 import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
 
 import Button from 'primevue/button';
 import InputGroup from "primevue/inputgroup";
+import SelectButton from 'primevue/selectbutton';
 import {useToast} from "primevue/usetoast";
 
 import AppInfo from "@/components/config/AppInfo/AppInfo.vue";
@@ -23,8 +25,9 @@ const props = defineProps({
   },
 })
 
-
-const configData = ref<AppConfigClass | undefined>();
+const configData = ref<AppConfigClass>();
+const versions = ref<string[]>([]);
+const selectedVersion = ref<string>('');
 
 function setData(c: AppConfigClass) {
   configData.value = c
@@ -34,29 +37,57 @@ function rollbackAll() {
   configData.value?.rollback()
 }
 
-function fetchConfig() {
+async function fetchConfig() {
   configData.value = undefined
-  GetConfigNodes(props.serviceName)
+
+  GetConfigNodes(props.serviceName, selectedVersion.value)
       .then(setData)
       .catch(handleGrpcError(toastApi))
 }
 
-function save() {
+async function fetchVersions() {
+  const listReq = {
+    paging: {
+      limit: 1
+    },
+    searchPattern: props.serviceName
+  } as ListConfigsRequest;
 
-  const changes = configData.value?.getChanges()
-  PatchConfig(props.serviceName, changes)
+  ListServices(listReq)
+      .then(res => {
+          versions.value = res.servicesInfo[0].versions
+          selectedVersion.value = versions.value[0]
+      })
+      .catch(handleGrpcError(toastApi))
+}
+
+async function save() {
+  if (!configData.value) return
+
+  const changes = configData.value.getChanges()
+  PatchConfig(props.serviceName, selectedVersion.value, changes)
       .then(setData)
       .then(fetchConfig)
       .catch(handleGrpcError(toastApi))
 }
 
-fetchConfig()
+fetchVersions()
+    .then(fetchConfig)
+
 </script>
 
 <template>
   <div v-if="!configData">No App config data</div>
 
   <div v-else class="Display">
+
+    <SelectButton
+        v-if="versions.length > 1"
+        v-model="selectedVersion"
+        :options="versions"
+        @update:modelValue="fetchConfig"
+    />
+
     <div class="Content">
       <div
           class="ContentBlock"

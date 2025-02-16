@@ -1,10 +1,5 @@
 import {ConfigValueClass} from "@/models/shared/common.ts";
 
-export type ServicesList = {
-    servicesInfo: AppInfoClass[]
-    total: number
-}
-
 export class ServiceListClass {
     servicesInfo: AppInfoClass[]
     total: number
@@ -15,22 +10,22 @@ export class ServiceListClass {
     }
 }
 
-
 export class AppInfoClass {
     name: ConfigValueClass<string>
-    version: ConfigValueClass<string>
-
+    serviceVersion: ConfigValueClass<string>
     public updated_at?: Date
 
-    constructor(name: ConfigValueClass<string>, version: ConfigValueClass<string>) {
+    versions: string[] = []
+
+    constructor(name: ConfigValueClass<string>, serviceVersion: ConfigValueClass<string>) {
         this.name = name;
-        this.version = version;
+        this.serviceVersion = serviceVersion;
     }
 
     getChanges(): Change[] {
         const changes: Change[] = []
         changes.push(...this.name.getChanges())
-        changes.push(...this.version.getChanges())
+        changes.push(...this.serviceVersion.getChanges())
         return changes
     }
 
@@ -40,7 +35,7 @@ export class AppInfoClass {
 
     rollback() {
         this.name.rollback()
-        this.version.rollback()
+        this.serviceVersion.rollback()
     }
 }
 

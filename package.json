@@ -9,6 +9,7 @@
     "local-image": "docker buildx build --load --platform linux/arm64 -t matreshka_fe:local ."
   },
   "dependencies": {
+    "@godverv/matreshka": "^1.0.51",
     "@grpc/grpc-js": "^1.10.7",
     "@grpc/proto-loader": "^0.7.13",
     "@primevue/themes": "^4.0.7",
@@ -20,7 +21,6 @@
     "google-protobuf": "^3.21.2",
     "grpc-web": "^1.5.0",
     "js-yaml": "^4.1.0",
-    "@godverv/matreshka": "^1.0.48",
     "pinia": "^2.1.7",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.4",

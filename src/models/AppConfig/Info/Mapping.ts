@@ -1,5 +1,5 @@
 import { AppInfoClass } from "@/models/AppConfig/Info/AppInfo.ts";
-import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@godverv/matreshka";
 import {ConfigValueClass, extractStringValue} from "@/models/shared/common.ts";;
 
 export function mapAppInfo(root: Node): AppInfoClass {
