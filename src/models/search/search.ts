@@ -1,4 +1,4 @@
-import {SortType} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
+import {SortType} from "@godverv/matreshka";
 
 export type ListServicesReq = {
     paging: Paging;

@@ -17,7 +17,7 @@ const info = defineModel<AppInfoClass>({required: true})
         />
 
         <ConfigField
-            v-model="info.version"
+            v-model="info.serviceVersion"
             field-name="Version"
         />
   </div>
