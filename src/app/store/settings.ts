@@ -36,6 +36,8 @@ function backendUrlLocalStorageKey(): string {
 export function getBackendUrl(): string {
     const item = localStorage.getItem(backendUrlLocalStorageKey())
     const beApiAddr =  item !== null ? item : import.meta.env.VITE_MATRESHKA_BACKEND_URL
+
     localStorage.setItem(backendUrlLocalStorageKey(), beApiAddr)
+
     return beApiAddr
 }
