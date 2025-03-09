@@ -1,13 +1,7 @@
-import {ConfigValueClass} from "@/models/shared/common.ts";
-import {ResourceType} from "@/models/AppConfig/Resources/ResourceTypes.ts";
 import {Component} from "vue";
 
-import unknownImage from "@/assets/resource_icons/unknown.png";
-import pgImage from "@/assets/resource_icons/pg.png";
-import redisImage from "@/assets/resource_icons/redis.png"
-import sqliteImage from "@/assets/resource_icons/sqlite.png"
-import grpcImage from "@/assets/resource_icons/grpc.png"
-import telegramImage from "@/assets/resource_icons/telegram.png"
+import {ConfigValueClass} from "@/models/shared/common.ts";
+import {ResourceType} from "@/models/AppConfig/Resources/ResourceTypes.ts";
 import {Change} from "@/models/AppConfig/Info/AppInfo.ts";
 
 type NamedResource = {
@@ -42,16 +36,18 @@ export function NormalizeName(res: NamedResource): string {
     return out
 }
 
+const resourcesURL = 'https://s3-api.redsock.ru/verv/matreshka/'
+
 export abstract class DataSourceClass {
     resourceName: string
     readonly type: ResourceType
 
     private readonly resourceTypeToImagePath = new Map<string, string>()
-        .set(ResourceType.Postgres, pgImage)
-        .set(ResourceType.Redis, redisImage)
-        .set(ResourceType.Sqlite, sqliteImage)
-        .set(ResourceType.Grpc, grpcImage)
-        .set(ResourceType.Telegram, telegramImage)
+        .set(ResourceType.Postgres, resourcesURL+'pg.png')
+        .set(ResourceType.Redis, resourcesURL+'redis.png')
+        .set(ResourceType.Sqlite, resourcesURL+'sqlite.png')
+        .set(ResourceType.Grpc, resourcesURL+'grpc.png')
+        .set(ResourceType.Telegram, resourcesURL+'telegram.png')
 
     constructor(resourceName: string, resType: ResourceType) {
         this.resourceName = resourceName;
@@ -82,7 +78,7 @@ export abstract class DataSourceClass {
             return imagePath
         }
 
-        return unknownImage;
+        return resourcesURL+'unknown.png';
     }
 
     isChanged(): boolean {

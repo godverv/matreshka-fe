@@ -51,7 +51,6 @@ document.addEventListener('keydown', function(event) {
         <InputText
             style="width: 100%"
             v-model="apiURL as Nullable<string>"
-            :invalid="apiURL == ''"
             @input="changeApiUrl"
         />
         <label> Api Url </label>
