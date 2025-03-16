@@ -13,7 +13,11 @@ import {ConfigValueClass} from "@/models/shared/common.ts";
 
 const prefix = {pathPrefix: getBackendUrl()};
 
-export function setBackendUrl(url: string) {
+export function setBackendAddress(url: string) {
+    if (!url.startsWith('http')) {
+        url = 'http://' + url
+    }
+
     prefix.pathPrefix = url
 }
 

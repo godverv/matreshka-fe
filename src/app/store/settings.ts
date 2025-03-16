@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {setBackendUrl} from "@/processes/Api/Api.ts";
+import {setBackendAddress} from "@/processes/Api/Api.ts";
 
 export const useSettingsStore = defineStore('settings', {
     state: () => {
@@ -7,7 +7,7 @@ export const useSettingsStore = defineStore('settings', {
             apiURL: getBackendUrl()
         } as Settings
 
-        setBackendUrl(s.apiURL)
+        setBackendAddress(s.apiURL)
 
         return s
     },
@@ -19,7 +19,7 @@ export const useSettingsStore = defineStore('settings', {
     actions: {
         setApiURL(url: string) {
             this.apiURL = url
-            setBackendUrl(this.apiURL)
+            setBackendAddress(this.apiURL)
             localStorage.setItem(backendUrlLocalStorageKey(), url)
         },
     },
@@ -35,7 +35,7 @@ function backendUrlLocalStorageKey(): string {
 
 export function getBackendUrl(): string {
     const item = localStorage.getItem(backendUrlLocalStorageKey())
-    const beApiAddr =  item !== null ? item : import.meta.env.VITE_MATRESHKA_BACKEND_URL
+    const beApiAddr = item !== null ? item : import.meta.env.VITE_MATRESHKA_BACKEND_URL
 
     localStorage.setItem(backendUrlLocalStorageKey(), beApiAddr)
 
