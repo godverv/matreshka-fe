@@ -67,7 +67,6 @@ async function save() {
   const changes = configData.value.getChanges()
   PatchConfig(props.serviceName, selectedVersion.value, changes)
       .then(setData)
-      .then(fetchConfig)
       .catch(handleGrpcError(toastApi))
 }
 
@@ -80,7 +79,7 @@ fetchVersions()
   <div v-if="!configData">No App config data</div>
 
   <div v-else class="Display">
-
+    <div class="Tittle">{{ configData.appInfo.name.value }}</div>
     <SelectButton
         v-if="versions.length > 1"
         v-model="selectedVersion"

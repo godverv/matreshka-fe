@@ -127,7 +127,8 @@ function openServiceInfo(event: MouseEvent, serviceName: string) {
   <Dialog
       v-model:visible="isDialogOpen"
       modal
-      :header="openedConfigName"
+      :closable="false"
+      :draggable="false"
       :dismissableMask="true"
       :pt="{
           root: 'border-none',

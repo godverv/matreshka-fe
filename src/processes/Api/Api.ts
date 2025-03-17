@@ -87,8 +87,17 @@ export async function PatchConfig(serviceName: string, version: string, changeLi
         }),
     } as PatchConfigRequest;
 
+
     return MatreshkaBeAPI.PatchConfig(req, prefix)
-        .then(() => GetConfigNodes(serviceName, version))
+        .then(() => {
+            changeList.map((n) => {
+                if (n.envName.includes('APP-INFO_NAME')) {
+                    serviceName = n.newValue
+                }
+            })
+            console.log(serviceName)
+            return GetConfigNodes(serviceName, version)
+        })
 }
 
 export async function CreateConfig(name: string) {

@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { ref, onMounted, nextTick } from "vue";
 
 import {AppInfoClass} from "@/models/AppConfig/Info/AppInfo.ts";
 import {dateToString} from "@/models/AppConfig/converters/date.ts";
+import ConfigName from "@/components/base/ConfigName.vue";
 
 defineProps({
   servicesList: {
@@ -12,6 +14,24 @@ defineProps({
 const emit = defineEmits<{
   (event: 'clickService', mouseEvent: MouseEvent, name: string): void
 }>()
+
+
+const labelRef = ref(null); // Reference to the Label div
+
+const checkOverflow = () => {
+  nextTick(() => {
+    if (!labelRef.value) return; // Skip if ref not found
+
+    const text = labelRef.value.querySelector(".LabelText");
+    if (text.scrollWidth > labelRef.value.clientWidth) {
+      labelRef.value.classList.add("hover-scroll");
+    } else {
+      labelRef.value.classList.remove("hover-scroll");
+    }
+  });
+};
+
+onMounted(checkOverflow);
 
 </script>
 
@@ -25,9 +45,7 @@ const emit = defineEmits<{
           class="ListItem"
           @click="(event: MouseEvent) => { emit('clickService', event, service.name.value) }"
       >
-        <div>
-          {{ service.name.value }}
-        </div>
+        <ConfigName :label="service.name.value"/>
       </div>
     </div>
   </div>
