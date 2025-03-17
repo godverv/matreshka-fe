@@ -19,7 +19,6 @@ defineProps({
 <style scoped>
 .Label {
   width: 100%;
-  border: red solid;
   display: flex;
   justify-content: center;
   overflow: hidden;
