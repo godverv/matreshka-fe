@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Toast from "primevue/toast";
 import SettingsWidget from "@/widget/SettingsWidget.vue";
+import SideMenu from "@/components/global/SideMenu/SideMenu.vue";
 
 </script>
 
@@ -9,6 +10,7 @@ import SettingsWidget from "@/widget/SettingsWidget.vue";
     <Toast/>
     <RouterView />
     <SettingsWidget/>
+    <SideMenu/>
   </div>
 </template>
 

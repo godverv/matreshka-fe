@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
-import ConfigPickList from "@/components/base/ConfigPickList.vue";
-import ConfigToggle from "@/components/base/ConfigToggle.vue";
+import ConfigToggle from "@/components/base/ConfigField/ConfigToggle.vue";
 import ResourcesList from "@/components/resources/minio/ResourcesList.vue"
 
 import {S3Action, Statement} from "@/models/resource_configs/s3/minio/minio.ts";

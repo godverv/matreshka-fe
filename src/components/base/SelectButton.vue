@@ -16,7 +16,6 @@ const props = defineProps({
   <SelectButton
       v-model="model"
       :options="props.options"
-
   />
 </template>
 

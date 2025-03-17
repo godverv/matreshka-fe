@@ -7,7 +7,6 @@ import SpeedDial from "primevue/speeddial";
 import {MenuItem} from "primevue/menuitem";
 import Dialog from "primevue/dialog";
 
-
 const isDialogOpen = ref<boolean>(false);
 
 function openCreateVervConfigWidget() {
