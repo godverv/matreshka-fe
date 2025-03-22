@@ -106,15 +106,17 @@ function openServiceInfo(event: MouseEvent, serviceName: string) {
       <ServiceListTopControlsWidget
           @updateSearchRequest="updateSearchReq"
       />
-      <div v-if="!isLoading">
-        <ServicesListWidget
-            v-if="servicesList && servicesList.servicesInfo.length > 0"
-            :servicesList="servicesList.servicesInfo"
-            @click-service="openServiceInfo"
-        />
-        <p v-else class="EmptyNodeMessage">No configs on this node</p>
-      </div>
-      <ProgressSpinner v-else/>
+      <Transition name="load-fader" mode="out-in">
+        <div v-if="!isLoading">
+          <ServicesListWidget
+              v-if="servicesList && servicesList.servicesInfo.length > 0"
+              :servicesList="servicesList.servicesInfo"
+              @click-service="openServiceInfo"
+          />
+          <p v-else class="EmptyNodeMessage">No configs on this node</p>
+        </div>
+        <ProgressSpinner v-else/>
+      </Transition>
 
       <Paginator
           :rows="listRequest.paging.limit"
@@ -175,5 +177,20 @@ function openServiceInfo(event: MouseEvent, serviceName: string) {
 .EmptyNodeMessage {
   display: flex;
   justify-content: center;
+}
+
+.load-fader-enter-active,
+.load-fader-leave-active {
+  transition: 0.25s;
+}
+
+.load-fader-enter-to,
+.load-fader-leave-from {
+  opacity: 1;
+}
+
+.load-fader-enter-from,
+.load-fader-leave-to {
+  opacity: 0;
 }
 </style>

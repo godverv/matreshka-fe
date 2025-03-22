@@ -58,7 +58,6 @@ const model = defineModel<Statement>({required: true})
   animation: blink 0.5s forwards;
 }
 
-
 @keyframes blink {
   0%, 100% {
     background: none;

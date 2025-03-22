@@ -22,24 +22,42 @@ const searchPattern = ref<string>('');
 
 // Sort
 const sorting = ref<Sort>({
-  type: SortType.default,
+  type: SortType.by_updated_at,
   desc: false,
 } as Sort)
 
+const ascByUpdatedAtLabel = 'New first';
+const descByUpdatedAtLabel = 'Old first';
+
+const ascByNameLabel = 'Asc';
+const descByNameLabel = 'Desc';
+
+const offLabel = ref<string>(ascByUpdatedAtLabel)
+const onLabel = ref<string>(descByUpdatedAtLabel)
+
 const sortOptions = ref([
-  {name: 'default', code: SortType.default},
-  {name: 'name', code: SortType.by_name},
-  {name: 'updated at', code: SortType.by_updated_at},
+  {name: 'Name', code: SortType.by_name},
+  {name: 'Updated at', code: SortType.by_updated_at},
 ])
 
 function doSearch() {
+  if (sorting.value.type == SortType.by_name) {
+    offLabel.value = ascByNameLabel;
+    onLabel.value = descByNameLabel;
+  } else {
+    offLabel.value = ascByUpdatedAtLabel;
+    onLabel.value = descByUpdatedAtLabel;
+
+    sorting.value.desc = !sorting.value.desc
+  }
+
   emit('updateSearchRequest', searchPattern.value, sorting.value)
 }
 </script>
 
 <template>
   <div class="TopControls">
-    <InputGroup >
+    <InputGroup>
       <InputText
           v-model="searchPattern"
           placeholder="Search"
@@ -67,15 +85,15 @@ function doSearch() {
         />
         <label for="select_sort_type">Sort by</label>
       </FloatLabel>
-        <ToggleButton
-            :style="{width: '8em'}"
-            v-model="sorting.desc"
-            off-label="ASC"
-            off-icon="pi pi-arrow-up"
-            on-icon="pi pi-arrow-down"
-            on-label="DESC"
-            @click="doSearch"
-        />
+      <ToggleButton
+          :style="{width: '8em'}"
+          v-model="sorting.desc"
+          :off-label="offLabel"
+          off-icon="pi pi-arrow-up"
+          on-icon="pi pi-arrow-down"
+          :on-label="onLabel"
+          @click="doSearch"
+      />
     </InputGroup>
   </div>
 </template>
