@@ -1,4 +1,4 @@
-import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@godverv/matreshka";
 
 import {mapPostgres} from "@/models/AppConfig/Resources/postgres.ts";
 import {mapRedis} from "@/models/AppConfig/Resources/redis.ts";

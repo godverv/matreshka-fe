@@ -3,6 +3,7 @@ import {Component} from "vue";
 import {ConfigValueClass} from "@/models/shared/common.ts";
 import {ResourceType} from "@/models/AppConfig/Resources/ResourceTypes.ts";
 import {Change} from "@/models/AppConfig/Info/AppInfo.ts";
+import {getResourceLink} from "@/models/shared/s3.ts";
 
 type NamedResource = {
     resource_name: string
@@ -36,18 +37,17 @@ export function NormalizeName(res: NamedResource): string {
     return out
 }
 
-const resourcesURL = 'https://s3-api.redsock.ru/verv/matreshka/'
 
 export abstract class DataSourceClass {
     resourceName: string
     readonly type: ResourceType
 
     private readonly resourceTypeToImagePath = new Map<string, string>()
-        .set(ResourceType.Postgres, resourcesURL+'pg.png')
-        .set(ResourceType.Redis, resourcesURL+'redis.png')
-        .set(ResourceType.Sqlite, resourcesURL+'sqlite.png')
-        .set(ResourceType.Grpc, resourcesURL+'grpc.png')
-        .set(ResourceType.Telegram, resourcesURL+'telegram.png')
+        .set(ResourceType.Postgres, getResourceLink('pg.png'))
+        .set(ResourceType.Redis, getResourceLink('redis.png'))
+        .set(ResourceType.Sqlite, getResourceLink('sqlite.png'))
+        .set(ResourceType.Grpc, getResourceLink('grpc.png'))
+        .set(ResourceType.Telegram, getResourceLink('telegram.png'))
 
     constructor(resourceName: string, resType: ResourceType) {
         this.resourceName = resourceName;
@@ -78,7 +78,7 @@ export abstract class DataSourceClass {
             return imagePath
         }
 
-        return resourcesURL+'unknown.png';
+        return getResourceLink('unknown.png');
     }
 
     isChanged(): boolean {

@@ -1,6 +1,6 @@
-import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@godverv/matreshka";
 import {GrpcClient} from "@/models/AppConfig/Resources/Resource.ts";
-import {extractStringValue} from "@/models/shared/common.ts";;
+import {extractStringValue} from "@/models/shared/common.ts";
 
 export function mapGrpc(root: Node): GrpcClient {
     if (!root.name) {

@@ -1,4 +1,4 @@
-import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@godverv/matreshka";
 import {DataSourceClass, Postgres} from "@/models/AppConfig/Resources/Resource.ts";
 import {extractNumberValue, extractStringValue} from "@/models/shared/common.ts";
 

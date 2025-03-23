@@ -1,4 +1,4 @@
-import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@godverv/matreshka";
 import {FsHandler, GrpcHandler, ServerClass} from "@/models/AppConfig/Servers/Servers.ts";
 import {ConfigValueClass, extractStringValue} from "@/models/shared/common.ts";
 

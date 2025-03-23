@@ -1,9 +1,8 @@
-import {Node} from "matreshka-api/api/grpc/matreshka-be_api.pb.ts";
+import {Node} from "@godverv/matreshka";
 import {DataSourceClass, Redis} from "@/models/AppConfig/Resources/Resource.ts";
 import {extractNumberValue, extractStringValue} from "@/models/shared/common.ts";
 
 export function mapRedis(root: Node) : DataSourceClass {
-
     if (!root.name) {
         throw  {message: "Can't parse redis config"}
     }

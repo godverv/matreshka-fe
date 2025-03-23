@@ -15,7 +15,7 @@
     "@primevue/themes": "^4.0.7",
     "@types/grpc-error": "^1.0.3",
     "@types/js-yaml": "^4.0.9",
-    "axios": "^1.6.8",
+    "axios": "1.8.2",
     "browserify": "^17.0.0",
     "goog": "^0.2.1",
     "google-protobuf": "^3.21.2",

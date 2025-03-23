@@ -2,6 +2,8 @@
 import {AppInfoClass} from "@/models/AppConfig/Info/AppInfo.ts";
 import {dateToString} from "@/models/AppConfig/converters/date.ts";
 import ConfigName from "@/components/base/ConfigName.vue";
+import ConfigIcon from "@/components/base/ConfigIcon.vue";
+import {ConfigType} from "@/models/configs/types.ts";
 
 defineProps({
   servicesList: {
@@ -29,6 +31,7 @@ const emit = defineEmits<{
           @click="(event: MouseEvent) => { emit('clickService', event, service.name.value) }"
       >
         <ConfigName :label="service.name.value"/>
+        <ConfigIcon :config-type="ConfigType.AppConfig"/>
       </div>
     </div>
   </div>
