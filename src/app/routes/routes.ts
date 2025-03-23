@@ -4,7 +4,7 @@ import DisplayConfigPage from "@/pages/DisplayConfigPage.vue";
 
 import {createRouter, createWebHistory} from "vue-router";
 import NewConfigPage from "@/pages/NewConfigPage.vue";
-import IAMConfig from "@/components/resources/minio/IAMConfig.vue";
+import IAMConfig from "@/components/config/minio/IAMConfig.vue";
 
 export enum Pages {
     Unknown = "unknown",

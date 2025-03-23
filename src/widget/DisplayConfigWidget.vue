@@ -12,9 +12,9 @@ import InputGroup from "primevue/inputgroup";
 import SelectButton from 'primevue/selectbutton';
 import {useToast} from "primevue/usetoast";
 
-import AppInfo from "@/components/config/AppInfo/AppInfo.vue";
-import ResourcesInfo from "@/components/config/Resource/ResourcesInfo.vue";
-import ServersInfo from "@/components/config/Server/ServersInfo.vue";
+import AppInfo from "@/components/config/verv/app_info/AppInfo.vue";
+import ResourcesInfo from "@/components/config/verv/resource/AppResources.vue";
+import ServersInfo from "@/components/config/verv/server/ServersInfo.vue";
 
 const toastApi = useToast();
 

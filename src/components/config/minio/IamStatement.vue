@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-import ConfigToggle from "@/components/base/ConfigField/ConfigToggle.vue";
-import ResourcesList from "@/components/resources/minio/ResourcesList.vue"
+import Toggle from "@/components/base/config/fields/Toggle.vue";
+import ResourcesList from "@/components/config/minio/ResourcesList.vue"
+import SelectActions from "@/components/config/minio/SelectActions.vue";
 
 import {S3Action, Statement} from "@/models/resource_configs/s3/minio/minio.ts";
-import SelectActions from "@/components/resources/minio/SelectActions.vue";
 
 const model = defineModel<Statement>({required: true})
 
@@ -20,7 +20,7 @@ const model = defineModel<Statement>({required: true})
       </div>
     </Transition>
 
-    <ConfigToggle
+    <Toggle
         v-model="model.allow"
     />
     <SelectActions

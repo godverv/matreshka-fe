@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
-import IconButton from "@/components/base/IconButton.vue";
+import IconButton from "@/components/base/config/IconButton.vue";
 
 import {ref} from "vue";
 import {ConfigValueClass} from "@/models/shared/common.ts";
@@ -50,14 +50,15 @@ function countConfigFields<T>(config: T): number {
             } "
         >
           <IconButton
-              :onclick="()=>setSelected(i)"
+              :onclick="() => setSelected(i)"
               :isSelected="selectedIdx === i"
               :iconPath="res.getIcon()"
               :label="res.normalizeName()"
           />
           <div
               v-if="res.isChanged()"
-              class="ResourceChanged">*</div>
+              class="ResourceChanged">*
+          </div>
         </div>
       </div>
 

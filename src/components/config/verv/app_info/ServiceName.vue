@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {ConfigValueClass} from "@/models/shared/common.ts";
-import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
+import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
 import Button from "primevue/button";
 import {ref} from "vue";
 import {ExtractSourceCodeSystemFromServiceName, PiIconFromSourceCodeSystem} from "@/models/AppConfig/Info/AppInfo.ts";

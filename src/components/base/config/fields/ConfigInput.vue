@@ -1,12 +1,14 @@
 <script setup lang="ts">
 
 import {ConfigValueClass} from "@/models/shared/common.ts";
+
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
 import FloatLabel from 'primevue/floatlabel';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 import Button from 'primevue/button';
 import {Nullable} from "@primevue/core";
+
 import {FieldAddon} from "@/models/shared/FieldAddon.ts";
 
 const model = defineModel<ConfigValueClass<string | number>>({

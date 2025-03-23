@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import {Sqlite} from "@/models/AppConfig/Resources/Resource.ts";
-import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
-import SelectButton from "@/components/base/SelectButton.vue"
+
+import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
+import SelectButton from "@/components/base/config/SelectButton.vue"
 
 import {ref} from "vue";
 

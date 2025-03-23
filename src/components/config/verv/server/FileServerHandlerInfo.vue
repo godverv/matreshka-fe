@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {FsHandler} from "@/models/AppConfig/Servers/Servers.ts";
-import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
+import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
 
 const fsInfo = defineModel<FsHandler>({required: true})
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import ServerInfo from "@/components/config/Server/ServerInfo.vue";
+import ServerInfo from "@/components/config/verv/server/ServerInfo.vue";
 import {ServerClass} from "@/models/AppConfig/Servers/Servers.ts";
-import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
+import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
 
 const servers = defineModel<ServerClass[]>({default: []})
 

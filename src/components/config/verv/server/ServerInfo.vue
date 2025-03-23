@@ -1,8 +1,9 @@
 <script setup lang="ts">
 
 import {ServerClass} from "@/models/AppConfig/Servers/Servers.ts";
-import GrpcHandlerInfo from "@/components/config/Server/GrpcHandlerInfo.vue";
-import FileServerHandlerInfo from "@/components/config/Server/FileServerHandlerInfo.vue";
+
+import GrpcHandlerInfo from "@/components/config/verv/server/GrpcHandlerInfo.vue";
+import FileServerHandlerInfo from "@/components/config/verv/server/FileServerHandlerInfo.vue";
 
 const cfg = defineModel<ServerClass>({required: true})
 

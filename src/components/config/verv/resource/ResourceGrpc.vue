@@ -2,7 +2,7 @@
 
 import {GrpcClient} from "@/models/AppConfig/Resources/Resource.ts";
 
-import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
+import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
 
 const model = defineModel<GrpcClient>({required: true})
 </script>

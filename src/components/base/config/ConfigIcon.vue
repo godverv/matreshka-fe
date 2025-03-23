@@ -13,8 +13,8 @@ defineProps({
 
 <template>
   <img
-      src=""
-      alt="@/assets/svg/errorconfig.svg">
+      src="@/assets/svg/errorconfig.svg"
+      :alt="configType">
 </template>
 
 <style scoped>

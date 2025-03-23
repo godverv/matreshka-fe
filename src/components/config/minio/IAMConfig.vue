@@ -12,8 +12,8 @@ import {
   Statement
 } from "@/models/resource_configs/s3/minio/minio.ts";
 
-import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
-import IamStatement from "@/components/resources/minio/IamStatement.vue";
+import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
+import IamStatement from "@/components/config/minio/IamStatement.vue";
 
 import Button from "primevue/button";
 

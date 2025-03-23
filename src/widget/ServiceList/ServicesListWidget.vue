@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {AppInfoClass} from "@/models/AppConfig/Info/AppInfo.ts";
-import {dateToString} from "@/models/AppConfig/converters/date.ts";
-import ConfigName from "@/components/base/ConfigName.vue";
-import ConfigIcon from "@/components/base/ConfigIcon.vue";
 import {ConfigType} from "@/models/configs/types.ts";
+import {dateToString} from "@/models/AppConfig/converters/date.ts";
+
+import ConfigName from "@/components/base/config/ConfigName.vue";
+import ConfigIcon from "@/components/base/config/ConfigIcon.vue";
 
 defineProps({
   servicesList: {

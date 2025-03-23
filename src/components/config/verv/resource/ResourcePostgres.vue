@@ -1,16 +1,21 @@
 <script setup lang="ts">
+import {Postgres} from "@/models/AppConfig/Resources/Resource.ts";
 
-import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
-import {Redis} from "@/models/AppConfig/Resources/Resource.ts";
+import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
 
-const model = defineModel<Redis>(
-    {
-      required: true,
-    })
-
+const model = defineModel<Postgres>({
+  required: true,
+})
 </script>
 
 <template>
+  <div class="NodeField">
+    <ConfigField
+        v-model="model.name"
+        field-name="Database name"
+    />
+  </div>
+
   <div class="NodeField">
     <ConfigField
         v-model="model.host"
@@ -28,7 +33,7 @@ const model = defineModel<Redis>(
   <div class="NodeField">
     <ConfigField
         v-model="model.user"
-        field-name="User"
+        field-name="Username"
     />
   </div>
 
@@ -38,11 +43,10 @@ const model = defineModel<Redis>(
         field-name="Password"
     />
   </div>
-
   <div class="NodeField">
     <ConfigField
-        v-model="model.db"
-        field-name="Db Number"
+        v-model="model.ssl_mode"
+        field-name="Ssl mode"
     />
   </div>
 </template>

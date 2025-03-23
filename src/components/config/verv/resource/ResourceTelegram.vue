@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import ConfigField from "@/components/base/ConfigField/ConfigInput.vue";
+import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
 
 import {Telegram} from "@/models/AppConfig/Resources/Resource.ts";
 
