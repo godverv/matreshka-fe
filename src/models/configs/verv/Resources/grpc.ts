@@ -1,5 +1,5 @@
 import {Node} from "@godverv/matreshka";
-import {GrpcClient} from "@/models/AppConfig/Resources/Resource.ts";
+import {GrpcClient} from "@/models/configs/verv/Resources/Resource.ts";
 import {extractStringValue} from "@/models/shared/common.ts";
 
 export function mapGrpc(root: Node): GrpcClient {

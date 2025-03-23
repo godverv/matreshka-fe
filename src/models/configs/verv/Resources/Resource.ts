@@ -1,9 +1,10 @@
 import {Component} from "vue";
 
 import {ConfigValueClass} from "@/models/shared/common.ts";
-import {ResourceType} from "@/models/AppConfig/Resources/ResourceTypes.ts";
-import {Change} from "@/models/AppConfig/Info/AppInfo.ts";
 import {getResourceLink} from "@/models/shared/s3.ts";
+
+import {Change} from "@/models/configs/verv/info/AppInfo.ts";
+import {ResourceType} from "@/models/configs/verv/Resources/ResourceTypes.ts";
 
 type NamedResource = {
     resource_name: string

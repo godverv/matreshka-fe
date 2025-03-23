@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import {ref} from "vue";
+
+import Button from "primevue/button";
 
 import {ConfigValueClass} from "@/models/shared/common.ts";
 import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
-import Button from "primevue/button";
-import {ref} from "vue";
-import {ExtractSourceCodeSystemFromServiceName, PiIconFromSourceCodeSystem} from "@/models/AppConfig/Info/AppInfo.ts";
+import {ExtractSourceCodeSystemFromServiceName, PiIconFromSourceCodeSystem} from "@/models/configs/verv/info/AppInfo.ts";
 
 const model = defineModel<ConfigValueClass<string>>({required: true})
 

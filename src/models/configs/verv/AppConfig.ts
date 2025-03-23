@@ -1,6 +1,6 @@
-import {AppInfoClass, Change} from "@/models/AppConfig/Info/AppInfo.ts";
-import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
-import {ServerClass} from "@/models/AppConfig/Servers/Servers.ts";
+import {AppInfoClass, Change} from "@/models/configs/verv/info/AppInfo.ts";
+import {DataSourceClass} from "@/models/configs/verv/Resources/Resource.ts";
+import {ServerClass} from "@/models/configs/verv/Servers/Servers.ts";
 
 export class AppConfigClass {
     appInfo: AppInfoClass

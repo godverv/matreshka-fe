@@ -1,13 +1,15 @@
 import {Node} from "@godverv/matreshka";
 
-import {mapPostgres} from "@/models/AppConfig/Resources/postgres.ts";
-import {mapRedis} from "@/models/AppConfig/Resources/redis.ts";
-import {mapSqlite} from "@/models/AppConfig/Resources/sqlite.ts";
-import {mapTelegram} from "@/models/AppConfig/Resources/telegram.ts";
-import {mapGrpc} from "@/models/AppConfig/Resources/grpc.ts";
 import {extractResourceType} from "@/models/shared/common.ts";
-import {ResourceType} from "@/models/AppConfig/Resources/ResourceTypes.ts";
-import {DataSourceClass} from "@/models/AppConfig/Resources/Resource.ts";
+
+import {mapPostgres} from "@/models/configs/verv/Resources/postgres.ts";
+import {mapRedis} from "@/models/configs/verv/Resources/redis.ts";
+import {mapSqlite} from "@/models/configs/verv/Resources/sqlite.ts";
+import {mapTelegram} from "@/models/configs/verv/Resources/telegram.ts";
+import {mapGrpc} from "@/models/configs/verv/Resources/grpc.ts";
+
+import {ResourceType} from "@/models/configs/verv/Resources/ResourceTypes.ts";
+import {DataSourceClass} from "@/models/configs/verv/Resources/Resource.ts";
 
 const resourceMapping = new Map<string, (node: Node) => DataSourceClass>()
 resourceMapping.set(ResourceType.Postgres, mapPostgres)
@@ -19,8 +21,8 @@ resourceMapping.set(ResourceType.Grpc, mapGrpc)
 
 export function extractDataSources(root: Node): DataSourceClass[] {
 
-    const dataSources : DataSourceClass[] = []
-    root.innerNodes?.map((n)=> {
+    const dataSources: DataSourceClass[] = []
+    root.innerNodes?.map((n) => {
         const resType = extractResourceType(n, root)
 
         if (!resType) {

@@ -1,6 +1,7 @@
-import { AppInfoClass } from "@/models/AppConfig/Info/AppInfo.ts";
 import {Node} from "@godverv/matreshka";
-import {ConfigValueClass, extractStringValue} from "@/models/shared/common.ts";;
+
+import {ConfigValueClass, extractStringValue} from "@/models/shared/common.ts";
+import { AppInfoClass } from "@/models/configs/verv/info/AppInfo.ts";
 
 export function mapAppInfo(root: Node): AppInfoClass {
 

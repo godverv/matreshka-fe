@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {AppInfoClass} from "@/models/AppConfig/Info/AppInfo.ts";
+import {AppInfoClass} from "@/models/configs/verv/info/AppInfo.ts";
 import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
 import ServiceName from "@/components/config/verv/app_info/ServiceName.vue";
 

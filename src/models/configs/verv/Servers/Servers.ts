@@ -1,5 +1,5 @@
 import {ConfigValueClass} from "@/models/shared/common.ts";
-import {Change} from "@/models/AppConfig/Info/AppInfo.ts";
+import {Change} from "@/models/configs/verv/info/AppInfo.ts";
 
 
 export class ServerClass {

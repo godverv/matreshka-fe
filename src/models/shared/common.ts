@@ -1,5 +1,6 @@
 import {Node} from "@godverv/matreshka";
-import {Change} from "@/models/AppConfig/Info/AppInfo.ts";
+
+import {Change} from "@/models/configs/verv/info/AppInfo.ts";
 
 export type keyMap = {
     [key: string]: any

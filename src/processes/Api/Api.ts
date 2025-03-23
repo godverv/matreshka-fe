@@ -6,9 +6,10 @@ import {
 } from "@godverv/matreshka";
 
 import {parseAppConfigFromEnv} from "@/processes/Api/ModelMapping.ts";
-import {AppInfoClass, Change, ServiceListClass} from "@/models/AppConfig/Info/AppInfo.ts";
-import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
 import {getBackendUrl} from "@/app/store/settings.ts";
+
+import {AppInfoClass, Change, ServiceListClass} from "@/models/configs/verv/info/AppInfo.ts";
+import {AppConfigClass} from "@/models/configs/verv/AppConfig.ts";
 import {ConfigValueClass} from "@/models/shared/common.ts";
 
 const prefix = {pathPrefix: getBackendUrl()};

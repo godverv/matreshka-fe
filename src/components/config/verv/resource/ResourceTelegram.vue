@@ -2,7 +2,7 @@
 
 import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
 
-import {Telegram} from "@/models/AppConfig/Resources/Resource.ts";
+import {Telegram} from "@/models/configs/verv/Resources/Resource.ts";
 
 const model = defineModel<Telegram>({required: true})
 </script>

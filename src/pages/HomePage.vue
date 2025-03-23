@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 
-import {ServiceListClass} from "@/models/AppConfig/Info/AppInfo.ts";
+import {ServiceListClass} from "@/models/configs/verv/info/AppInfo.ts";
 
 import {ListServices} from "@/processes/Api/Api.ts";
 import {handleGrpcError} from "@/processes/Api/ErrorCodes.ts";
@@ -75,7 +75,7 @@ watch(isDialogOpen, () => {
   }
 })
 
-//  Service Info
+//  Service info
 function openDisplayConfigDialog(serviceName: string) {
   openedConfigName.value = serviceName
   isDialogOpen.value = true

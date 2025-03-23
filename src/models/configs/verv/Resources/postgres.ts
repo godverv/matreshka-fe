@@ -1,5 +1,5 @@
 import {Node} from "@godverv/matreshka";
-import {DataSourceClass, Postgres} from "@/models/AppConfig/Resources/Resource.ts";
+import {DataSourceClass, Postgres} from "@/models/configs/verv/Resources/Resource.ts";
 import {extractNumberValue, extractStringValue} from "@/models/shared/common.ts";
 
 export function mapPostgres(root: Node): DataSourceClass {

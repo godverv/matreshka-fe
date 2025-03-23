@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {GrpcClient} from "@/models/AppConfig/Resources/Resource.ts";
+import {GrpcClient} from "@/models/configs/verv/Resources/Resource.ts";
 
 import ConfigField from "@/components/base/config/fields/ConfigInput.vue";
 

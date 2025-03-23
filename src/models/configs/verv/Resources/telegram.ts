@@ -1,5 +1,5 @@
 import {Node} from "@godverv/matreshka";
-import {Telegram} from "@/models/AppConfig/Resources/Resource.ts";
+import {Telegram} from "@/models/configs/verv/Resources/Resource.ts";
 import {extractStringValue} from "@/models/shared/common.ts";
 
 

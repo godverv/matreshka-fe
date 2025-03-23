@@ -1,5 +1,5 @@
 import {Node} from "@godverv/matreshka";
-import {DataSourceClass, Redis} from "@/models/AppConfig/Resources/Resource.ts";
+import {DataSourceClass, Redis} from "@/models/configs/verv/Resources/Resource.ts";
 import {extractNumberValue, extractStringValue} from "@/models/shared/common.ts";
 
 export function mapRedis(root: Node) : DataSourceClass {
