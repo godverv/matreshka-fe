@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ConfigType} from "@/models/configs/types.ts";
 import {PropType} from "vue";
+import {getConfigIcon} from "@/models/configs/icons.ts";
 
 defineProps({
   configType: {
@@ -13,10 +14,14 @@ defineProps({
 
 <template>
   <img
-      src="@/assets/svg/errorconfig.svg"
+      class="config-icon"
+      :src="getConfigIcon(configType)"
       :alt="configType">
 </template>
 
 <style scoped>
-
+.config-icon {
+  height: 100%;
+  width: 100%;
+}
 </style>

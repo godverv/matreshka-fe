@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 
-import { ServiceListClass } from "@/models/AppConfig/Info/AppInfo.ts";
+import {ServiceListClass} from "@/models/AppConfig/Info/AppInfo.ts";
 
 import {ListServices} from "@/processes/Api/Api.ts";
 import {handleGrpcError} from "@/processes/Api/ErrorCodes.ts";
@@ -15,8 +15,9 @@ import {useToast} from "primevue/usetoast";
 import ProgressSpinner from 'primevue/progressspinner';
 import Paginator from 'primevue/paginator';
 
-import ServicesListWidget from "@/widget/ServiceList/ServicesListWidget.vue";
-import ServiceListTopControlsWidget from "@/widget/ServiceList/ServiceListTopControlsWidget.vue";
+import ServicesListWidget from "@/widget/config_list/ConfigListWidget.vue";
+import TopControls from "@/widget/config_list/TopControls.vue";
+
 import {ListServicesReq, Paging, Sort} from "@/models/search/search.ts";
 import {SortType} from "@godverv/matreshka";
 
@@ -52,8 +53,7 @@ function updateList() {
       })
       .catch((err) => {
         handleGrpcError(toastApi)(err)
-      }).
-      then(() => isLoading.value = false)
+      }).then(() => isLoading.value = false)
 }
 
 function openPage(page: number) {
@@ -103,9 +103,11 @@ function openServiceInfo(event: MouseEvent, serviceName: string) {
   <!--  List of services -->
   <div class="Home">
     <div class="ListWrapper">
-      <ServiceListTopControlsWidget
+
+      <TopControls
           @updateSearchRequest="updateSearchReq"
       />
+
       <Transition name="load-fader" mode="out-in">
         <div v-if="!isLoading">
           <ServicesListWidget

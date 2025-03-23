@@ -15,8 +15,8 @@ function openCreateVervConfigWidget() {
 
 const buttons: MenuItem[] = [
   {
-    label: 'New Verv config',
-    icon: 'pi pi-box',
+    label: 'New matreshka config',
+    icon: "pi pi-box",
     command(_) {
       openCreateVervConfigWidget()
     },

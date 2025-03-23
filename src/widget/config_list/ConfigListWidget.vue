@@ -31,8 +31,12 @@ const emit = defineEmits<{
 
           @click="(event: MouseEvent) => { emit('clickService', event, service.name.value) }"
       >
-        <ConfigName :label="service.name.value"/>
-        <ConfigIcon :config-type="ConfigType.AppConfig"/>
+        <div class="ConfigTitle">
+          <ConfigName :label="service.name.value"/>
+        </div>
+        <div class="ConfigIcon">
+          <ConfigIcon :config-type="ConfigType.AppConfig"/>
+        </div>
       </div>
     </div>
   </div>
@@ -69,6 +73,20 @@ const emit = defineEmits<{
   align-items: center;
 
   cursor: pointer;
+}
+
+.ConfigTitle {
+  flex: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.ConfigIcon {
+  flex: 1;
+  width: 100%;
+  height: 100%;
 }
 
 </style>
