@@ -2,10 +2,10 @@
 import {ref} from "vue";
 
 import {ListConfigsRequest} from "@godverv/matreshka";
-import {GetConfigNodes, ListServices, PatchConfig} from "@/processes/Api/Api.ts";
-import {handleGrpcError} from "@/processes/Api/ErrorCodes.ts";
+import {GetConfigNodes, ListServices, PatchConfig} from "@/processes/api/api.ts";
+import {handleGrpcError} from "@/processes/api/error_codes.ts";
 
-import {AppConfigClass} from "@/models/AppConfig/AppConfig.ts";
+import {AppConfigClass} from "@/models/configs/verv/AppConfig.ts";
 
 import Button from 'primevue/button';
 import InputGroup from "primevue/inputgroup";

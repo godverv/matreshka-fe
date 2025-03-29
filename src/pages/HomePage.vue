@@ -3,8 +3,8 @@ import {onMounted, ref, watch} from "vue";
 
 import {ServiceListClass} from "@/models/configs/verv/info/AppInfo.ts";
 
-import {ListServices} from "@/processes/Api/Api.ts";
-import {handleGrpcError} from "@/processes/Api/ErrorCodes.ts";
+import {ListServices} from "@/processes/api/api.ts";
+import {handleGrpcError} from "@/processes/api/error_codes.ts";
 
 import Dialog from "primevue/dialog";
 import DisplayConfigWidget from "@/widget/DisplayConfigWidget.vue";

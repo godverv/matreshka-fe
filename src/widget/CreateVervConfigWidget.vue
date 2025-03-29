@@ -10,8 +10,8 @@ import InputGroup from "primevue/inputgroup";
 
 import {RouteToConfigDisplay} from "@/app/routes/routes.ts";
 
-import {CreateConfig} from "@/processes/Api/Api.ts";
-import {handleGrpcError} from "@/processes/Api/ErrorCodes.ts";
+import {CreateConfig} from "@/processes/api/api.ts";
+import {handleGrpcError} from "@/processes/api/error_codes.ts";
 
 const serviceName = ref<string>('');
 

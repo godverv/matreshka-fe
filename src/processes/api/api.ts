@@ -5,7 +5,7 @@ import {
     Node, CreateConfigRequest, PatchConfigRequest, AppInfo
 } from "@godverv/matreshka";
 
-import {parseAppConfigFromEnv} from "@/processes/Api/ModelMapping.ts";
+import {parseAppConfigFromEnv} from "@/processes/api/model_mapping.ts";
 import {getBackendUrl} from "@/app/store/settings.ts";
 
 import {AppInfoClass, Change, ServiceListClass} from "@/models/configs/verv/info/AppInfo.ts";
