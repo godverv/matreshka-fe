@@ -26,6 +26,7 @@ const toastApi = useToast();
 const isDialogOpen = ref<boolean>(false);
 const openedConfigName = ref<string>('');
 const isLoading = ref<boolean>(true);
+
 // Service list
 const listRequest = ref<ListServicesReq>({
   searchPattern: '',
@@ -44,7 +45,9 @@ const servicesList = ref<ServiceListClass>()
 const pagingTotalRecords = ref<number>(0)
 
 function updateList() {
-  isLoading.value = true;
+  if (servicesList.value?.servicesInfo.length == 0) {
+    isLoading.value = true;
+  }
 
   ListServices(listRequest.value)
       .then((resp) => {
